@@ -1,6 +1,6 @@
 import React from 'react';
 import './Loader.css';
-import logo from '../../assets/img/logo.jpg';
+import logo from '@assets/img/logo.jpg';
 
 const Loader = () => {
     return (

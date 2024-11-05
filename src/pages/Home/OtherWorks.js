@@ -1,6 +1,6 @@
 import React from 'react';
-import WorkCard from './WorkCard';
-import { addToFavorites } from '../../utils/favoritesUtils';
+import WorkCard from '@pages/Home/WorkCard';
+import { addToFavorites } from '@utils/favoritesUtils';
 
 // @ts-ignore
 export default function OtherWorks({ works }) {

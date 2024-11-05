@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './DetailInfo.css';
-import bookmarkAdd from '../../assets/img/bookmark.png';
-import bookmarkRemove from '../../assets/img/unbookmark.png';
+import '@pages/DetailInfo/DetailInfo.css';
+import bookmarkAdd from '@assets/img/bookmark.png';
+import bookmarkRemove from '@assets/img/unbookmark.png';
 import {
     addToFavorites,
     removeFromFavorites,
     isFavorite
-} from '../../utils/favoritesUtils';
-import Loader from '../../components/Loader/Loader';
-import ArtworkImage from '../../utils/Hooks/useImageLoader';
+} from '@utils/favoritesUtils';
+import Loader from '@components/Loader/Loader';
+import ArtworkImage from '@utils/Hooks/useImageLoader';
 
 function DetailInfo() {
     const { id } = useParams();

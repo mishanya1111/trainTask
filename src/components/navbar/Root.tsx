@@ -1,11 +1,11 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import './Navbar.css';
+import '@components/navbar/Navbar.css';
 import React, { useRef, useState } from 'react';
-import logo from '../../assets/img/svg.svg';
-import modsen from '../../assets/img/modsen.svg';
-import bookmark from '../../assets/img/bookmark.png';
-import home from '../../assets/img/home.svg';
-import { useOutsideClick } from '../../utils/Hooks/useOutsideClick';
+import logo from '@assets/img/svg.svg';
+import modsen from '@assets/img/modsen.svg';
+import bookmark from '@assets/img/bookmark.png';
+import home from '@assets/img/home.svg';
+import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
 
 export const Navbar = () => {
     const location = useLocation();
