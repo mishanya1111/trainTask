@@ -67,3 +67,54 @@
 .navbar-right ul li a.pending {
     opacity: 0.5;
 }
+/* Стили для бургер-кнопки */
+.burger-button {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Стили для бургер-меню */
+@media (max-width: 900px) {
+    /* Скрываем обычную навигацию на малых экранах */
+    .navbar-right {
+        display: none;
+        position: absolute;
+        top: 127px; /* на высоте navbar */
+        right: 0;
+        background-color: #343333;
+        width: 100%;
+        text-align: right;
+        padding: 1rem 2rem;
+    }
+
+    /* Показываем бургер-кнопку */
+    .burger-button {
+        display: block;
+    }
+
+    /* Показываем меню, если бургер открыт */
+    .navbar-right.open {
+        display: block;
+    }
+
+    .navbar-right ul {
+        display: block;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .navbar-right ul li {
+        margin-bottom: 1rem;
+    }
+
+    .navbar-right ul li a {
+        font-size: 1.5rem;
+        color: white;
+        text-decoration: none;
+    }
+}
