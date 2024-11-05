@@ -16,7 +16,7 @@ function PaginatedCard({
         <div className="paginated-work-card">
             <div className="paginated-image-placeholder">
                 <Link to={`/trainTask/details/${linkID}`}>
-                    <ArtworkImage size="800" imageId={imageId} />
+                    <ArtworkImage size={['863','1686','600','400','200']} imageId={imageId} alt={title} />
                 </Link>
             </div>
             <div className="overlay-card">

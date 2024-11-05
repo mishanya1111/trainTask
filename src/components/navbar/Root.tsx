@@ -9,7 +9,7 @@ import { useOutsideClick } from '../../Hooks/useOutsideClick';
 
 export const Navbar = () => {
     const location = useLocation();
-    const isHomePage = location.pathname === '/trainTask';
+    const isHomePage = location.pathname === '/trainTask' || location.pathname === '/trainTask/' ;
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const menuRef = useRef(null);
 
@@ -43,6 +43,7 @@ export const Navbar = () => {
                         <li>
                             <NavLink
                                 to="/trainTask"
+                                end
                                 className={({ isActive, isPending }) =>
                                     isActive ? 'active' : isPending ? 'pending' : ''
                                 }

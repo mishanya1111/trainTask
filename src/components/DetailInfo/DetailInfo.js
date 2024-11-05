@@ -8,23 +8,35 @@ import {
     removeFromFavorites,
     isFavorite
 } from '../Favorites/favoritesUtils';
+import Loader from '../Loader';
+import ArtworkImage from '../../Hooks/useImageLoader';
 
 function DetailInfo() {
     const { id } = useParams();
     const [artwork, setArtwork] = useState(null);
     const [isFavorited, setIsFavorited] = useState(false);
+    const [loading, setLoading] = useState(true); // состояние для отслеживания загрузки
+    const [error, setError] = useState(null); // состояние для отслеживания ошибок
 
     useEffect(() => {
         const fetchArtworkDetails = async () => {
+            setLoading(true); // начинаем загрузку
+            setError(null); // сбрасываем ошибку перед загрузкой
             try {
                 const response = await fetch(
                     `https://api.artic.edu/api/v1/artworks/${id}`
                 );
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
                 const data = await response.json();
                 setArtwork(data.data);
-                setIsFavorited(isFavorite(data.data.id)); // Check if artwork is already in favorites
+                setIsFavorited(isFavorite(data.data.id));
             } catch (error) {
                 console.error('Error fetching artwork details:', error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -47,17 +59,18 @@ function DetailInfo() {
         setIsFavorited(!isFavorited);
     };
 
-    if (!artwork) {
-        return <p>Loading...</p>;
-    }
+    if (loading) return <Loader />; // отображение Loader при загрузке
+
+    if (error) return <p className="error-message">{error}</p>; // отображение сообщения об ошибке
 
     return (
         <div className="detail-info">
             <div className="image-container">
-                <img
-                    src={`https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`}
+               {/* <img
+                    src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`}
                     alt={artwork.title}
-                />
+                />*/}
+                <ArtworkImage imageId={artwork.image_id} size={843}/>
                 <div className="bookmark-icon" onClick={toggleFavorite}>
                     <img
                         src={isFavorited ? bookmarkRemove : bookmarkAdd}
