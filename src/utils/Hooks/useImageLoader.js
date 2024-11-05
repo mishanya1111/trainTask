@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import defaultPage from '../../assets/img/maxresdefault.jpg';
-import logo from '../../assets/img/svg.svg';
+import defaultPage from '@assets/img/maxresdefault.jpg';
+import logo from '@assets/img/svg.svg';
 
 function useImageLoader(imageId, size) {
     const [imageSrc, setImageSrc] = useState(null);

@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import '@pages/index/index.css';
 
-import reportWebVitals from '../../reportWebVitals';
+import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from '../../components/navbar/Root';
-import Home from '../Home/Home';
-import ErrorPage from '../../components/ErrorPage';
-import Favorites from '../Favorites/Favorites';
-import DetailInfo from '../DetailInfo/DetailInfo';
+import Root from '@components/navbar/Root';
+import Home from '@pages/Home/Home';
+import ErrorPage from '@components/ErrorPage';
+import Favorites from '@pages/Favorites/Favorites';
+import DetailInfo from '@pages/DetailInfo/DetailInfo';
+import ErrorBoundary from './ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
@@ -39,7 +40,9 @@ const router = createBrowserRouter([
 ]);
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <ErrorBoundary>
+            <RouterProvider router={router} />
+        </ErrorBoundary>
     </React.StrictMode>
 );
 

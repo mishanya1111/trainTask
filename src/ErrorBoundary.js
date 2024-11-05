@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar } from './components/navbar/Root';
+import { Navbar } from '@components/navbar/Root.tsx';
 
 class ErrorBoundary extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
     }
 
     componentDidCatch(error, errorInfo) {
-        console.error("Error caught by ErrorBoundary:", error, errorInfo);
+        console.error('Error caught by ErrorBoundary:', error, errorInfo);
         this.setState({ error }); // Сохраняем ошибку в state
     }
 
@@ -22,7 +22,12 @@ class ErrorBoundary extends Component {
                 <>
                     <Navbar />
                     <div className="errorContainer">
-                        <h1>Error: {this.state.error ? this.state.error.message : "An unknown error occurred"}</h1>
+                        <h1>
+                            Error:{' '}
+                            {this.state.error
+                                ? this.state.error.message
+                                : 'An unknown error occurred'}
+                        </h1>
                     </div>
                 </>
             );

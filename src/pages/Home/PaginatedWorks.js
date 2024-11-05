@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PaginatedCard from './PaginatedCard';
-import { addToFavorites } from '../../utils/favoritesUtils';
+import PaginatedCard from '@pages/Home/PaginatedCard';
+import { addToFavorites } from '@utils/favoritesUtils';
 
 const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) => {
     const [currentPage, setCurrentPage] = useState(1);
