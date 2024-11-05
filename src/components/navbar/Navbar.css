@@ -1,0 +1,69 @@
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+    padding: 1rem 2rem;
+    color: white;
+    height: 127px;
+}
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    padding: 1rem 2rem;
+    color: black;
+    height: 127px;
+}
+
+.navbar-left , .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Логотип */
+.navbar-logo img , .footer-logo img {
+    width: 2.8rem;
+    height: 3rem;
+    object-fit: cover;
+}
+
+
+.navbar-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.footer-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+}
+
+.navbar-text .highlight , .footer-text .highlight {
+    color: #d4a017;
+}
+
+
+.navbar-right img{
+    height: 1rem;
+}
+.navbar-right ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar-right ul li a.active {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.navbar-right ul li a.pending {
+    opacity: 0.5;
+}

@@ -1,0 +1,60 @@
+.paginated-work-card {
+    position: relative;
+    overflow: visible;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.paginated-image-placeholder {
+    width: 100%;
+    height: calc(100%);
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.paginated-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-card {
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 50%); /* Центрирование по горизонтали и вертикально наполовину */
+    background-color: #F0F1F1;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.overlay-card .work-info {
+    width: 100%;
+
+}
+
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.filter-container label {
+    margin-right: 0.5rem;
+}
+.filter-container label{
+    font-size: 1.5rem;
+    color: #F17900;
+}
