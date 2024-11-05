@@ -2,7 +2,6 @@ import React from 'react';
 import WorkCard from './WorkCard';
 import { addToFavorites } from '../Favorites/favoritesUtils';
 
-
 // @ts-ignore
 export default function OtherWorks({ works }) {
     return (
@@ -25,6 +24,3 @@ export default function OtherWorks({ works }) {
         </div>
     );
 }
-
-
-

@@ -41,7 +41,6 @@ function Home() {
     const handleSortChange = event => {
         setSortCriterion(event.target.value);
     };
-    
 
     const sortedArtworks = [...artworks].sort((a, b) => {
         if (sortCriterion === 'name') {
@@ -53,15 +52,10 @@ function Home() {
         } else if (sortCriterion === 'availability') {
             const aAvailability = a.is_public_domain ?? false;
             const bAvailability = b.is_public_domain ?? false;
-            return aAvailability === bAvailability
-                ? 0
-                : aAvailability
-                    ? 1
-                    : -1;
+            return aAvailability === bAvailability ? 0 : aAvailability ? 1 : -1;
         }
         return 0;
     });
-
 
     if (error) return <p>Error in home page: {error}</p>;
 

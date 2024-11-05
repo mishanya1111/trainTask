@@ -41,7 +41,10 @@ function useImageLoader(imageId, size) {
 
 function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' }) {
     const [currentSizeIndex, setCurrentSizeIndex] = useState(0);
-    const { imageSrc, loading, error } = useImageLoader(imageId, sizes[currentSizeIndex]);
+    const { imageSrc, loading, error } = useImageLoader(
+        imageId,
+        sizes[currentSizeIndex]
+    );
 
     useEffect(() => {
         if (error && currentSizeIndex < sizes.length - 1) {
@@ -50,7 +53,8 @@ function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' 
     }, [error, currentSizeIndex, sizes.length]);
 
     if (loading) return <img src={defaultPage} alt="Loading artwork" />;
-    if (error && currentSizeIndex === sizes.length - 1) return <img src={logo} alt="Placeholder logo" />;
+    if (error && currentSizeIndex === sizes.length - 1)
+        return <img src={logo} alt="Placeholder logo" />;
 
     return <img src={imageSrc} alt={alt} />;
 }

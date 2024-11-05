@@ -9,12 +9,13 @@ import { useOutsideClick } from '../../Hooks/useOutsideClick';
 
 export const Navbar = () => {
     const location = useLocation();
-    const isHomePage = location.pathname === '/trainTask' || location.pathname === '/trainTask/' ;
+    const isHomePage =
+        location.pathname === '/trainTask' || location.pathname === '/trainTask/';
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const menuRef = useRef(null);
 
     const toggleBurgerMenu = () => {
-        setIsBurgerOpen((prev) => !prev);
+        setIsBurgerOpen(prev => !prev);
     };
 
     // Закрытие меню при клике вне его
@@ -31,13 +32,14 @@ export const Navbar = () => {
                 </div>
             </div>
 
-
             <button className="burger-button" onClick={toggleBurgerMenu}>
                 ☰
             </button>
 
-
-            <nav ref={menuRef} className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}>
+            <nav
+                ref={menuRef}
+                className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}
+            >
                 <ul>
                     {!isHomePage && (
                         <li>
@@ -73,7 +75,6 @@ export const Navbar = () => {
         </div>
     );
 };
-
 
 function Footer() {
     return (

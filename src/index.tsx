@@ -15,24 +15,26 @@ const router = createBrowserRouter([
     {
         path: 'trainTask',
         errorElement: <NotFoundPage />,
-        children: [{
-            path: '',
-            element: <Root />,
-            children: [
-                {
-                    index: true,
-                    element: <Home />
-                },
-                {
-                    path: 'favorites',
-                    element: <Favorites />
-                },
-                {
-                    path: 'details/:id',
-                    element: <DetailInfo />
-                }
-            ]
-        }]
+        children: [
+            {
+                path: '',
+                element: <Root />,
+                children: [
+                    {
+                        index: true,
+                        element: <Home />
+                    },
+                    {
+                        path: 'favorites',
+                        element: <Favorites />
+                    },
+                    {
+                        path: 'details/:id',
+                        element: <DetailInfo />
+                    }
+                ]
+            }
+        ]
     }
 ]);
 root.render(
