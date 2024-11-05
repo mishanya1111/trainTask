@@ -1,13 +1,25 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import './Navbar.css';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import logo from '../../img/svg.svg';
 import modsen from '../../img/modsen.svg';
 import bookmark from '../../img/bookmark.png';
 import home from '../../img/home.svg';
+import { useOutsideClick } from '../../Hooks/useOutsideClick';
+
 export const Navbar = () => {
     const location = useLocation();
     const isHomePage = location.pathname === '/trainTask';
+    const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    const menuRef = useRef(null);
+
+    const toggleBurgerMenu = () => {
+        setIsBurgerOpen((prev) => !prev);
+    };
+
+    // Закрытие меню при клике вне его
+    useOutsideClick(menuRef, () => setIsBurgerOpen(false));
+
     return (
         <div className="navbar">
             <div className="navbar-left">
@@ -18,8 +30,14 @@ export const Navbar = () => {
                     Museum of <span className="highlight">Art</span>
                 </div>
             </div>
-            <div></div>
-            <nav className="navbar-right">
+
+
+            <button className="burger-button" onClick={toggleBurgerMenu}>
+                ☰
+            </button>
+
+
+            <nav ref={menuRef} className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}>
                 <ul>
                     {!isHomePage && (
                         <li>
@@ -45,7 +63,7 @@ export const Navbar = () => {
                         >
                             <span>
                                 <img src={bookmark} alt="bookmark" />
-                            </span>{' '}
+                            </span>
                             Your favorites
                         </NavLink>
                     </li>
@@ -53,7 +71,7 @@ export const Navbar = () => {
             </nav>
         </div>
     );
-}
+};
 
 
 function Footer() {
