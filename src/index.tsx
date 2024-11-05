@@ -9,7 +9,7 @@ import Home from '@pages/Home/Home';
 import ErrorPage from '@components/ErrorPage';
 import Favorites from '@pages/Favorites/Favorites';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
-import ErrorBoundary from './ErrorBoundary';
+import ErrorBoundary from '@utils/ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
