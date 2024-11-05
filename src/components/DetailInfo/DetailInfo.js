@@ -15,13 +15,13 @@ function DetailInfo() {
     const { id } = useParams();
     const [artwork, setArtwork] = useState(null);
     const [isFavorited, setIsFavorited] = useState(false);
-    const [loading, setLoading] = useState(true); // состояние для отслеживания загрузки
-    const [error, setError] = useState(null); // состояние для отслеживания ошибок
+    const [loading, setLoading] = useState(true); 
+    const [error, setError] = useState(null); 
 
     useEffect(() => {
         const fetchArtworkDetails = async () => {
-            setLoading(true); // начинаем загрузку
-            setError(null); // сбрасываем ошибку перед загрузкой
+            setLoading(true); 
+            setError(null); 
             try {
                 const response = await fetch(
                     `https://api.artic.edu/api/v1/artworks/${id}`
@@ -61,16 +61,13 @@ function DetailInfo() {
 
     if (loading) return <Loader />; // отображение Loader при загрузке
 
-    if (error) return <p className="error-message">{error}</p>; // отображение сообщения об ошибке
+    if (error) return <p className="error-message">{error}</p>; 
 
     return (
         <div className="detail-info">
             <div className="image-container">
-               {/* <img
-                    src={`https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`}
-                    alt={artwork.title}
-                />*/}
-                <ArtworkImage imageId={artwork.image_id} size={843}/>
+               
+                <ArtworkImage imageId={artwork.image_id} size={['863','1686','600','400','200']}/>
                 <div className="bookmark-icon" onClick={toggleFavorite}>
                     <img
                         src={isFavorited ? bookmarkRemove : bookmarkAdd}
