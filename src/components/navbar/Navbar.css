@@ -23,7 +23,7 @@
     gap: 0.5rem;
 }
 
-/* Логотип */
+
 .navbar-logo img , .footer-logo img {
     width: 2.8rem;
     height: 3rem;
@@ -67,7 +67,7 @@
 .navbar-right ul li a.pending {
     opacity: 0.5;
 }
-/* Стили для бургер-кнопки */
+
 .burger-button {
     display: none;
     font-size: 24px;
@@ -77,13 +77,12 @@
     cursor: pointer;
 }
 
-/* Стили для бургер-меню */
 @media (max-width: 900px) {
-    /* Скрываем обычную навигацию на малых экранах */
+
     .navbar-right {
         display: none;
         position: absolute;
-        top: 127px; /* на высоте navbar */
+        top: 127px;
         right: 0;
         background-color: #343333;
         width: 100%;
@@ -91,12 +90,12 @@
         padding: 1rem 2rem;
     }
 
-    /* Показываем бургер-кнопку */
+
     .burger-button {
         display: block;
     }
 
-    /* Показываем меню, если бургер открыт */
+
     .navbar-right.open {
         display: block;
     }
