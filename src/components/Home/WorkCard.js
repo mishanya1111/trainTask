@@ -17,7 +17,7 @@ function WorkCard({
         <div className="work-card">
             <div className="image-placeholder">
                 <Link to={`/trainTask/details/${linkID}`}>
-                    <ArtworkImage size="200" imageId={imageId} />
+                    <ArtworkImage size={['200','863','600','400','1686']} imageId={imageId} alt={title}/>
                 </Link>
             </div>
             <div className="work-info">

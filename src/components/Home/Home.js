@@ -4,6 +4,7 @@ import OtherWorks from './OtherWorks';
 import PaginatedWorks from './PaginatedWorks';
 import useArtworksFetcher from '../../Hooks/useArtworkFetcher';
 import useDebounce from '../../Hooks/useDebounce';
+import Loader from '../Loader';
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -40,6 +41,7 @@ function Home() {
     const handleSortChange = event => {
         setSortCriterion(event.target.value);
     };
+    
 
     const sortedArtworks = [...artworks].sort((a, b) => {
         if (sortCriterion === 'name') {
@@ -68,7 +70,7 @@ function Home() {
             <SearchScreen onSearch={handleSearch} />
 
             {loading ? (
-                <p>Загрузка данных...</p>
+                <Loader />
             ) : (
                 <>
                     <PaginatedWorks

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import defalutPage from '../img/maxresdefault.jpg';
+import defaultPage from '../img/maxresdefault.jpg';
 import logo from '../img/svg.svg';
+
 function useImageLoader(imageId, size) {
     const [imageSrc, setImageSrc] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -27,24 +28,31 @@ function useImageLoader(imageId, size) {
             };
 
             img.onerror = () => {
-                setError('Ошибка при загрузке изображения');
+                setError('No Photo');
                 setLoading(false);
             };
         };
 
         loadImage();
-    }, [imageId]);
+    }, [imageId, size]);
 
     return { imageSrc, loading, error };
 }
 
-function ArtworkImage({ imageId, size }) {
-    const { imageSrc, loading, error } = useImageLoader(imageId, size);
+function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' }) {
+    const [currentSizeIndex, setCurrentSizeIndex] = useState(0);
+    const { imageSrc, loading, error } = useImageLoader(imageId, sizes[currentSizeIndex]);
 
-    if (loading) return <img src={defalutPage} alt="Artwork" />;
-    if (error) return <p>{error}</p>;
+    useEffect(() => {
+        if (error && currentSizeIndex < sizes.length - 1) {
+            setCurrentSizeIndex(currentSizeIndex + 1);
+        }
+    }, [error, currentSizeIndex, sizes.length]);
 
-    return <img src={imageSrc} alt="Artwork" />;
+    if (loading) return <img src={defaultPage} alt="Loading artwork" />;
+    if (error && currentSizeIndex === sizes.length - 1) return <img src={logo} alt="Placeholder logo" />;
+
+    return <img src={imageSrc} alt={alt} />;
 }
 
 export default ArtworkImage;
