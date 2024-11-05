@@ -41,8 +41,7 @@ function Home() {
     const handleSortChange = event => {
         setSortCriterion(event.target.value);
     };
-    //https://mishanya1111.github.io/trainTask/
-    //https://mishanya1111.github.io/trainTask
+    
 
     const sortedArtworks = [...artworks].sort((a, b) => {
         if (sortCriterion === 'name') {
