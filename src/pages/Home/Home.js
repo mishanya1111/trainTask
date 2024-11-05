@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import SearchScreen from './SearchScreen';
 import OtherWorks from './OtherWorks';
 import PaginatedWorks from './PaginatedWorks';
-import useArtworksFetcher from '../../Hooks/useArtworkFetcher';
-import useDebounce from '../../Hooks/useDebounce';
-import Loader from '../Loader';
+import useArtworksFetcher from '../../utils/Hooks/useArtworkFetcher';
+import useDebounce from '../../utils/Hooks/useDebounce';
+import Loader from '../../components/Loader/Loader';
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState('');

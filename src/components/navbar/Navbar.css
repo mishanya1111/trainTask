@@ -84,7 +84,7 @@
         position: absolute;
         top: 127px;
         right: 0;
-        background-color: #343333;
+        background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
         width: 100%;
         text-align: right;
         padding: 1rem 2rem;
@@ -98,6 +98,7 @@
 
     .navbar-right.open {
         display: block;
+        z-index: 100;
     }
 
     .navbar-right ul {

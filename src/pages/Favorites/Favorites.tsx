@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getFavorites, removeFromFavorites } from './favoritesUtils';
+import { getFavorites, removeFromFavorites } from '../../utils/favoritesUtils';
 import './favorites.css';
 import WorkCard from '../Home/WorkCard';
-import bookmark from '../../img/bookmark.png';
+import bookmark from '../../assets/img/bookmark.png';
 
 function Favorites() {
     const [favorites, setFavorites] = useState([
@@ -52,7 +52,7 @@ function Favorites() {
                         />
                     ))
                 ) : (
-                    <p>No favorites added yet.</p>
+                    <p><h4>No favorites added yet.</h4></p>
                 )}
             </div>
         </div>
