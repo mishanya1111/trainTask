@@ -1,7 +1,7 @@
 import React from 'react';
-import ArtworkImage from '../../Hooks/useImageLoader';
-import bookmark from '../../img/bookmark.png';
-import unbookmark from '../../img/unbookmark.png';
+import ArtworkImage from '../../utils/Hooks/useImageLoader';
+import bookmark from '../../assets/img/bookmark.png';
+import unbookmark from '../../assets/img/unbookmark.png';
 import { Link } from 'react-router-dom';
 
 function WorkCard({

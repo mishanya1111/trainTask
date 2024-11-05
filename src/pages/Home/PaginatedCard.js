@@ -1,7 +1,7 @@
 import React from 'react';
-import ArtworkImage from '../../Hooks/useImageLoader';
+import ArtworkImage from '../../utils/Hooks/useImageLoader';
 import './PaginatedCard.css';
-import bookmark from '../../img/bookmark.png';
+import bookmark from '../../assets/img/bookmark.png';
 import { Link } from 'react-router-dom';
 
 function PaginatedCard({

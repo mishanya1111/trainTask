@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from '../../reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './components/navbar/Root';
-import Home from './components/Home/Home';
-import NotFoundPage from './components/NotFoundPage';
-import Favorites from './components/Favorites/Favorites';
-import DetailInfo from './components/DetailInfo/DetailInfo';
+import Root from '../../components/navbar/Root';
+import Home from '../Home/Home';
+import ErrorPage from '../../components/ErrorPage';
+import Favorites from '../Favorites/Favorites';
+import DetailInfo from '../DetailInfo/DetailInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
     {
         path: 'trainTask',
-        errorElement: <NotFoundPage />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '',
