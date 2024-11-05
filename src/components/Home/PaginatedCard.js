@@ -15,13 +15,13 @@ function PaginatedCard({
     return (
         <div className="paginated-work-card">
             <div className="paginated-image-placeholder">
-                <Link to={`/details/${linkID}`}>
+                <Link to={`/trainTask/details/${linkID}`}>
                     <ArtworkImage size="800" imageId={imageId} />
                 </Link>
             </div>
             <div className="overlay-card">
                 <div className="work-info">
-                    <Link to={`/details/${linkID}`}>
+                    <Link to={`/trainTask/details/${linkID}`}>
                         <h3 className="work-title">{title}</h3>
                     </Link>
                     <p className="work-author">{author}</p>

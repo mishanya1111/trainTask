@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
 #detail {
     margin: 120px 16%;
 }
@@ -246,9 +250,12 @@ code {
     visibility: hidden;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.errorContainer {
+    display: flex;
+    justify-content: center;
 }
-
+.errorContainer a{
+    color: orange;
+    text-decoration: blue;
+}
 

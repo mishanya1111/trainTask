@@ -1,6 +1,7 @@
 {
   "name": "modsentraintask",
   "version": "0.1.0",
+  "homepage": "https://mishanya1111.github.io/trainTask",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -21,12 +22,15 @@
     "yup": "^1.4.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"./src/**/*.{js,md,scss,tsx}\""
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",

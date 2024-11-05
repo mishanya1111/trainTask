@@ -9,26 +9,30 @@ import Home from './components/Home/Home';
 import NotFoundPage from './components/NotFoundPage';
 import Favorites from './components/Favorites/Favorites';
 import DetailInfo from './components/DetailInfo/DetailInfo';
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
     {
-        path: '/',
-        element: <Root />,
+        path: 'trainTask',
         errorElement: <NotFoundPage />,
-        children: [
-            {
-                index: true,
-                element: <Home />
-            },
-            {
-                path: 'favorites',
-                element: <Favorites />
-            },
-            {
-                path: 'details/:id',
-                element: <DetailInfo />
-            }
-        ]
+        children: [{
+            path: '',
+            element: <Root />,
+            children: [
+                {
+                    index: true,
+                    element: <Home />
+                },
+                {
+                    path: 'favorites',
+                    element: <Favorites />
+                },
+                {
+                    path: 'details/:id',
+                    element: <DetailInfo />
+                }
+            ]
+        }]
     }
 ]);
 root.render(

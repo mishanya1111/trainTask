@@ -43,20 +43,23 @@ function Home() {
 
     const sortedArtworks = [...artworks].sort((a, b) => {
         if (sortCriterion === 'name') {
-            return a.title.localeCompare(b.title);
+            return (a.title || '').localeCompare(b.title || '');
         } else if (sortCriterion === 'author') {
-            return a.author.localeCompare(b.author);
+            return (a.author || '').localeCompare(b.author || '');
         } else if (sortCriterion === 'year') {
-            return a.year - b.year;
+            return (a.year ?? Infinity) - (b.year ?? Infinity);
         } else if (sortCriterion === 'availability') {
-            return a.is_public_domain === b.is_public_domain
+            const aAvailability = a.is_public_domain ?? false;
+            const bAvailability = b.is_public_domain ?? false;
+            return aAvailability === bAvailability
                 ? 0
-                : a.is_public_domain
-                  ? 1
-                  : -1;
+                : aAvailability
+                    ? 1
+                    : -1;
         }
         return 0;
     });
+
 
     if (error) return <p>Error in home page: {error}</p>;
 

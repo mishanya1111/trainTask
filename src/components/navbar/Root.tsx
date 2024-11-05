@@ -5,9 +5,9 @@ import logo from '../../img/svg.svg';
 import modsen from '../../img/modsen.svg';
 import bookmark from '../../img/bookmark.png';
 import home from '../../img/home.svg';
-function Navbar() {
+export const Navbar = () => {
     const location = useLocation();
-    const isHomePage = location.pathname === '/';
+    const isHomePage = location.pathname === '/trainTask';
     return (
         <div className="navbar">
             <div className="navbar-left">
@@ -24,7 +24,7 @@ function Navbar() {
                     {!isHomePage && (
                         <li>
                             <NavLink
-                                to="/"
+                                to="/trainTask"
                                 className={({ isActive, isPending }) =>
                                     isActive ? 'active' : isPending ? 'pending' : ''
                                 }
@@ -38,7 +38,7 @@ function Navbar() {
                     )}
                     <li>
                         <NavLink
-                            to="/favorites"
+                            to="/trainTask/favorites"
                             className={({ isActive, isPending }) =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }
@@ -54,6 +54,7 @@ function Navbar() {
         </div>
     );
 }
+
 
 function Footer() {
     return (

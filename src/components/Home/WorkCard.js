@@ -16,12 +16,12 @@ function WorkCard({
     return (
         <div className="work-card">
             <div className="image-placeholder">
-                <Link to={`/details/${linkID}`}>
+                <Link to={`/trainTask/details/${linkID}`}>
                     <ArtworkImage size="200" imageId={imageId} />
                 </Link>
             </div>
             <div className="work-info">
-                <Link to={`/details/${linkID}`}>
+                <Link to={`/trainTask/details/${linkID}`}>
                     <h3 className="work-title">{title}</h3>
                 </Link>
 
