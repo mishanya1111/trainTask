@@ -1,11 +1,15 @@
+// useImageLoader.ts
 import { useState, useEffect } from 'react';
 import defaultPage from '@assets/img/maxresdefault.jpg';
 import logo from '@assets/img/svg.svg';
+import { ArtworkImageProps, UseImageLoaderReturn } from '@constants/types';
 
-function useImageLoader(imageId, size) {
-    const [imageSrc, setImageSrc] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+
+
+function useImageLoader(imageId: string | undefined, size: number): UseImageLoaderReturn {
+    const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (!imageId) {
@@ -39,8 +43,8 @@ function useImageLoader(imageId, size) {
     return { imageSrc, loading, error };
 }
 
-function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' }) {
-    const [currentSizeIndex, setCurrentSizeIndex] = useState(0);
+function ArtworkImage({ imageId, sizes = [843, 500, 300], alt = 'Artwork' }: ArtworkImageProps): JSX.Element {
+    const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const { imageSrc, loading, error } = useImageLoader(
         imageId,
         sizes[currentSizeIndex]
@@ -56,7 +60,7 @@ function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' 
     if (error && currentSizeIndex === sizes.length - 1)
         return <img src={logo} alt="Placeholder logo" />;
 
-    return <img src={imageSrc} alt={alt} />;
+    return <img src={imageSrc!} alt={alt} />;
 }
 
 export default ArtworkImage;

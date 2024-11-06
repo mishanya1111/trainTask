@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@pages/index/index.css';
+import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from '@components/navbar/Root';
 import Home from '@pages/Home/Home';
-import ErrorPage from '@components/ErrorPage';
+import {ErrorPage} from '@components/ErrorPage';
 import Favorites from '@pages/Favorites/Favorites';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
 import ErrorBoundary from '@utils/ErrorBoundary';

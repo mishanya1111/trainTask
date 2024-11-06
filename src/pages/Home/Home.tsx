@@ -5,13 +5,15 @@ import PaginatedWorks from '@pages/Home/PaginatedWorks';
 import useArtworksFetcher from '@utils/Hooks/useArtworkFetcher';
 import useDebounce from '@utils/Hooks/useDebounce';
 import Loader from '@components/Loader/Loader';
+import { Artwork } from '@constants/types';
 
-function Home() {
-    const [searchQuery, setSearchQuery] = useState('');
+//function Favorites():JSX.Element
+function Home():JSX.Element{
+    const [searchQuery, setSearchQuery] = useState<string>('');
     const debouncedQuery = useDebounce(searchQuery, 500);
     const { artworks, loading, error } = useArtworksFetcher(debouncedQuery);
-    const [cardsPerPage, setCardsPerPage] = useState(4);
-    const [sortCriterion, setSortCriterion] = useState('name');
+    const [cardsPerPage, setCardsPerPage] = useState<number>(4);
+    const [sortCriterion, setSortCriterion] = useState<string>('name');
 
     useEffect(() => {
         const handleResize = () => {
@@ -20,10 +22,10 @@ function Home() {
                 widthWindow < 900
                     ? 1
                     : widthWindow < 1200
-                      ? 2
-                      : widthWindow < 1920
-                        ? 3
-                        : 4
+                        ? 2
+                        : widthWindow < 1920
+                            ? 3
+                            : 4
             );
         };
 
@@ -34,15 +36,15 @@ function Home() {
         };
     }, []);
 
-    const handleSearch = query => {
+    const handleSearch = (query: string) => {
         setSearchQuery(query);
     };
 
-    const handleSortChange = event => {
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortCriterion(event.target.value);
     };
 
-    const sortedArtworks = [...artworks].sort((a, b) => {
+    const sortedArtworks : Artwork[] = [...artworks].sort((a: Artwork, b: Artwork) => {
         if (sortCriterion === 'name') {
             return (a.title || '').localeCompare(b.title || '');
         } else if (sortCriterion === 'author') {
@@ -58,7 +60,8 @@ function Home() {
     });
 
     if (error) return <p>Error in home page: {error}</p>;
-
+    //console.log(artworks);
+    //console.log(sortedArtworks);
     return (
         <div>
             <SearchScreen onSearch={handleSearch} />
@@ -73,7 +76,7 @@ function Home() {
                         sortCriterion={sortCriterion}
                         onSortChange={handleSortChange}
                     />
-                    <OtherWorks works={sortedArtworks} />{' '}
+                    <OtherWorks works={sortedArtworks} />
                 </>
             )}
         </div>
