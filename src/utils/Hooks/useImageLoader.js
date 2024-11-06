@@ -39,7 +39,7 @@ function useImageLoader(imageId, size) {
     return { imageSrc, loading, error };
 }
 
-function ArtworkImage({ imageId, sizes = ['843', '500', '300'], alt = 'Artwork' }) {
+function ArtworkImage({ imageId, sizes = [843, 500, 300], alt = 'Artwork' }) {
     const [currentSizeIndex, setCurrentSizeIndex] = useState(0);
     const { imageSrc, loading, error } = useImageLoader(
         imageId,

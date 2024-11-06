@@ -3,6 +3,7 @@ import ArtworkImage from '@utils/Hooks/useImageLoader';
 import '@pages/Home/PaginatedCard.css';
 import bookmark from '@assets/img/bookmark.png';
 import { Link } from 'react-router-dom';
+import { number } from 'yup';
 
 function PaginatedCard({
     linkID,
@@ -12,12 +13,13 @@ function PaginatedCard({
     is_public_domain,
     onClickHandler
 }) {
+    const sizesImage = [863, 1686, 600, 400, 200];
     return (
         <div className="paginated-work-card">
             <div className="paginated-image-placeholder">
                 <Link to={`/trainTask/details/${linkID}`}>
                     <ArtworkImage
-                        size={['863', '1686', '600', '400', '200']}
+                        size={sizesImage}
                         imageId={imageId}
                         alt={title}
                     />
