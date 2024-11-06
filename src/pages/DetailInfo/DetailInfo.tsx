@@ -62,7 +62,7 @@ function DetailInfo(): JSX.Element {
                 removeFromFavorites(artwork.id);
             } else {
                 addToFavorites({
-                    id: artwork.id,
+                    ID: artwork.id,
                     /*ID: artwork.id,*/
                     title: artwork.title,
                     author: artwork.artist_title,

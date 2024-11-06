@@ -3,18 +3,12 @@ import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
 import '@pages/Favorites/favorites.css';
 import WorkCard from '@pages/Home/WorkCard';
 import bookmark from '@assets/img/bookmark.png';
-
+import { Artwork } from '@constants/types';
 // Определяем интерфейс для элементов избранного
-interface FavoriteItem {
-    ID: number;
-    title: string;
-    author: string;
-    is_public_domain: boolean;
-    imageId: string;
-}
+
 
 function Favorites():JSX.Element  {
-    const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+    const [favorites, setFavorites] = useState<Artwork[]>([]);
 
     useEffect(() => {
         setFavorites(getFavorites());
@@ -49,6 +43,7 @@ function Favorites():JSX.Element  {
                             imageId={artwork.imageId}
                             is_public_domain={artwork.is_public_domain}
                             onClickHandler={() => handleRemoveFavorite(artwork.ID)}
+                            favoritePage={true}
                         />
                     ))
                 ) : (

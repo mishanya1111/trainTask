@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Artwork } from '@constants/types';
 
-const useArtworksFetcher = query => {
-    const [artworks, setArtworks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+const useArtworksFetcher = (query: string): { artworks: Artwork[]; loading: boolean; error: string | null } => {
+    const [artworks, setArtworks] = useState<Artwork[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchArtworks = async () => {
@@ -12,26 +13,25 @@ const useArtworksFetcher = query => {
             try {
                 const url = query
                     ? `https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(query)}&fields=id,artist_title,title,is_public_domain,image_id,fiscal_year`
-                    : 'https://api.artic.edu/api/v1/artworks/?fields=id,artist_title,title,is_public_domain,image_id,fiscal_year'; //
-                //console.log(url);
+                    : 'https://api.artic.edu/api/v1/artworks/?fields=id,artist_title,title,is_public_domain,image_id,fiscal_year';
+
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const data = await response.json();
-                //console.log(data)
-                const parsedArtworks = data.data.map(artwork => ({
+                const parsedArtworks = data.data.map((artwork: any): Artwork => ({
                     ID: artwork.id,
                     title: artwork.title,
-                    author: artwork.artist_title,
+                    author: artwork.artist_title || null,
                     is_public_domain: artwork.is_public_domain,
-                    imageId: artwork.image_id,
-                    year: artwork.fiscal_year
+                    imageId: artwork.image_id || null,
+                    year: artwork.fiscal_year ?? undefined
                 }));
 
                 setArtworks(parsedArtworks);
-            } catch (err) {
+            } catch (err: any) {
                 setError(err.message);
             } finally {
                 setLoading(false);

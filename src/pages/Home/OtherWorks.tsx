@@ -1,22 +1,19 @@
 import React from 'react';
 import WorkCard from '@pages/Home/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
-interface Artwork {
-    ID: number ;
-    title: string;
-    author: string | null;
-    is_public_domain: boolean;
-    imageId: string ;
+import { Artwork } from '@constants/types';
+
+interface OtherWorksProps {
+    works: Artwork[];
 }
 
-
-export default function OtherWorks(works : Artwork[]) {
+function OtherWorks({ works }: OtherWorksProps) {
     return (
         <div className="other-works">
             <h4> Here some more</h4>
             <h2>Other works for you</h2>
             <div className="work-card-container">
-                {works.map((work : Artwork, index :number ) => (
+                {works.map((work, index) => (
                     <WorkCard
                         key={index}
                         linkID={work.ID}
@@ -25,9 +22,12 @@ export default function OtherWorks(works : Artwork[]) {
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
                         onClickHandler={() => addToFavorites(work)}
+                        favoritePage={false}
                     />
                 ))}
             </div>
         </div>
     );
 }
+
+export default OtherWorks;

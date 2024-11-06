@@ -7,6 +7,7 @@ import bookmark from '@assets/img/bookmark.png';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
 
+
 export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean = location.pathname === '/trainTask' || location.pathname === '/trainTask/';

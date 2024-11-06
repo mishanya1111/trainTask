@@ -1,28 +1,29 @@
+// PaginatedWorks.tsx
 import React, { useState } from 'react';
 import PaginatedCard from '@pages/Home/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
+import { PaginatedWorksProps } from '@constants/types';
 
-const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) => {
-    const [currentPage, setCurrentPage] = useState(1);
+function PaginatedWorks({ works, cardsPerPage, sortCriterion, onSortChange }: PaginatedWorksProps) {
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = Math.ceil(works.length / cardsPerPage);
 
-    const handlePageChange = newPage => {
+    const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
     };
 
     const handleNextFour = () => {
-        setCurrentPage(prevPage => Math.min(prevPage + 4, totalPages));
+        setCurrentPage((prevPage) => Math.min(prevPage + 4, totalPages));
     };
 
     const handlePrevFour = () => {
-        setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
+        setCurrentPage((prevPage) => Math.max(prevPage - 4, 1));
     };
 
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
     const currentWorks = works.slice(indexOfFirstCard, indexOfLastCard);
 
-    // Вычисляем диапазон видимых номеров страниц
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 3);
 
@@ -30,15 +31,10 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
         <div className="paginated-works">
             <div className="filter-container">
                 <div></div>
-                <div></div>
                 <h2>Other works for you</h2>
                 <div>
                     <label htmlFor="sort-select">Filter: </label>
-                    <select
-                        id="sort-select"
-                        value={sortCriterion}
-                        onChange={onSortChange}
-                    >
+                    <select id="sort-select" value={sortCriterion} onChange={onSortChange}>
                         <option value="name">By Name</option>
                         <option value="author">By Author</option>
                         <option value="year">By Year</option>
@@ -47,9 +43,9 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
                 </div>
             </div>
             <div className="paginated-work-card-container">
-                {currentWorks.map((work, index) => (
+                {currentWorks.map((work) => (
                     <PaginatedCard
-                        key={index}
+                        key={work.ID}
                         linkID={work.ID}
                         title={work.title}
                         author={work.author}
@@ -60,33 +56,20 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
                 ))}
             </div>
             <div className="pagination-controls">
-                <button
-                    onClick={handlePrevFour}
-                    className={currentPage <= 2 ? 'hidden' : 'prev-four'}
-                >
+                <button onClick={handlePrevFour} className={currentPage <= 2 ? 'hidden' : 'prev-four'}>
                     {'<'}
                 </button>
-                {Array.from(
-                    { length: endPage - startPage + 1 },
-                    (_, i) => startPage + i
-                ).map(page => (
-                    <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={currentPage === page ? 'active' : ''}
-                    >
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
+                    <button key={page} onClick={() => handlePageChange(page)} className={currentPage === page ? 'active' : ''}>
                         {page}
                     </button>
                 ))}
-                <button
-                    onClick={handleNextFour}
-                    className={currentPage > totalPages - 2 ? 'hidden' : 'next-four'}
-                >
+                <button onClick={handleNextFour} className={currentPage > totalPages - 2 ? 'hidden' : 'next-four'}>
                     {'>'}
                 </button>
             </div>
         </div>
     );
-};
+}
 
 export default PaginatedWorks;

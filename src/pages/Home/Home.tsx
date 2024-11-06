@@ -5,16 +5,8 @@ import PaginatedWorks from '@pages/Home/PaginatedWorks';
 import useArtworksFetcher from '@utils/Hooks/useArtworkFetcher';
 import useDebounce from '@utils/Hooks/useDebounce';
 import Loader from '@components/Loader/Loader';
+import { Artwork } from '@constants/types';
 
-
-interface Artwork {
-    ID: number;
-    title: string;
-    author: string;
-    is_public_domain: boolean;
-    image_id: string;
-    year?: number;
-}
 //function Favorites():JSX.Element
 function Home():JSX.Element{
     const [searchQuery, setSearchQuery] = useState<string>('');
@@ -84,7 +76,7 @@ function Home():JSX.Element{
                         sortCriterion={sortCriterion}
                         onSortChange={handleSortChange}
                     />
-                    {/*<OtherWorks works={sortedArtworks} />*/}
+                    <OtherWorks works={sortedArtworks} />
                 </>
             )}
         </div>

@@ -1,9 +1,11 @@
 import React from 'react';
 import ArtworkImage from '@utils/Hooks/useImageLoader';
 import bookmark from '@assets/img/bookmark.png';
+import unbookmark from '@assets/img/unbookmark.png';
 import { Link } from 'react-router-dom';
 
 interface WorkCardProps {
+    favoritePage: boolean;
     linkID: number ;
     title: string ;
     author: string | null;
@@ -19,6 +21,7 @@ function WorkCard({
                       imageId,
                       is_public_domain,
                       onClickHandler,
+                      favoritePage
                   }: WorkCardProps) {
     const sizesImage : number[] = [200, 863, 600, 400, 1686];
     return (
@@ -42,7 +45,7 @@ function WorkCard({
                 </p>
             </div>
             <button className="bookmark-btn" onClick={onClickHandler}>
-                <img src={bookmark} alt="bookmark" />
+                <img src={favoritePage ? unbookmark : bookmark} alt="bookmark" />
             </button>
         </div>
     );
