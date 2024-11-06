@@ -6,24 +6,24 @@ import { Link } from 'react-router-dom';
 
 interface WorkCardProps {
     favoritePage: boolean;
-    linkID: number ;
-    title: string ;
+    linkID: number;
+    title: string;
     author: string | null;
-    imageId: string ;
+    imageId: string;
     is_public_domain: boolean;
     onClickHandler: () => void;
 }
 
 function WorkCard({
-                      linkID,
-                      title,
-                      author,
-                      imageId,
-                      is_public_domain,
-                      onClickHandler,
-                      favoritePage
-                  }: WorkCardProps) {
-    const sizesImage : number[] = [200, 863, 600, 400, 1686];
+    linkID,
+    title,
+    author,
+    imageId,
+    is_public_domain,
+    onClickHandler,
+    favoritePage
+}: WorkCardProps) {
+    const sizesImage: number[] = [200, 863, 600, 400, 1686];
     return (
         <div className="work-card">
             <div className="image-placeholder">

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Artwork } from '@constants/types';
 
-const useArtworksFetcher = (query: string): { artworks: Artwork[]; loading: boolean; error: string | null } => {
+const useArtworksFetcher = (
+    query: string
+): { artworks: Artwork[]; loading: boolean; error: string | null } => {
     const [artworks, setArtworks] = useState<Artwork[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -21,14 +23,16 @@ const useArtworksFetcher = (query: string): { artworks: Artwork[]; loading: bool
                 }
 
                 const data = await response.json();
-                const parsedArtworks = data.data.map((artwork: any): Artwork => ({
-                    ID: artwork.id,
-                    title: artwork.title,
-                    author: artwork.artist_title || null,
-                    is_public_domain: artwork.is_public_domain,
-                    imageId: artwork.image_id || null,
-                    year: artwork.fiscal_year ?? undefined
-                }));
+                const parsedArtworks = data.data.map(
+                    (artwork: any): Artwork => ({
+                        ID: artwork.id,
+                        title: artwork.title,
+                        author: artwork.artist_title || null,
+                        is_public_domain: artwork.is_public_domain,
+                        imageId: artwork.image_id || null,
+                        year: artwork.fiscal_year ?? undefined
+                    })
+                );
 
                 setArtworks(parsedArtworks);
             } catch (err: any) {

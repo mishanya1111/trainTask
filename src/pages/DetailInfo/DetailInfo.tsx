@@ -30,7 +30,7 @@ function DetailInfo(): JSX.Element {
     const [isFavorited, setIsFavorited] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const sizesImage : number[] = [863, 1686, 600, 400, 200];
+    const sizesImage: number[] = [863, 1686, 600, 400, 200];
     useEffect(() => {
         const fetchArtworkDetails = async (): Promise<void> => {
             setLoading(true);
@@ -81,10 +81,7 @@ function DetailInfo(): JSX.Element {
     return (
         <div className="detail-info">
             <div className="image-container">
-                <ArtworkImage
-                    imageId={artwork?.image_id}
-                    sizes={sizesImage}
-                />
+                <ArtworkImage imageId={artwork?.image_id} sizes={sizesImage} />
                 <div className="bookmark-icon" onClick={toggleFavorite}>
                     <img
                         src={isFavorited ? bookmarkRemove : bookmarkAdd}
@@ -105,7 +102,8 @@ function DetailInfo(): JSX.Element {
                 <div className="overview">
                     <h3>Overview</h3>
                     <p>
-                        <strong>Artist nationality:</strong> {artwork?.artist_display}
+                        <strong>Artist nationality:</strong>{' '}
+                        {artwork?.artist_display}
                     </p>
                     <p>
                         <strong>Dimensions:</strong> {artwork?.dimensions}

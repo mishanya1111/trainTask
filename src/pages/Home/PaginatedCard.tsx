@@ -4,17 +4,16 @@ import ArtworkImage from '@utils/Hooks/useImageLoader';
 import '@pages/Home/PaginatedCard.css';
 import bookmark from '@assets/img/bookmark.png';
 import { Link } from 'react-router-dom';
-import {  PaginatedCardProps } from '@constants/types';
-
+import { PaginatedCardProps } from '@constants/types';
 
 function PaginatedCard({
-                           linkID,
-                           title,
-                           author,
-                           imageId,
-                           is_public_domain,
-                           onClickHandler,
-                       }: PaginatedCardProps): JSX.Element {
+    linkID,
+    title,
+    author,
+    imageId,
+    is_public_domain,
+    onClickHandler
+}: PaginatedCardProps): JSX.Element {
     const sizesImage = [863, 1686, 600, 400, 200];
 
     return (
@@ -30,7 +29,9 @@ function PaginatedCard({
                         <h3 className="work-title">{title}</h3>
                     </Link>
                     <p className="work-author">{author}</p>
-                    <p className="work-access">{is_public_domain ? 'public' : 'private'}</p>
+                    <p className="work-access">
+                        {is_public_domain ? 'public' : 'private'}
+                    </p>
                 </div>
                 <button className="bookmark-btn" onClick={onClickHandler}>
                     <img src={bookmark} alt="bookmark" />

@@ -1,7 +1,7 @@
 import { useRouteError, Link } from 'react-router-dom';
 import { Navbar } from '@components/navbar/Root';
 
-export const ErrorPage : React.FC = () => {
+export const ErrorPage: React.FC = () => {
     const error = useRouteError() as { status?: number; statusText?: string };
     console.error(error);
     return (
@@ -22,4 +22,4 @@ export const ErrorPage : React.FC = () => {
             </div>
         </>
     );
-}
+};

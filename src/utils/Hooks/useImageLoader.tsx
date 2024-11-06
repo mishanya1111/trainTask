@@ -4,9 +4,10 @@ import defaultPage from '@assets/img/maxresdefault.jpg';
 import logo from '@assets/img/svg.svg';
 import { ArtworkImageProps, UseImageLoaderReturn } from '@constants/types';
 
-
-
-function useImageLoader(imageId: string | undefined, size: number): UseImageLoaderReturn {
+function useImageLoader(
+    imageId: string | undefined,
+    size: number
+): UseImageLoaderReturn {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,11 @@ function useImageLoader(imageId: string | undefined, size: number): UseImageLoad
     return { imageSrc, loading, error };
 }
 
-function ArtworkImage({ imageId, sizes = [843, 500, 300], alt = 'Artwork' }: ArtworkImageProps): JSX.Element {
+function ArtworkImage({
+    imageId,
+    sizes = [843, 500, 300],
+    alt = 'Artwork'
+}: ArtworkImageProps): JSX.Element {
     const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const { imageSrc, loading, error } = useImageLoader(
         imageId,

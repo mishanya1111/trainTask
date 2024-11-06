@@ -28,7 +28,10 @@ class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryStat
                     <Navbar />
                     <div className="errorContainer">
                         <h1>
-                            Error: {this.state.error ? this.state.error.message : 'An unknown error occurred'}
+                            Error:{' '}
+                            {this.state.error
+                                ? this.state.error.message
+                                : 'An unknown error occurred'}
                         </h1>
                     </div>
                 </>

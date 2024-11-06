@@ -6,8 +6,7 @@ import bookmark from '@assets/img/bookmark.png';
 import { Artwork } from '@constants/types';
 // Определяем интерфейс для элементов избранного
 
-
-function Favorites():JSX.Element  {
+function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<Artwork[]>([]);
 
     useEffect(() => {
@@ -34,7 +33,7 @@ function Favorites():JSX.Element  {
             </div>
             <div className="favorites-container">
                 {favorites.length > 0 ? (
-                    favorites.map((artwork) => (
+                    favorites.map(artwork => (
                         <WorkCard
                             linkID={artwork.ID}
                             key={artwork.ID}

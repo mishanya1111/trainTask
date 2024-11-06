@@ -8,7 +8,7 @@ import Loader from '@components/Loader/Loader';
 import { Artwork } from '@constants/types';
 
 //function Favorites():JSX.Element
-function Home():JSX.Element{
+function Home(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const debouncedQuery = useDebounce(searchQuery, 500);
     const { artworks, loading, error } = useArtworksFetcher(debouncedQuery);
@@ -22,10 +22,10 @@ function Home():JSX.Element{
                 widthWindow < 900
                     ? 1
                     : widthWindow < 1200
-                        ? 2
-                        : widthWindow < 1920
-                            ? 3
-                            : 4
+                      ? 2
+                      : widthWindow < 1920
+                        ? 3
+                        : 4
             );
         };
 
@@ -44,20 +44,22 @@ function Home():JSX.Element{
         setSortCriterion(event.target.value);
     };
 
-    const sortedArtworks : Artwork[] = [...artworks].sort((a: Artwork, b: Artwork) => {
-        if (sortCriterion === 'name') {
-            return (a.title || '').localeCompare(b.title || '');
-        } else if (sortCriterion === 'author') {
-            return (a.author || '').localeCompare(b.author || '');
-        } else if (sortCriterion === 'year') {
-            return (a.year ?? Infinity) - (b.year ?? Infinity);
-        } else if (sortCriterion === 'availability') {
-            const aAvailability = a.is_public_domain ?? false;
-            const bAvailability = b.is_public_domain ?? false;
-            return aAvailability === bAvailability ? 0 : aAvailability ? 1 : -1;
+    const sortedArtworks: Artwork[] = [...artworks].sort(
+        (a: Artwork, b: Artwork) => {
+            if (sortCriterion === 'name') {
+                return (a.title || '').localeCompare(b.title || '');
+            } else if (sortCriterion === 'author') {
+                return (a.author || '').localeCompare(b.author || '');
+            } else if (sortCriterion === 'year') {
+                return (a.year ?? Infinity) - (b.year ?? Infinity);
+            } else if (sortCriterion === 'availability') {
+                const aAvailability = a.is_public_domain ?? false;
+                const bAvailability = b.is_public_domain ?? false;
+                return aAvailability === bAvailability ? 0 : aAvailability ? 1 : -1;
+            }
+            return 0;
         }
-        return 0;
-    });
+    );
 
     if (error) return <p>Error in home page: {error}</p>;
     //console.log(artworks);

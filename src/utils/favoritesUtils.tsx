@@ -5,7 +5,8 @@ export const getFavorites = (): Artwork[] => {
     return favorites ? JSON.parse(favorites) : [];
 };
 
-export const isFavorite = (ID: number): boolean => getFavorites().some((fav: Artwork) => fav.ID === ID);
+export const isFavorite = (ID: number): boolean =>
+    getFavorites().some((fav: Artwork) => fav.ID === ID);
 
 export const addToFavorites = (artwork: Artwork): void => {
     const favorites = getFavorites();
