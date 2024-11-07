@@ -1,4 +1,4 @@
-export interface Artwork {
+export interface ARTWORK {
 
     ID: number;
     title: string;
@@ -9,15 +9,15 @@ export interface Artwork {
     favoritePage?: boolean;
 }
 
-export interface PaginatedWorksProps {
-    works: Artwork[];
+export interface PAGINATED_WORKS_PROPS {
+    works: ARTWORK[];
     cardsPerPage: number;
     sortCriterion: string;
     onSortChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 
-export interface PaginatedCardProps {
+export interface PAGINATED_CARD_PROPS {
     linkID: number;
     title: string;
     author: string | null;
@@ -27,13 +27,8 @@ export interface PaginatedCardProps {
 }
 
 export
-interface ArtworkImageProps {
+interface ARTWORK_IMAGE_PROPS {
     imageId: string | undefined;
     sizes?: number[];
     alt?: string;
-}
-export interface UseImageLoaderReturn {
-    imageSrc: string | null;
-    loading: boolean;
-    error: string | null;
 }

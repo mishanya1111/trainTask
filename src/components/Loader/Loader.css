@@ -13,7 +13,7 @@
 }
 
 .loader-logo {
-    width: 80px; /* Размер логотипа */
+    width: 80px;
     height: 80px;
     animation: rotate 1.5s linear infinite; /* Анимация вращения */
 }

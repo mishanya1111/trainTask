@@ -9,7 +9,7 @@
     width:50%;
 }
 
-.image-container img {
+.image-container > img {
     width:100%;
     height: auto;
     object-fit: cover;
@@ -27,7 +27,7 @@
     background: white;
     padding: 1rem;
 }
-.bookmark-icon img{
+.bookmark-icon > img{
     width: 90%;
     
 }
@@ -37,11 +37,11 @@
     width: 50%;
 }
 
-.overview h3 {
+.overview > h3 {
     margin-top: 4rem;
 }
 
-.overview p {
+.overview > p {
     margin: 0.5rem 0;
 }
 .detail-info strong{

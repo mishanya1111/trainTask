@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import SearchScreen from '@pages/Home/SearchScreen';
-import OtherWorks from '@pages/Home/OtherWorks';
-import PaginatedWorks from '@pages/Home/PaginatedWorks';
+import SearchScreen from '@components/SearchScreen';
+import OtherWorks from '@components/OtherWorks';
+import PaginatedWorks from '@components/Paginated/PaginatedWorks';
 import useArtworksFetcher from '@utils/Hooks/useArtworkFetcher';
 import useDebounce from '@utils/Hooks/useDebounce';
 import Loader from '@components/Loader/Loader';
-import { Artwork } from '@constants/types';
+import { ARTWORK } from '@constants/types';
 
 //function Favorites():JSX.Element
 function Home(): JSX.Element {
@@ -43,21 +43,27 @@ function Home(): JSX.Element {
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortCriterion(event.target.value);
     };
-
-    const sortedArtworks: Artwork[] = [...artworks].sort(
-        (a: Artwork, b: Artwork) => {
-            if (sortCriterion === 'name') {
-                return (a.title || '').localeCompare(b.title || '');
-            } else if (sortCriterion === 'author') {
-                return (a.author || '').localeCompare(b.author || '');
-            } else if (sortCriterion === 'year') {
-                return (a.year ?? Infinity) - (b.year ?? Infinity);
-            } else if (sortCriterion === 'availability') {
-                const aAvailability = a.is_public_domain ?? false;
-                const bAvailability = b.is_public_domain ?? false;
-                return aAvailability === bAvailability ? 0 : aAvailability ? 1 : -1;
+    const sortedArtworks: ARTWORK[] = [...artworks].sort(
+        (a: ARTWORK, b: ARTWORK) => {
+            switch (sortCriterion) {
+                case 'name':
+                    return (a.title || '').localeCompare(b.title || '');
+                case 'author':
+                    return (a.author || '').localeCompare(b.author || '');
+                case 'year':
+                    return (a.year ?? Infinity) - (b.year ?? Infinity);
+                case 'availability': {
+                    const aAvailability = a.is_public_domain ?? false;
+                    const bAvailability = b.is_public_domain ?? false;
+                    return aAvailability === bAvailability
+                        ? 0
+                        : aAvailability
+                          ? 1
+                          : -1;
+                }
+                default:
+                    return 0;
             }
-            return 0;
         }
     );
 

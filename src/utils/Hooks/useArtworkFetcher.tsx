@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Artwork } from '@constants/types';
+import { ARTWORK } from '@constants/types';
 
 const useArtworksFetcher = (
     query: string
-): { artworks: Artwork[]; loading: boolean; error: string | null } => {
-    const [artworks, setArtworks] = useState<Artwork[]>([]);
+): { artworks: ARTWORK[]; loading: boolean; error: string | null } => {
+    const [artworks, setArtworks] = useState<ARTWORK[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -24,7 +24,7 @@ const useArtworksFetcher = (
 
                 const data = await response.json();
                 const parsedArtworks = data.data.map(
-                    (artwork: any): Artwork => ({
+                    (artwork: any): ARTWORK => ({
                         ID: artwork.id,
                         title: artwork.title,
                         author: artwork.artist_title || null,
