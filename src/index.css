@@ -87,7 +87,7 @@ a {
 
 
 .work-card {
-    width: calc(25% - 3rem);display: flex;
+    width: calc(25% - 4rem);display: flex;
     align-items: center;
     padding: 1rem;
     border: 1px solid #ddd;
@@ -243,13 +243,13 @@ a {
 }
 
 @media (max-width: 1920px) {
-    .work-card, .paginated-work-card {
+    .work-card {
         width: calc(33.33% - 3rem);
     }
 }
 
 @media (max-width: 1200px) {
-    .work-card, .paginated-work-card {
+    .work-card {
         width: calc(50% - 3rem);
     }
     #detail {
@@ -259,7 +259,7 @@ a {
 }
 
 @media (max-width: 900px) {
-    .work-card, .paginated-work-card {
+    .work-card {
         width: calc(100% - 2rem);
     }
     .filter-container h2{

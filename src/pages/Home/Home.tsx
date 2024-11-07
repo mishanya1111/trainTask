@@ -19,11 +19,11 @@ function Home(): JSX.Element {
         const handleResize = () => {
             const widthWindow = window.innerWidth;
             setCardsPerPage(
-                widthWindow < 900
+                widthWindow <= 900
                     ? 1
-                    : widthWindow < 1200
+                    : widthWindow <= 1200
                       ? 2
-                      : widthWindow < 1920
+                      : widthWindow <= 1920
                         ? 3
                         : 4
             );

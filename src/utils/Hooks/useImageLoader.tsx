@@ -20,6 +20,7 @@ function useImageLoader(
         }
 
         const url = `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`;
+
         const loadImage = () => {
             setLoading(true);
             setError(null);
@@ -32,8 +33,17 @@ function useImageLoader(
                 setLoading(false);
             };
 
-            img.onerror = () => {
-                setError('No Photo');
+            img.onerror = (event) => {
+                if (event instanceof ErrorEvent && event.target instanceof HTMLImageElement) {
+                    const target = event.target;
+                    if (target.naturalWidth === 0 && target.naturalHeight === 0) {
+                        setError('ScaleRestricted');
+                    } else {
+                        setError('No Photo');
+                    }
+                } else {
+                    setError('No Photo');
+                }
                 setLoading(false);
             };
         };
@@ -45,10 +55,10 @@ function useImageLoader(
 }
 
 function ArtworkImage({
-    imageId,
-    sizes = [843, 500, 300],
-    alt = 'Artwork'
-}: ArtworkImageProps): JSX.Element {
+                          imageId,
+                          sizes = [843, 500, 300],
+                          alt = 'Artwork'
+                      }: ArtworkImageProps): JSX.Element {
     const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const { imageSrc, loading, error } = useImageLoader(
         imageId,
@@ -56,14 +66,15 @@ function ArtworkImage({
     );
 
     useEffect(() => {
-        if (error && currentSizeIndex < sizes.length - 1) {
+        if (error === 'ScaleRestricted' && currentSizeIndex < sizes.length - 1) {
             setCurrentSizeIndex(currentSizeIndex + 1);
         }
     }, [error, currentSizeIndex, sizes.length]);
 
     if (loading) return <img src={defaultPage} alt="Loading artwork" />;
-    if (error && currentSizeIndex === sizes.length - 1)
+    if (error && currentSizeIndex === sizes.length - 1) {
         return <img src={logo} alt="Placeholder logo" />;
+    }
 
     return <img src={imageSrc!} alt={alt} />;
 }
