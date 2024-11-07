@@ -1,15 +1,15 @@
 // PaginatedWorks.tsx
 import React, { useState } from 'react';
-import PaginatedCard from '@pages/Home/PaginatedCard';
+import PaginatedCard from '@components/Paginated/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
-import { PaginatedWorksProps } from '@constants/types';
+import { PAGINATED_WORKS_PROPS } from '@constants/types';
 
 function PaginatedWorks({
     works,
     cardsPerPage,
     sortCriterion,
     onSortChange
-}: PaginatedWorksProps) {
+}: PAGINATED_WORKS_PROPS) {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = Math.ceil(works.length / cardsPerPage);
 

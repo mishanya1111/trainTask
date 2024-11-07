@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtworkImage from '@utils/Hooks/useImageLoader';
+import ArtworkImage from '@utils/ArtworkImage';
 import bookmark from '@assets/img/bookmark.png';
 import unbookmark from '@assets/img/unbookmark.png';
 import { Link } from 'react-router-dom';

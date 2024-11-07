@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
 import '@pages/Favorites/favorites.css';
-import WorkCard from '@pages/Home/WorkCard';
+import WorkCard from '@components/WorkCard';
 import bookmark from '@assets/img/bookmark.png';
-import { Artwork } from '@constants/types';
-// Определяем интерфейс для элементов избранного
+import { ARTWORK } from '@constants/types';
 
 function Favorites(): JSX.Element {
-    const [favorites, setFavorites] = useState<Artwork[]>([]);
+    const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 
     useEffect(() => {
         setFavorites(getFavorites());

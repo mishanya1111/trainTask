@@ -1,10 +1,10 @@
 import React from 'react';
-import WorkCard from '@pages/Home/WorkCard';
+import WorkCard from '@components/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
-import { Artwork } from '@constants/types';
+import { ARTWORK } from '@constants/types';
 
 interface OtherWorksProps {
-    works: Artwork[];
+    works: ARTWORK[];
 }
 
 function OtherWorks({ works }: OtherWorksProps) {

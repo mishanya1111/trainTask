@@ -1,10 +1,10 @@
 // PaginatedCard.tsx
 import React from 'react';
-import ArtworkImage from '@utils/Hooks/useImageLoader';
-import '@pages/Home/PaginatedCard.css';
+import ArtworkImage from '@utils/ArtworkImage';
+import '@components/Paginated/PaginatedCard.css';
 import bookmark from '@assets/img/bookmark.png';
 import { Link } from 'react-router-dom';
-import { PaginatedCardProps } from '@constants/types';
+import { PAGINATED_CARD_PROPS } from '@constants/types';
 
 function PaginatedCard({
     linkID,
@@ -13,7 +13,7 @@ function PaginatedCard({
     imageId,
     is_public_domain,
     onClickHandler
-}: PaginatedCardProps): JSX.Element {
+}: PAGINATED_CARD_PROPS): JSX.Element {
     const sizesImage = [863, 1686, 600, 400, 200];
 
     return (

@@ -1,38 +1,53 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import '@components/navbar/Navbar.css';
+import '@components/navbar/NavbarAndFooter.css';
 import React, { useRef, useState, RefObject } from 'react';
 import logo from '@assets/img/svg.svg';
 import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/bookmark.png';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
-
 export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean =
         location.pathname === '/trainTask' || location.pathname === '/trainTask/';
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
 
     const toggleBurgerMenu = (): void => {
         setIsBurgerOpen(prev => !prev);
     };
 
     // Закрытие меню при клике вне его
-    useOutsideClick(menuRef, () => setIsBurgerOpen(false));
+    useOutsideClick(menuRef, (event: MouseEvent) => {
+        if (!buttonRef.current?.contains(event.target as Node)) {
+            setIsBurgerOpen(false);
+        }
+    });
 
     return (
         <div className="navbar">
-            <div className="navbar-left">
-                <div className="navbar-logo">
-                    <img src={logo} alt="logo" />
+            <NavLink
+                to="/trainTask"
+                end
+                className={({ isActive, isPending }): string =>
+                    isActive ? 'active' : isPending ? 'pending' : ''
+                }
+            >
+                <div className="navbar-left">
+                    <div className="navbar-logo">
+                        <img src={logo} alt="logo" />
+                    </div>
+                    <div className="navbar-text">
+                        Museum of <span className="highlight">Art</span>
+                    </div>
                 </div>
-                <div className="navbar-text">
-                    Museum of <span className="highlight">Art</span>
-                </div>
-            </div>
-
-            <button className="burger-button" onClick={toggleBurgerMenu}>
+            </NavLink>
+            <button
+                ref={buttonRef} // Привязываем кнопку к рефу
+                className="burger-button"
+                onClick={toggleBurgerMenu}
+            >
                 ☰
             </button>
 

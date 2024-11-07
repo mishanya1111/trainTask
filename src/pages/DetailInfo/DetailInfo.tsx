@@ -9,7 +9,7 @@ import {
     isFavorite
 } from '@utils/favoritesUtils';
 import Loader from '@components/Loader/Loader';
-import ArtworkImage from '@utils/Hooks/useImageLoader';
+import ArtworkImage from '@utils/ArtworkImage';
 
 interface Artwork {
     id: number;
@@ -81,7 +81,11 @@ function DetailInfo(): JSX.Element {
     return (
         <div className="detail-info">
             <div className="image-container">
-                <ArtworkImage imageId={artwork?.image_id} sizes={sizesImage} />
+                <ArtworkImage
+                    imageId={artwork?.image_id}
+                    sizes={sizesImage}
+                    alt={artwork?.title}
+                />
                 <div className="bookmark-icon" onClick={toggleFavorite}>
                     <img
                         src={isFavorited ? bookmarkRemove : bookmarkAdd}
