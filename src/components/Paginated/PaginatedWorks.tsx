@@ -5,11 +5,11 @@ import { PAGINATED_WORKS_PROPS } from '@constants/types';
 //блок с карточками для пагинации, в css можно настроить либо у нех у всех будет одна высота(сейас 600)
 // либо все вытягивацию по самой длинной картинки
 function PaginatedWorks({
-                            works,
-                            cardsPerPage,
-                            sortCriterion,
-                            onSortChange
-                        }: PAGINATED_WORKS_PROPS) {
+    works,
+    cardsPerPage,
+    sortCriterion,
+    onSortChange
+}: PAGINATED_WORKS_PROPS) {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = Math.ceil(works.length / cardsPerPage); //Сколько блоков переключеия
 

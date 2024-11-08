@@ -4,10 +4,10 @@ import logo from '@assets/img/svg.svg';
 import { ARTWORK_IMAGE_PROPS } from '@constants/types';
 
 function ArtworkImage({
-                          imageId,
-                          sizes = [843, 500, 300, 200],
-                          alt = 'Artwork'
-                      }: ARTWORK_IMAGE_PROPS): JSX.Element {
+    imageId,
+    sizes = [843, 500, 300, 200],
+    alt = 'Artwork'
+}: ARTWORK_IMAGE_PROPS): JSX.Element {
     const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const [validSrc, setValidSrc] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -31,7 +31,7 @@ function ArtworkImage({
             setLoading(false);
             setError('Image load failed');
             if (currentSizeIndex < sizes.length - 1) {
-                setCurrentSizeIndex((prevIndex) => prevIndex + 1);
+                setCurrentSizeIndex(prevIndex => prevIndex + 1);
             }
         };
     };

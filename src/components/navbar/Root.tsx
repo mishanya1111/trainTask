@@ -10,7 +10,8 @@ import { HOME_PAGE_ROUTE } from '@constants/routes';
 export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean =
-        location.pathname === HOME_PAGE_ROUTE || location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
+        location.pathname === HOME_PAGE_ROUTE ||
+        location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
