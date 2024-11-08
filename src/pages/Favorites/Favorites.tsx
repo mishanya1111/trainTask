@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
 import '@pages/Favorites/favorites.css';
-import WorkCard from '@pages/Home/WorkCard';
+import WorkCard from '@components/WorkCard';
 import bookmark from '@assets/img/bookmark.png';
-function Favorites() {
-    const [favorites, setFavorites] = useState([
-        {
-            ID: 0,
-            title: '',
-            author: '',
-            is_public_domain: false,
-            imageId: ''
-        }
-    ]);
+import { ARTWORK } from '@constants/types';
+//Использует FavoritesUtils для отображения тех кто туда попал, также использует workcrd
+function Favorites(): JSX.Element {
+    const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 
     useEffect(() => {
         setFavorites(getFavorites());
     }, []);
 
-    const handleRemoveFavorite = (id: any) => {
+    const handleRemoveFavorite = (id: number) => {
         removeFromFavorites(id);
         setFavorites(getFavorites());
     };
@@ -28,7 +22,7 @@ function Favorites() {
             <div className="search-screen">
                 <h1>Here are your</h1>
                 <h2>
-                    <img src={bookmark} alt="bokmark" />
+                    <img src={bookmark} alt="bookmark" />
                     Favorites
                 </h2>
             </div>
@@ -38,22 +32,20 @@ function Favorites() {
             </div>
             <div className="favorites-container">
                 {favorites.length > 0 ? (
-                    favorites.map((artwork, index) => (
+                    favorites.map(artwork => (
                         <WorkCard
-                            favoritePage={true}
                             linkID={artwork.ID}
-                            key={index}
+                            key={artwork.ID}
                             title={artwork.title}
                             author={artwork.author}
                             imageId={artwork.imageId}
                             is_public_domain={artwork.is_public_domain}
                             onClickHandler={() => handleRemoveFavorite(artwork.ID)}
+                            favoritePage={true}
                         />
                     ))
                 ) : (
-                    <p>
-                        <h4>No favorites added yet.</h4>
-                    </p>
+                    <h4>No favorites added yet.</h4>
                 )}
             </div>
         </div>

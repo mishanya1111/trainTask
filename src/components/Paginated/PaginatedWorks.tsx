@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import PaginatedCard from '@pages/Home/PaginatedCard';
+import PaginatedCard from '@components/Paginated/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
+import { PAGINATED_WORKS_PROPS } from '@constants/types';
+//блок с карточками для пагинации, в css можно настроить либо у нех у всех будет одна высота(сейас 600)
+// либо все вытягивацию по самой длинной картинки
+function PaginatedWorks({
+    works,
+    cardsPerPage,
+    sortCriterion,
+    onSortChange
+}: PAGINATED_WORKS_PROPS) {
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const totalPages = Math.ceil(works.length / cardsPerPage); //Сколько блоков переключеия
 
-const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(works.length / cardsPerPage);
-
-    const handlePageChange = newPage => {
+    const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
     };
 
@@ -18,14 +25,13 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
         setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
     };
 
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const indexOfLastCard = currentPage * cardsPerPage; // индекс последней карточки на текущей странице
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage; //индекс первой карточки на текущей странице
     const currentWorks = works.slice(indexOfFirstCard, indexOfLastCard);
 
-    // Вычисляем диапазон видимых номеров страниц
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 3);
-
+    //Пучтой див для более централизировано Other Works
     return (
         <div className="paginated-works">
             <div className="filter-container">
@@ -47,9 +53,9 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
                 </div>
             </div>
             <div className="paginated-work-card-container">
-                {currentWorks.map((work, index) => (
+                {currentWorks.map(work => (
                     <PaginatedCard
-                        key={index}
+                        key={work.ID}
                         linkID={work.ID}
                         title={work.title}
                         author={work.author}
@@ -87,6 +93,6 @@ const PaginatedWorks = ({ works, cardsPerPage, sortCriterion, onSortChange }) =>
             </div>
         </div>
     );
-};
+}
 
 export default PaginatedWorks;

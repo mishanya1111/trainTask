@@ -1,43 +1,60 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import '@components/navbar/Navbar.css';
-import React, { useRef, useState } from 'react';
+import '@components/navbar/NavbarAndFooter.css';
+import React, { useRef, useState, RefObject } from 'react';
 import logo from '@assets/img/svg.svg';
 import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/bookmark.png';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
-
-export const Navbar = () => {
+import { HOME_PAGE_ROUTE } from '@constants/routes';
+export const Navbar: React.FC = () => {
     const location = useLocation();
-    const isHomePage =
-        location.pathname === '/trainTask' || location.pathname === '/trainTask/';
-    const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-    const menuRef = useRef(null);
+    const isHomePage: boolean =
+        location.pathname === HOME_PAGE_ROUTE ||
+        location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
+    const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
 
-    const toggleBurgerMenu = () => {
+    const toggleBurgerMenu = (): void => {
         setIsBurgerOpen(prev => !prev);
     };
 
-    // Закрытие меню при клике вне его
-    useOutsideClick(menuRef, () => setIsBurgerOpen(false));
-
+    // Закрытие меню при клике вне его  с проверкой на нажатие на самоу кнопку бургер меню
+    useOutsideClick(menuRef, (event: MouseEvent) => {
+        if (!buttonRef.current?.contains(event.target as Node)) {
+            setIsBurgerOpen(false);
+        }
+    });
+    //наверное можно было убрать у NavLInk classNAme
     return (
         <div className="navbar">
-            <div className="navbar-left">
-                <div className="navbar-logo">
-                    <img src={logo} alt="logo" />
+            <NavLink
+                to="/trainTask"
+                end
+                className={({ isActive, isPending }): string =>
+                    isActive ? 'active' : isPending ? 'pending' : ''
+                }
+            >
+                <div className="navbar-left">
+                    <div className="navbar-logo">
+                        <img src={logo} alt="logo" />
+                    </div>
+                    <div className="navbar-text">
+                        Museum of <span className="highlight">Art</span>
+                    </div>
                 </div>
-                <div className="navbar-text">
-                    Museum of <span className="highlight">Art</span>
-                </div>
-            </div>
-
-            <button className="burger-button" onClick={toggleBurgerMenu}>
+            </NavLink>
+            <button
+                ref={buttonRef}
+                className="burger-button"
+                onClick={toggleBurgerMenu}
+            >
                 ☰
             </button>
 
             <nav
-                ref={menuRef}
+                ref={menuRef as RefObject<HTMLDivElement>}
                 className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}
             >
                 <ul>
@@ -46,7 +63,7 @@ export const Navbar = () => {
                             <NavLink
                                 to="/trainTask"
                                 end
-                                className={({ isActive, isPending }) =>
+                                className={({ isActive, isPending }): string =>
                                     isActive ? 'active' : isPending ? 'pending' : ''
                                 }
                             >
@@ -60,7 +77,7 @@ export const Navbar = () => {
                     <li>
                         <NavLink
                             to="/trainTask/favorites"
-                            className={({ isActive, isPending }) =>
+                            className={({ isActive, isPending }): string =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }
                         >
@@ -76,7 +93,7 @@ export const Navbar = () => {
     );
 };
 
-function Footer() {
+const Footer: React.FC = () => {
     return (
         <div className="footer">
             <div className="footer-left">
@@ -93,9 +110,9 @@ function Footer() {
             </nav>
         </div>
     );
-}
+};
 
-export default function Root() {
+const Root: React.FC = () => {
     return (
         <>
             <Navbar />
@@ -105,4 +122,6 @@ export default function Root() {
             <Footer />
         </>
     );
-}
+};
+
+export default Root;

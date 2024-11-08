@@ -3,7 +3,15 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-const SearchScreen = ({ onSearch }) => {
+interface SearchFormInputs {
+    query: string;
+}
+
+interface SearchScreenProps {
+    onSearch: (query: string) => void;
+}
+
+const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
     // Схема валидации
     const validationSchema = Yup.object({
         query: Yup.string()
@@ -20,20 +28,19 @@ const SearchScreen = ({ onSearch }) => {
         watch,
         formState: { errors },
         trigger
-    } = useForm({
+    } = useForm<SearchFormInputs>({
         resolver: yupResolver(validationSchema)
     });
 
     const query = watch('query', '');
-
+    //дебаунс
     useEffect(() => {
         const delayDebounce = setTimeout(async () => {
             const isValid = await trigger('query');
-
             if (isValid) {
                 onSearch(query);
             }
-        }, 1000); // Задержка в 500 мс
+        }, 1000);
 
         return () => clearTimeout(delayDebounce);
     }, [query, onSearch, trigger]);
@@ -51,7 +58,7 @@ const SearchScreen = ({ onSearch }) => {
                     placeholder="Search art author/title"
                     {...register('query')}
                 />
-
+                {/*Проверяется вводилась ли что-нибудь для отображеия ошибки*/}
                 {query.trim() !== '' && errors.query && (
                     <p className="error-message">{errors.query.message}</p>
                 )}

@@ -1,19 +1,24 @@
-import React, { Component } from 'react';
-import { Navbar } from '@components/navbar/Root.tsx';
+import React, { Component, ReactNode, ErrorInfo } from 'react';
+import { Navbar } from '@components/navbar/Root';
 
-class ErrorBoundary extends Component {
-    constructor(props) {
+interface ErrorBoundaryState {
+    hasError: boolean;
+    error: Error | null;
+}
+
+class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryState> {
+    constructor(props: { children: ReactNode }) {
         super(props);
         this.state = { hasError: false, error: null };
     }
 
-    static getDerivedStateFromError(_error) {
-        return { hasError: true };
+    static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
+        return { hasError: true, error: _error };
     }
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
         console.error('Error caught by ErrorBoundary:', error, errorInfo);
-        this.setState({ error }); // Сохраняем ошибку в state
+        this.setState({ error });
     }
 
     render() {

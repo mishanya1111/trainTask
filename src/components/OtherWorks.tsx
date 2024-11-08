@@ -1,9 +1,13 @@
 import React from 'react';
-import WorkCard from '@pages/Home/WorkCard';
+import WorkCard from '@components/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
+import { ARTWORK } from '@constants/types';
 
-// @ts-ignore
-export default function OtherWorks({ works }) {
+interface OtherWorksProps {
+    works: ARTWORK[];
+}
+//Отображает все карточки которые передаются из Home
+function OtherWorks({ works }: OtherWorksProps) {
     return (
         <div className="other-works">
             <h4> Here some more</h4>
@@ -18,9 +22,12 @@ export default function OtherWorks({ works }) {
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
                         onClickHandler={() => addToFavorites(work)}
+                        favoritePage={false}
                     />
                 ))}
             </div>
         </div>
     );
 }
+
+export default OtherWorks;
