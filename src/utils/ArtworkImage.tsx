@@ -41,8 +41,10 @@ function ArtworkImage({
         //Проверка на ошибку 403 (связанно с размером картинки, пример Elements I Nancy Hemenway Barto )
         const originalConsoleError = console.error;
         console.error = (...args) => {
+            console.log(args[0]?.toString());
             if (
-                args[0]?.toString()?.includes('403') &&
+
+                args[0]?.toString()?.includes('403') ||
                 args[0]?.toString()?.includes('Image load failed')
             ) {
                 return;
