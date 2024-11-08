@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/trainTask/static/css/main.2645a194.css",
-    "main.js": "/trainTask/static/js/main.c72af030.js",
+    "main.css": "/trainTask/static/css/main.823b1de2.css",
+    "main.js": "/trainTask/static/js/main.6e2c0691.js",
     "static/js/453.9379d93b.chunk.js": "/trainTask/static/js/453.9379d93b.chunk.js",
     "static/media/maxresdefault.jpg": "/trainTask/static/media/maxresdefault.3c372bfc264470c7debc.jpg",
     "static/media/modsen.svg": "/trainTask/static/media/modsen.ce537654a5b7d42f148463e4281fdaca.svg",
     "static/media/svg.svg": "/trainTask/static/media/svg.b96c0c5ff0196eebdfc8f7465796258f.svg",
     "index.html": "/trainTask/index.html",
     "static/media/home.svg": "/trainTask/static/media/home.6b15244d46321178e817730f0ec05b33.svg",
-    "main.2645a194.css.map": "/trainTask/static/css/main.2645a194.css.map",
-    "main.c72af030.js.map": "/trainTask/static/js/main.c72af030.js.map",
+    "main.823b1de2.css.map": "/trainTask/static/css/main.823b1de2.css.map",
+    "main.6e2c0691.js.map": "/trainTask/static/js/main.6e2c0691.js.map",
     "453.9379d93b.chunk.js.map": "/trainTask/static/js/453.9379d93b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2645a194.css",
-    "static/js/main.c72af030.js"
+    "static/css/main.823b1de2.css",
+    "static/js/main.6e2c0691.js"
   ]
 }
