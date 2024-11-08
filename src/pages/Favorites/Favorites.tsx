@@ -4,7 +4,7 @@ import '@pages/Favorites/favorites.css';
 import WorkCard from '@components/WorkCard';
 import bookmark from '@assets/img/bookmark.png';
 import { ARTWORK } from '@constants/types';
-
+//Использует FavoritesUtils для отображения тех кто туда попал, также использует workcrd
 function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 

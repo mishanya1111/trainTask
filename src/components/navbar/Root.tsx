@@ -6,10 +6,11 @@ import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/bookmark.png';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
+import { HOME_PAGE_ROUTE } from '@constants/routes';
 export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean =
-        location.pathname === '/trainTask' || location.pathname === '/trainTask/';
+        location.pathname === HOME_PAGE_ROUTE || location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
@@ -18,13 +19,13 @@ export const Navbar: React.FC = () => {
         setIsBurgerOpen(prev => !prev);
     };
 
-    // Закрытие меню при клике вне его
+    // Закрытие меню при клике вне его  с проверкой на нажатие на самоу кнопку бургер меню
     useOutsideClick(menuRef, (event: MouseEvent) => {
         if (!buttonRef.current?.contains(event.target as Node)) {
             setIsBurgerOpen(false);
         }
     });
-
+    //наверное можно было убрать у NavLInk classNAme
     return (
         <div className="navbar">
             <NavLink
@@ -44,7 +45,7 @@ export const Navbar: React.FC = () => {
                 </div>
             </NavLink>
             <button
-                ref={buttonRef} // Привязываем кнопку к рефу
+                ref={buttonRef}
                 className="burger-button"
                 onClick={toggleBurgerMenu}
             >

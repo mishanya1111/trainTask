@@ -6,7 +6,7 @@ import { ARTWORK } from '@constants/types';
 interface OtherWorksProps {
     works: ARTWORK[];
 }
-
+//Отображает все карточки которые передаются из Home
 function OtherWorks({ works }: OtherWorksProps) {
     return (
         <div className="other-works">

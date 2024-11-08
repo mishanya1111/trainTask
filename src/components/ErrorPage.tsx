@@ -1,6 +1,7 @@
 import { useRouteError, Link } from 'react-router-dom';
 import { Navbar } from '@components/navbar/Root';
 
+//в Случае ошибки отображается эта страница, в случае неправильного пути очень важно
 export const ErrorPage: React.FC = () => {
     const error = useRouteError() as { status?: number; statusText?: string };
     console.error(error);

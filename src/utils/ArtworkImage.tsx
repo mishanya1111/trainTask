@@ -4,17 +4,17 @@ import logo from '@assets/img/svg.svg';
 import { ARTWORK_IMAGE_PROPS } from '@constants/types';
 
 function ArtworkImage({
-    imageId,
-    sizes = [843, 500, 300, 200],
-    alt = 'Artwork'
-}: ARTWORK_IMAGE_PROPS): JSX.Element {
+                          imageId,
+                          sizes = [843, 500, 300, 200],
+                          alt = 'Artwork'
+                      }: ARTWORK_IMAGE_PROPS): JSX.Element {
     const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const [validSrc, setValidSrc] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     const testImageSrc = (size: number) => {
-        if (!imageId) return logo;
+        if (!imageId) return logo; // Если ID отсутствует, возвращаем лого
         return `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`;
     };
 
@@ -28,38 +28,19 @@ function ArtworkImage({
         };
 
         img.onerror = () => {
-            // Suppress 403 error logging
             setLoading(false);
             setError('Image load failed');
             if (currentSizeIndex < sizes.length - 1) {
-                setCurrentSizeIndex(prevIndex => prevIndex + 1);
+                setCurrentSizeIndex((prevIndex) => prevIndex + 1);
             }
         };
     };
 
     useEffect(() => {
-        //Проверка на ошибку 403 (связанно с размером картинки, пример Elements I Nancy Hemenway Barto )
-        const originalConsoleError = console.error;
-        console.error = (...args) => {
-            console.log(args[0]?.toString());
-            if (
-
-                args[0]?.toString()?.includes('403') ||
-                args[0]?.toString()?.includes('Image load failed')
-            ) {
-                return;
-            }
-            originalConsoleError(...args);
-        };
-
         setLoading(true);
         setError(null);
         const url = testImageSrc(sizes[currentSizeIndex]);
         loadImage(url);
-
-        return () => {
-            console.error = originalConsoleError;
-        };
     }, [currentSizeIndex, sizes, imageId]);
 
     if (loading) return <img src={defaultPage} alt="Loading artwork" />;

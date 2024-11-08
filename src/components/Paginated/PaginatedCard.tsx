@@ -1,11 +1,10 @@
-// PaginatedCard.tsx
 import React from 'react';
 import ArtworkImage from '@utils/ArtworkImage';
 import '@components/Paginated/PaginatedCard.css';
 import bookmark from '@assets/img/bookmark.png';
 import { Link } from 'react-router-dom';
 import { PAGINATED_CARD_PROPS } from '@constants/types';
-
+// Отдельные карточки используемые для пагинации
 function PaginatedCard({
     linkID,
     title,
@@ -14,7 +13,7 @@ function PaginatedCard({
     is_public_domain,
     onClickHandler
 }: PAGINATED_CARD_PROPS): JSX.Element {
-    const sizesImage = [863, 1686, 600, 400, 200];
+    const sizesImage = [863, 1686, 600, 400, 200]; //размер для карточек, сделано из-за того что некоторые карточки не имеют большого размера
 
     return (
         <div className="paginated-work-card">

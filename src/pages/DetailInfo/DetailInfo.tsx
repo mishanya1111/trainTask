@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '@pages/DetailInfo/DetailInfo.css';
-import bookmarkAdd from '@assets/img/bookmark.png';
-import bookmarkRemove from '@assets/img/unbookmark.png';
 import {
     addToFavorites,
     removeFromFavorites,
@@ -10,6 +8,7 @@ import {
 } from '@utils/favoritesUtils';
 import Loader from '@components/Loader/Loader';
 import ArtworkImage from '@utils/ArtworkImage';
+import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
 
 interface Artwork {
     id: number;
@@ -23,7 +22,7 @@ interface Artwork {
     place_of_origin: string;
     date_display: string;
 }
-
+//отображает детальую информацию о товаре, также присутствует больше иформации
 function DetailInfo(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [artwork, setArtwork] = useState<Artwork | null>(null);
@@ -87,14 +86,7 @@ function DetailInfo(): JSX.Element {
                     alt={artwork?.title}
                 />
                 <div className="bookmark-icon" onClick={toggleFavorite}>
-                    <img
-                        src={isFavorited ? bookmarkRemove : bookmarkAdd}
-                        alt={
-                            isFavorited
-                                ? 'Remove from favorites'
-                                : 'Add to favorites'
-                        }
-                    />
+                    <ReplaceableBookmark isFavorited={isFavorited} />
                 </div>
             </div>
             <div className="info-container">

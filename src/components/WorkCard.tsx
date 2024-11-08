@@ -13,7 +13,7 @@ interface WorkCardProps {
     is_public_domain: boolean;
     onClickHandler: () => void;
 }
-
+//Компонент используюшийся в двух местах, представляет собой блок с небольшой информацией
 function WorkCard({
     linkID,
     title,

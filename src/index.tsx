@@ -11,7 +11,7 @@ import Favorites from '@pages/Favorites/Favorites';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
 import ErrorBoundary from '@utils/ErrorBoundary';
 import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
-
+//Главный путь
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const router = createBrowserRouter([
     {

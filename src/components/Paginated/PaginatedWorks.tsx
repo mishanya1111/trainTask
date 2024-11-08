@@ -1,17 +1,17 @@
-// PaginatedWorks.tsx
 import React, { useState } from 'react';
 import PaginatedCard from '@components/Paginated/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
-
+//блок с карточками для пагинации, в css можно настроить либо у нех у всех будет одна высота(сейас 600)
+// либо все вытягивацию по самой длинной картинки
 function PaginatedWorks({
-    works,
-    cardsPerPage,
-    sortCriterion,
-    onSortChange
-}: PAGINATED_WORKS_PROPS) {
+                            works,
+                            cardsPerPage,
+                            sortCriterion,
+                            onSortChange
+                        }: PAGINATED_WORKS_PROPS) {
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const totalPages = Math.ceil(works.length / cardsPerPage);
+    const totalPages = Math.ceil(works.length / cardsPerPage); //Сколько блоков переключеия
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -25,8 +25,8 @@ function PaginatedWorks({
         setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
     };
 
-    const indexOfLastCard = currentPage * cardsPerPage;
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+    const indexOfLastCard = currentPage * cardsPerPage; // индекс последней карточки на текущей странице
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage; //индекс первой карточки на текущей странице
     const currentWorks = works.slice(indexOfFirstCard, indexOfLastCard);
 
     const startPage = Math.max(1, currentPage - 2);

@@ -33,7 +33,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
     });
 
     const query = watch('query', '');
-
+    //дебаунс
     useEffect(() => {
         const delayDebounce = setTimeout(async () => {
             const isValid = await trigger('query');
@@ -58,6 +58,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
                     placeholder="Search art author/title"
                     {...register('query')}
                 />
+                {/*Проверяется вводилась ли что-нибудь для отображеия ошибки*/}
                 {query.trim() !== '' && errors.query && (
                     <p className="error-message">{errors.query.message}</p>
                 )}

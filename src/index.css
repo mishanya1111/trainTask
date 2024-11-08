@@ -94,10 +94,6 @@ a {
     border-radius: 8px;
     position: relative;
 }
-.work-card a{
-
-
-}
 
 .image-placeholder {
     width: 60px;
@@ -158,14 +154,6 @@ a {
     align-items: center;
 }
 
-.paginated-work-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 20px;
-    min-height: 400px;
-}
-
 .card-image {
     width: 100%;
     height: calc(1.15 * 100%);
@@ -199,6 +187,9 @@ a {
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
+    min-height: 400px;
+    width: 100%;
+
 }
 
 .pagination-controls {
@@ -261,7 +252,7 @@ a {
 
 @media (max-width: 900px) {
     .work-card {
-        width: calc(100% - 2rem);
+        width: calc(100% - 3rem);
     }
     .filter-container h2{
         font-size: 1.2rem;

@@ -11,17 +11,19 @@
     height: calc(100%);
     overflow: hidden;
     border-radius: 8px 8px 0 0;
+
 }
 
 .paginated-image-placeholder img {
     width: 100%;
-    height: 100%;
+    height: 600px; /*height: 100%; будут вытягиваться по самому максимальному */
     object-fit: cover;
 }
 
 .overlay-card {
     position: absolute;
     width: 80%;
+    height: 116px;
     left: 50%;
     bottom: 0;
     transform: translate(-50%, 50%); /* Центрирование по горизонтали и вертикально наполовину */
@@ -63,13 +65,13 @@
 
 @media (max-width: 1920px) {
     .paginated-work-card {
-        width: calc(33.33% - 3rem);
+        width: calc(33.33% - 1rem);
     }
 }
 
 @media (max-width: 1200px) {
     .paginated-work-card {
-        width: calc(50% - 3rem);
+        width: calc(50% - 1rem);
     }
 
 }
