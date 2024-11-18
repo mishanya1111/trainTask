@@ -1,3 +1,4 @@
+import React from 'react'; //для Eslist
 import { useRouteError, Link } from 'react-router-dom';
 import { Navbar } from '@components/navbar/Root';
 

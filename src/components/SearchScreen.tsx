@@ -48,7 +48,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
     return (
         <div className="search-screen">
             <h1 className="search-title">
-                Let's Find Some <span className="highlight">Art</span>
+                Let&apos;s Find Some <span className="highlight">Art</span>
             </h1>
             <h2>Here</h2>
             <form>

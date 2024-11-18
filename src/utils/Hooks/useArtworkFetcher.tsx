@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ARTWORK } from '@constants/types';
+import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
 
 const useArtworksFetcher = (
     query: string
@@ -23,13 +23,15 @@ const useArtworksFetcher = (
                 }
 
                 const data = await response.json();
+                console.log(data);
+
                 const parsedArtworks = data.data.map(
-                    (artwork: any): ARTWORK => ({
+                    (artwork: ARTWORK_FETCH): ARTWORK => ({
                         ID: artwork.id,
                         title: artwork.title,
                         author: artwork.artist_title || null,
                         is_public_domain: artwork.is_public_domain,
-                        imageId: artwork.image_id || null,
+                        imageId: artwork.image_id,
                         year: artwork.fiscal_year ?? undefined
                     })
                 );

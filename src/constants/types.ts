@@ -32,3 +32,12 @@ interface ARTWORK_IMAGE_PROPS {
     sizes?: number[];
     alt?: string;
 }
+
+export interface ARTWORK_FETCH {
+    id: number;
+    title: string;
+    artist_title: string | null;
+    is_public_domain: boolean;
+    image_id: string ;
+    fiscal_year: number | undefined;
+}
