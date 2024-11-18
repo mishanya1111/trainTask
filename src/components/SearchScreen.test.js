@@ -8,18 +8,20 @@ const mockOnSearch = jest.fn();
 
 describe('SearchScreen component', () => {
     beforeEach(() => {
-        jest.clearAllMocks();  // очищаем мок функции перед каждым тестом
+        jest.clearAllMocks(); // очищаем мок функции перед каждым тестом
     });
 
     test('renders correctly', () => {
         render(<SearchScreen onSearch={mockOnSearch} />);
 
         // Ищем элемент по роли
-        expect(screen.getByRole('heading', { name: /Let's Find Some Art/i })).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('Search art author/title')).toBeInTheDocument();
+        expect(
+            screen.getByRole('heading', { name: /Let's Find Some Art/i })
+        ).toBeInTheDocument();
+        expect(
+            screen.getByPlaceholderText('Search art author/title')
+        ).toBeInTheDocument();
     });
-
-
 
     test('calls onSearch function when input is valid', async () => {
         jest.useFakeTimers();
@@ -44,7 +46,6 @@ describe('SearchScreen component', () => {
         render(<SearchScreen onSearch={mockOnSearch} />);
 
         const input = screen.getByPlaceholderText('Search art author/title');
-
 
         userEvent.type(input, 'ab');
 

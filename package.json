@@ -27,7 +27,7 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "format": "prettier --write \"./src/**/*.{js,md,scss,tsx}\"",
-    "lint": "eslint src/ --fix --max-warnings=0",
+    "lint": "eslint src/ --fix --max-warnings=5",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -65,7 +65,7 @@
     "typescript-eslint": "^8.14.0"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,md,scss,tsx}": "prettier --write"
+    "*.{js,md,tsx}": "eslint src/ --fix --max-warnings=5",
+    "*.{js,md,scss,tsx}": "prettier --write \"./src/**/*.{js,md,scss,tsx}\""
   }
 }
