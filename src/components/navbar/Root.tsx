@@ -7,6 +7,7 @@ import bookmark from '@assets/img/bookmark.png';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
 import { HOME_PAGE_ROUTE } from '@constants/routes';
+
 export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean =
@@ -115,11 +116,17 @@ const Footer: React.FC = () => {
 const Root: React.FC = () => {
     return (
         <>
-            <Navbar />
+            <header>
+                <Navbar />
+            </header>
             <div id="detail">
-                <Outlet />
+                <main>
+                    <Outlet />
+                </main>
             </div>
-            <Footer />
+            <footer>
+                <Footer />
+            </footer>
         </>
     );
 };

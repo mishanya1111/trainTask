@@ -2,47 +2,41 @@
     position: relative;
     overflow: visible;
     border-radius: 8px;
-    margin-bottom: 1rem;
-    width: calc(25% - 4rem);
+    margin-bottom: 16px;
+    width: calc(25% - 64px);
+
 }
 
 .paginated-image-placeholder {
     width: 100%;
     height: calc(100%);
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
 
 }
 
 .paginated-image-placeholder img {
     width: 100%;
-    height: 600px; /*height: 100%; будут вытягиваться по самому максимальному */
+    height: 444px; /*height: 100%; будут вытягиваться по самому максимальному */
     object-fit: cover;
 }
 
 .overlay-card {
     position: absolute;
-    width: 80%;
-    height: 116px;
+    width: 70%;
     left: 50%;
     bottom: 0;
     transform: translate(-50%, 50%); /* Центрирование по горизонтали и вертикально наполовину */
-    background-color: #F0F1F1;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    background-color: #FFFFFF;
+    padding: 32px 24px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 
 }
-
-
-.overlay-card .work-info {
-    width: 100%;
-
+.overlay-card > .work-info {
+    width: 70%;
 }
+
 
 
 .filter-container {
@@ -50,35 +44,35 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
     width: 100%;
 }
 
 .filter-container label {
-    margin-right: 0.5rem;
+    margin-right: 8px;
 }
 
 .filter-container label {
-    font-size: 1.5rem;
+    font-size: 24px;
     color: #F17900;
 }
 
 @media (max-width: 1920px) {
     .paginated-work-card {
-        width: calc(33.33% - 1rem);
+        width: calc(33.33% - 16px);
     }
 }
 
 @media (max-width: 1200px) {
     .paginated-work-card {
-        width: calc(50% - 1rem);
+        width: calc(50% - 16px);
     }
 
 }
 
 @media (max-width: 900px) {
     .paginated-work-card {
-        width: calc(100% - 2rem);
+        width: calc(100% - 32px);
     }
 
 

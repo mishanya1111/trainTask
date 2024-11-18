@@ -80,42 +80,44 @@ function DetailInfo(): JSX.Element {
     if (error) return <p className="error-message">{error}</p>;
 
     return (
-        <div className="detail-info">
-            <div className="image-container">
-                <ArtworkImage
-                    imageId={artwork?.image_id}
-                    sizes={sizesImage}
-                    alt={artwork?.title}
-                />
-                <div className="bookmark-icon" onClick={toggleFavorite}>
-                    <ReplaceableBookmark isFavorited={isFavorited} />
+        <section>
+            <div className="detail-info">
+                <div className="image-container">
+                    <ArtworkImage
+                        imageId={artwork?.image_id}
+                        sizes={sizesImage}
+                        alt={artwork?.title}
+                    />
+                    <div className="bookmark-icon" onClick={toggleFavorite}>
+                        <ReplaceableBookmark isFavorited={isFavorited} />
+                    </div>
+                </div>
+                <div className="info-container">
+                    <h1>{artwork?.title}</h1>
+                    <h2>
+                        <strong>{artwork?.artist_title}</strong>
+                    </h2>
+                    <p>{artwork?.date_display}</p>
+                    <div className="overview">
+                        <h3>Overview</h3>
+                        <p>
+                            <strong>Artist nationality:</strong>{' '}
+                            {artwork?.artist_display}
+                        </p>
+                        <p>
+                            <strong>Dimensions:</strong> {artwork?.dimensions}
+                        </p>
+                        <p>
+                            <strong>Credit Line:</strong> {artwork?.credit_line}
+                        </p>
+                        <p>
+                            <strong>Repository:</strong> {artwork?.place_of_origin}
+                        </p>
+                        <p>{artwork?.is_public_domain ? 'Public' : 'Private'}</p>
+                    </div>
                 </div>
             </div>
-            <div className="info-container">
-                <h1>{artwork?.title}</h1>
-                <h2>
-                    <strong>{artwork?.artist_title}</strong>
-                </h2>
-                <p>{artwork?.date_display}</p>
-                <div className="overview">
-                    <h3>Overview</h3>
-                    <p>
-                        <strong>Artist nationality:</strong>{' '}
-                        {artwork?.artist_display}
-                    </p>
-                    <p>
-                        <strong>Dimensions:</strong> {artwork?.dimensions}
-                    </p>
-                    <p>
-                        <strong>Credit Line:</strong> {artwork?.credit_line}
-                    </p>
-                    <p>
-                        <strong>Repository:</strong> {artwork?.place_of_origin}
-                    </p>
-                    <p>{artwork?.is_public_domain ? 'Public' : 'Private'}</p>
-                </div>
-            </div>
-        </div>
+        </section>
     );
 }
 

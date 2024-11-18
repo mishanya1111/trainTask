@@ -72,21 +72,24 @@ function Home(): JSX.Element {
     //console.log(sortedArtworks);
     return (
         <div>
-            <SearchScreen onSearch={handleSearch} />
-
-            {loading ? (
-                <Loader />
-            ) : (
-                <>
-                    <PaginatedWorks
-                        works={sortedArtworks}
-                        cardsPerPage={cardsPerPage}
-                        sortCriterion={sortCriterion}
-                        onSortChange={handleSortChange}
-                    />
-                    <OtherWorks works={sortedArtworks} />
-                </>
-            )}
+            <aside>
+                <SearchScreen onSearch={handleSearch} />
+            </aside>
+            <section>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <PaginatedWorks
+                            works={sortedArtworks}
+                            cardsPerPage={cardsPerPage}
+                            sortCriterion={sortCriterion}
+                            onSortChange={handleSortChange}
+                        />
+                        <OtherWorks works={sortedArtworks} />
+                    </>
+                )}
+            </section>
         </div>
     );
 }
