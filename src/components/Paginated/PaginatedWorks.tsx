@@ -31,10 +31,11 @@ function PaginatedWorks({
 
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 3);
-
+    //Пучтой див для более централизировано Other Works
     return (
         <div className="paginated-works">
             <div className="filter-container">
+                <div></div>
                 <div></div>
                 <h2>Other works for you</h2>
                 <div>
