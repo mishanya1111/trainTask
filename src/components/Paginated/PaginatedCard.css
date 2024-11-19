@@ -16,7 +16,7 @@
 
 .paginated-image-placeholder img {
     width: 100%;
-    height: 444px; /*height: 100%; будут вытягиваться по самому максимальному */
+    height: 444px;
     object-fit: cover;
 }
 
@@ -25,7 +25,7 @@
     width: 75%;
     left: 50%;
     bottom: 0;
-    transform: translate(-50%, 50%); /* Центрирование по горизонтали и вертикально наполовину */
+    transform: translate(-50%, 50%);
     background-color: #FFFFFF;
     padding: 32px 24px;
     display: flex;

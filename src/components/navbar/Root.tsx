@@ -13,22 +13,21 @@ export const Navbar: React.FC = () => {
     const location = useLocation();
     const isHomePage: boolean =
         location.pathname === HOME_PAGE_ROUTE ||
-        location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
+        location.pathname === HOME_PAGE_ROUTE + '/';
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-    const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     const toggleBurgerMenu = (): void => {
         setIsBurgerOpen(prev => !prev);
     };
 
-    // Закрытие меню при клике вне его  с проверкой на нажатие на самоу кнопку бургер меню
     useOutsideClick(menuRef, (event: MouseEvent) => {
         if (!buttonRef.current?.contains(event.target as Node)) {
             setIsBurgerOpen(false);
         }
     });
-    //наверное можно было убрать у NavLInk classNAme
+
     return (
         <div className="navbar">
             <NavLink

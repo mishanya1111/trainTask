@@ -6,7 +6,6 @@ import { ARTWORK } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 
-//Использует FavoritesUtils для отображения тех кто туда попал, также использует workcrd
 function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 

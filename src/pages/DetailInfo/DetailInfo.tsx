@@ -3,13 +3,12 @@ import '@pages/DetailInfo/DetailInfo.css';
 import { useFetch } from '@api/useFetch';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
+import ReplaceableBookmark from '@constants/ReplaceableBookmark';
 import { URL_DETAIL } from '@constants/URL';
 import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import ReplaceableBookmark from '../../tests/ReplaceableBookmark';
 
 interface Artwork {
     id: number;
@@ -24,7 +23,6 @@ interface Artwork {
     date_display: string;
 }
 
-//отображает детальую информацию о товаре, также присутствует больше иформации
 function DetailInfo(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [isFavorited, setIsFavorited] = useState<boolean>(false);

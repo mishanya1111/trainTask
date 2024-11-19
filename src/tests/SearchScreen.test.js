@@ -1,8 +1,7 @@
+import SearchScreen from '@components/SearchScreen'; // путь к компоненту
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-
-import SearchScreen from './SearchScreen'; // путь к компоненту
 
 // Мокаем onSearch функцию
 const mockOnSearch = jest.fn();

@@ -1,8 +1,6 @@
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
 import { useState } from 'react';
 
-//Кастомный хук для управления пагинацией.
-
 export default function usePaginatedWorks(
     works: PAGINATED_WORKS_PROPS['works'],
     cardsPerPage: number

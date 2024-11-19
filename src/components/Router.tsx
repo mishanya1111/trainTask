@@ -6,7 +6,6 @@ import Favorites from '@pages/Favorites/Favorites';
 import Home from '@pages/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-//в Случае ошибки отображается эта страница, в случае неправильного пути очень важно
 export const Router: React.FC = () => {
     const router = createBrowserRouter([
         {
