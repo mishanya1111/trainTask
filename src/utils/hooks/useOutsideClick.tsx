@@ -5,7 +5,7 @@ export const useOutsideClick = (
 ): void => {
     const handleClickOutside = (event: MouseEvent) => {
         if (ref.current && !ref.current.contains(event.target as Node)) {
-            callback(event); // Передаем событие в callback
+            callback(event);
         }
     };
     useEffect(() => {

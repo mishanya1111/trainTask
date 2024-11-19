@@ -6,21 +6,22 @@ import logo from '@assets/img/svg.svg';
 import bookmark from '@assets/img/svgBookmarkNavbar.svg';
 import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
 import { useOutsideClick } from '@utils/hooks/useOutsideClick';
-import { RefObject, useRef, useState } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react';
+import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
-export const Navbar: React.FC = () => {
+export const Navbar: React.FC = React.memo(() => {
     const location = useLocation();
-    const isHomePage: boolean =
+    const isHomePage =
         location.pathname === HOME_PAGE_ROUTE ||
-        location.pathname === HOME_PAGE_ROUTE + '/';
+        location.pathname === `${HOME_PAGE_ROUTE}/`;
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const toggleBurgerMenu = (): void => {
+    const toggleBurgerMenu = useCallback(() => {
         setIsBurgerOpen(prev => !prev);
-    };
+    }, []);
 
     useOutsideClick(menuRef, (event: MouseEvent) => {
         if (!buttonRef.current?.contains(event.target as Node)) {
@@ -53,7 +54,6 @@ export const Navbar: React.FC = () => {
             >
                 ☰
             </button>
-
             <nav
                 ref={menuRef as RefObject<HTMLDivElement>}
                 className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}
@@ -88,9 +88,11 @@ export const Navbar: React.FC = () => {
             </nav>
         </div>
     );
-};
+});
 
-const Footer: React.FC = () => {
+Navbar.displayName = 'Navbar';
+
+const Footer: React.FC = React.memo(() => {
     return (
         <div className="footer">
             <div className="footer-left">
@@ -101,13 +103,14 @@ const Footer: React.FC = () => {
                     Museum of <span className="highlight">Art</span>
                 </div>
             </div>
-            <div></div>
             <nav className="footer-right">
                 <img src={modsen} alt="modsen" />
             </nav>
         </div>
     );
-};
+});
+
+Footer.displayName = 'Footer';
 
 const Root: React.FC = () => {
     return (
@@ -115,11 +118,9 @@ const Root: React.FC = () => {
             <header>
                 <Navbar />
             </header>
-            <div id="detail">
-                <main>
-                    <Outlet />
-                </main>
-            </div>
+            <main id="detail">
+                <Outlet />
+            </main>
             <footer>
                 <Footer />
             </footer>
@@ -127,4 +128,4 @@ const Root: React.FC = () => {
     );
 };
 
-export default Root;
+export default React.memo(Root);

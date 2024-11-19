@@ -1,7 +1,7 @@
 import './index.css';
 
 import ErrorBoundary from '@components/ErrorBoundary';
-import { Router } from '@components/Router';
+import Router from '@components/Router';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 

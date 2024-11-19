@@ -2,7 +2,7 @@ import PaginatedCard from '@components/PaginatedCard';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 function PaginatedWorks({
     works,
@@ -20,6 +20,13 @@ function PaginatedWorks({
         startPage,
         endPage
     } = usePaginatedWorks(works, cardsPerPage);
+
+    const handleFavorites = useCallback(
+        (work: PAGINATED_WORKS_PROPS['works'][0]) => {
+            LocalStorageManager.addToFavorites(work);
+        },
+        []
+    );
 
     return (
         <div className="paginated-works">
@@ -50,9 +57,7 @@ function PaginatedWorks({
                         author={work.author}
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
-                        onClickHandler={() =>
-                            LocalStorageManager.addToFavorites(work)
-                        }
+                        onClickHandler={() => handleFavorites(work)}
                     />
                 ))}
             </div>
@@ -86,4 +91,4 @@ function PaginatedWorks({
     );
 }
 
-export default PaginatedWorks;
+export default React.memo(PaginatedWorks);

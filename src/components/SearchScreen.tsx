@@ -1,11 +1,10 @@
 import { SEARCH_FORM_INPUTS, SEARCH_SCREEN_PROPS } from '@constants/types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
-    // Схема валидации
     const validationSchema = Yup.object({
         query: Yup.string()
             .min(3, 'Enter at least 3 characters')
@@ -26,19 +25,19 @@ const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
     });
 
     const query = watch('query', '');
-    //дебаунс
-    const handleDebounceSearch = async () => {
+
+    const handleDebounceSearch = useCallback(async () => {
         const isValid = await trigger('query');
         if (isValid) {
             onSearch(query);
         }
-    };
+    }, [query, onSearch, trigger]);
 
     useEffect(() => {
         const delayDebounce = setTimeout(handleDebounceSearch, 1000);
 
         return () => clearTimeout(delayDebounce);
-    }, [query, onSearch, trigger]);
+    }, [query, handleDebounceSearch]);
 
     return (
         <div className="search-screen">
@@ -53,7 +52,6 @@ const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
                     placeholder="Search art author/title"
                     {...register('query')}
                 />
-                {/*Проверяется вводилась ли что-нибудь для отображеия ошибки*/}
                 {query.trim() !== '' && errors.query && (
                     <p className="error-message">{errors.query.message}</p>
                 )}
@@ -62,4 +60,4 @@ const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
     );
 };
 
-export default SearchScreen;
+export default React.memo(SearchScreen);

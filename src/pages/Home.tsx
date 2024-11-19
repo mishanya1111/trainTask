@@ -12,7 +12,7 @@ import useArtworksFetcher from '@utils/hooks/useArtworkFetcher';
 import useDebounce from '@utils/hooks/useDebounce';
 import { useWindowWidth } from '@utils/hooks/useWindowWidth';
 import { sortArtworks } from '@utils/sortUtils';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 function Home(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState<string>('');
@@ -21,14 +21,13 @@ function Home(): JSX.Element {
     const [sortCriterion, setSortCriterion] = useState<string>('name');
 
     const windowWidth = useWindowWidth();
-    const cardsPerPage =
-        windowWidth <= SMARTPHONE_WIDTH
-            ? 1
-            : windowWidth <= TABLET_WIDTH
-              ? 2
-              : windowWidth <= MONITOR_WIDTH
-                ? 3
-                : 4;
+
+    const cardsPerPage = useMemo(() => {
+        if (windowWidth <= SMARTPHONE_WIDTH) return 1;
+        if (windowWidth <= TABLET_WIDTH) return 2;
+        if (windowWidth <= MONITOR_WIDTH) return 3;
+        return 4;
+    }, [windowWidth]);
 
     const handleSearch = (query: string) => setSearchQuery(query);
 
@@ -36,7 +35,10 @@ function Home(): JSX.Element {
         setSortCriterion(event.target.value);
     };
 
-    const sortedArtworks: ARTWORK[] = sortArtworks(artworks, sortCriterion);
+    const sortedArtworks: ARTWORK[] = useMemo(
+        () => sortArtworks(artworks, sortCriterion),
+        [artworks, sortCriterion]
+    );
 
     if (error) return <p>Error in home page: {error}</p>;
 

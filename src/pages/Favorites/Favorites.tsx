@@ -4,7 +4,7 @@ import bookmark from '@assets/img/svgBookmark.svg';
 import WorkCard from '@components/WorkCard';
 import { ARTWORK } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
@@ -13,10 +13,10 @@ function Favorites(): JSX.Element {
         setFavorites(LocalStorageManager.getFavorites());
     }, []);
 
-    const handleRemoveFavorite = (id: number) => {
+    const handleRemoveFavorite = useCallback((id: number) => {
         LocalStorageManager.removeFromFavorites(id);
         setFavorites(LocalStorageManager.getFavorites());
-    };
+    }, []);
 
     return (
         <section>

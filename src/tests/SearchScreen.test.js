@@ -1,20 +1,18 @@
-import SearchScreen from '@components/SearchScreen'; // путь к компоненту
+import SearchScreen from '@components/SearchScreen';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-// Мокаем onSearch функцию
 const mockOnSearch = jest.fn();
 
 describe('SearchScreen component', () => {
     beforeEach(() => {
-        jest.clearAllMocks(); // очищаем мок функции перед каждым тестом
+        jest.clearAllMocks();
     });
 
     test('renders correctly', () => {
         render(<SearchScreen onSearch={mockOnSearch} />);
 
-        // Ищем элемент по роли
         expect(
             screen.getByRole('heading', { name: /Let's Find Some Art/i })
         ).toBeInTheDocument();
@@ -32,7 +30,6 @@ describe('SearchScreen component', () => {
 
         userEvent.type(input, 'Valid query');
 
-        // Симулируем прохождение времени для дебаунса
         jest.runAllTimers();
 
         await waitFor(() => {
@@ -49,7 +46,6 @@ describe('SearchScreen component', () => {
 
         userEvent.type(input, 'ab');
 
-        // Ожидаем, что onSearch не будет вызвана
         await waitFor(() => {
             expect(mockOnSearch).not.toHaveBeenCalled();
         });

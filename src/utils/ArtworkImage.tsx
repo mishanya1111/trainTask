@@ -1,7 +1,7 @@
 import defaultPage from '@assets/img/maxresdefault.jpg';
 import logo from '@assets/img/svg.svg';
 import { ARTWORK_IMAGE_PROPS } from '@constants/types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 function ArtworkImage({
     imageId,
@@ -11,42 +11,52 @@ function ArtworkImage({
     const [currentSizeIndex, setCurrentSizeIndex] = useState<number>(0);
     const [validSrc, setValidSrc] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<boolean>(false);
 
-    const testImageSrc = (size: number) => {
-        if (!imageId) return logo; // Если ID отсутствует, возвращаем лого
-        return `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`; //Не вижу смысла выносить эту ссылку
-    };
+    const testImageSrc = useCallback(
+        (size: number) =>
+            imageId
+                ? `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`
+                : logo,
+        [imageId]
+    );
 
-    const loadImage = (url: string) => {
-        const img = new Image();
-        img.src = url;
+    const currentImageSrc = useMemo(
+        () => testImageSrc(sizes[currentSizeIndex]),
+        [currentSizeIndex, sizes, testImageSrc]
+    );
 
-        img.onload = () => {
-            setValidSrc(url);
-            setLoading(false);
-        };
+    const loadImage = useCallback(
+        (url: string) => {
+            const img = new Image();
+            img.src = url;
 
-        img.onerror = () => {
-            setLoading(false);
-            setError('Image load failed');
-            if (currentSizeIndex < sizes.length - 1) {
-                setCurrentSizeIndex(prevIndex => prevIndex + 1);
-            }
-        };
-    };
+            img.onload = () => {
+                setValidSrc(url);
+                setLoading(false);
+                setError(false);
+            };
+
+            img.onerror = () => {
+                if (currentSizeIndex < sizes.length - 1) {
+                    setCurrentSizeIndex(prevIndex => prevIndex + 1);
+                } else {
+                    setLoading(false);
+                    setError(true);
+                }
+            };
+        },
+        [currentSizeIndex, sizes]
+    );
 
     useEffect(() => {
         setLoading(true);
-        setError(null);
-        const url = testImageSrc(sizes[currentSizeIndex]);
-        loadImage(url);
-    }, [currentSizeIndex, sizes, imageId]);
+        setError(false);
+        loadImage(currentImageSrc);
+    }, [currentImageSrc, loadImage]);
 
     if (loading) return <img src={defaultPage} alt="Loading artwork" />;
-    if (error && currentSizeIndex === sizes.length - 1) {
-        return <img src={logo} alt="Placeholder logo" />;
-    }
+    if (error) return <img src={logo} alt="Placeholder logo" />;
 
     return <img src={validSrc!} alt={alt} />;
 }
