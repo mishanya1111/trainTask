@@ -4,11 +4,12 @@ import { useFetch } from '@api/useFetch';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import { URL_DETAIL } from '@constants/URL';
-import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
 import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import ReplaceableBookmark from '../../tests/ReplaceableBookmark';
 
 interface Artwork {
     id: number;
