@@ -20,7 +20,9 @@ export default [
         }
     }, {
         rules: {
-            '@typescript-eslint/no-explicit-any': 'warn' //хотелось поставить off
+            '@typescript-eslint/no-explicit-any': 'warn',
+            'react/react-in-jsx-scope': 'off',
+            "react/prop-types": 'off',
         }
     }
 

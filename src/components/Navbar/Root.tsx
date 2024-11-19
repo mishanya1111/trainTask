@@ -1,11 +1,11 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import '@components/navbar/NavbarAndFooter.css';
-import React, { useRef, useState, RefObject } from 'react';
+import { useRef, useState, RefObject } from 'react';
 import logo from '@assets/img/svg.svg';
 import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/svgBookmarkNavbar.svg';
 import home from '@assets/img/home.svg';
-import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
+import { useOutsideClick } from '@utils/hooks/useOutsideClick';
 import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
 
 export const Navbar: React.FC = () => {

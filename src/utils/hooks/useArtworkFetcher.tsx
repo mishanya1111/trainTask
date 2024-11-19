@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
+import { ArtworkError } from '@utils/class/ArtworkError';
 
 const useArtworksFetcher = (
     query: string
@@ -19,7 +20,7 @@ const useArtworksFetcher = (
 
                 const response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new ArtworkError('Network response was not ok');
                 }
 
                 const data = await response.json();
@@ -37,8 +38,13 @@ const useArtworksFetcher = (
                 );
 
                 setArtworks(parsedArtworks);
-            } catch (err: any) {
-                setError(err.message);
+            } catch (err) {
+                if (err instanceof ArtworkError) {
+                    setError(err.message);
+                } else {
+                    console.error('Unexpected error:', err);
+                    setError('An unexpected error occurred.');
+                }
             } finally {
                 setLoading(false);
             }

@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PaginatedCard from '@components/Paginated/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
-//блок с карточками для пагинации, в css можно настроить либо у нех у всех будет одна высота(сейас 600)
-// либо все вытягивацию по самой длинной картинки
+import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
+
 function PaginatedWorks({
     works,
     cardsPerPage,
     sortCriterion,
     onSortChange
-}: PAGINATED_WORKS_PROPS) {
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const totalPages = Math.ceil(works.length / cardsPerPage); //Сколько блоков переключеия
+}: PAGINATED_WORKS_PROPS): JSX.Element {
+    const {
+        currentWorks,
+        currentPage,
+        totalPages,
+        handlePageChange,
+        handleNextFour,
+        handlePrevFour,
+        startPage,
+        endPage
+    } = usePaginatedWorks(works, cardsPerPage);
 
-    const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage);
-    };
-
-    const handleNextFour = () => {
-        setCurrentPage(prevPage => Math.min(prevPage + 4, totalPages));
-    };
-
-    const handlePrevFour = () => {
-        setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
-    };
-
-    const indexOfLastCard = currentPage * cardsPerPage; // индекс последней карточки на текущей странице
-    const indexOfFirstCard = indexOfLastCard - cardsPerPage; //индекс первой карточки на текущей странице
-    const currentWorks = works.slice(indexOfFirstCard, indexOfLastCard);
-
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, startPage + 3);
-    //Пучтой див для более централизировано Other Works
     return (
         <div className="paginated-works">
             <div className="filter-container">
