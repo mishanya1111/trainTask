@@ -9,6 +9,7 @@ import {
 import Loader from '@components/Loader/Loader';
 import ArtworkImage from '@utils/ArtworkImage';
 import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
+import { ArtworkError } from '@utils/class/ArtworkError';
 
 interface Artwork {
     id: number;
@@ -22,6 +23,7 @@ interface Artwork {
     place_of_origin: string;
     date_display: string;
 }
+
 //отображает детальую информацию о товаре, также присутствует больше иформации
 function DetailInfo(): JSX.Element {
     const { id } = useParams<{ id: string }>();
@@ -39,14 +41,18 @@ function DetailInfo(): JSX.Element {
                     `https://api.artic.edu/api/v1/artworks/${id}`
                 );
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new ArtworkError('Network response was not ok');
                 }
                 const data = await response.json();
                 setArtwork(data.data);
                 setIsFavorited(isFavorite(data.data.id));
-            } catch (error: any) {
-                console.error('Error fetching artwork details:', error);
-                setError(error.message);
+            } catch (error) {
+                if (error instanceof ArtworkError) {
+                    setError(error.message);
+                } else {
+                    console.error('Unexpected error:', error);
+                    setError('An unexpected error occurred.');
+                }
             } finally {
                 setLoading(false);
             }
@@ -62,7 +68,6 @@ function DetailInfo(): JSX.Element {
             } else {
                 addToFavorites({
                     ID: artwork.id,
-                    /*ID: artwork.id,*/
                     title: artwork.title,
                     author: artwork.artist_title,
                     is_public_domain: artwork.is_public_domain,
