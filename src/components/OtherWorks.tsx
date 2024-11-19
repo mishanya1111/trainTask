@@ -9,9 +9,9 @@ function OtherWorks({ works }: ARRAY_ARTWORK) {
             <h4> Here some more</h4>
             <h2>Other works for you</h2>
             <div className="work-card-container">
-                {works.map((work, index) => (
+                {works.map(work => (
                     <WorkCard
-                        key={index}
+                        key={work.ID}
                         linkID={work.ID}
                         title={work.title}
                         author={work.author}

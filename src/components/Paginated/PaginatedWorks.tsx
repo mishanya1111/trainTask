@@ -1,5 +1,5 @@
 import React from 'react';
-import PaginatedCard from '@components/Paginated/PaginatedCard';
+import PaginatedCard from '@components/PaginatedCard';
 import { addToFavorites } from '@utils/favoritesUtils';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
