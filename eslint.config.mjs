@@ -12,7 +12,7 @@ export default [
     },
     {
         languageOptions: {
-            globals: { ...globals.browser, ...globals.jest },
+            globals: { ...globals.browser, ...globals.jest,...globals.node },
             ecmaVersion: 'latest',
             sourceType: 'module',
         },
@@ -57,6 +57,7 @@ export default [
         rules: {
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
+            "no-undef": "off"
         },
     },
 ];

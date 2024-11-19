@@ -1,6 +1,6 @@
 import PaginatedCard from '@components/PaginatedCard';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
-import { addToFavorites } from '@utils/favoritesUtils';
+import LocalStorageManager from '@utils/favoritesUtils';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
 import React from 'react';
 
@@ -50,7 +50,9 @@ function PaginatedWorks({
                         author={work.author}
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
-                        onClickHandler={() => addToFavorites(work)}
+                        onClickHandler={() =>
+                            LocalStorageManager.addToFavorites(work)
+                        }
                     />
                 ))}
             </div>

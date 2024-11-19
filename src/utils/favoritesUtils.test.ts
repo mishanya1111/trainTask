@@ -1,4 +1,4 @@
-import { addToFavorites, getFavorites } from './favoritesUtils';
+import LocalStorageManager from './favoritesUtils';
 
 describe('Favorites Utilities', () => {
     beforeEach(() => {
@@ -11,12 +11,12 @@ describe('Favorites Utilities', () => {
             title: 'Mona Lisa',
             author: 'Leonardo da Vinci',
             is_public_domain: true,
-            imageId: 'abc123',
+            imageId: 'abc123'
         };
 
-        addToFavorites(artwork);
+        LocalStorageManager.addToFavorites(artwork);
 
-        const favorites = getFavorites();
+        const favorites = LocalStorageManager.getFavorites();
         expect(favorites).toHaveLength(1);
         expect(favorites[0]).toEqual(artwork);
     });
@@ -27,13 +27,13 @@ describe('Favorites Utilities', () => {
             title: 'Mona Lisa',
             author: 'Leonardo da Vinci',
             is_public_domain: true,
-            imageId: 'abc123',
+            imageId: 'abc123'
         };
 
-        addToFavorites(artwork);
-        addToFavorites(artwork);
+        LocalStorageManager.addToFavorites(artwork);
+        LocalStorageManager.addToFavorites(artwork);
 
-        const favorites = getFavorites();
+        const favorites = LocalStorageManager.getFavorites();
         expect(favorites).toHaveLength(1);
     });
 });

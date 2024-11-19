@@ -3,7 +3,7 @@ import '@pages/Favorites/favorites.css';
 import bookmark from '@assets/img/svgBookmark.svg';
 import WorkCard from '@components/WorkCard';
 import { ARTWORK } from '@constants/types';
-import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
+import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 
 //Использует FavoritesUtils для отображения тех кто туда попал, также использует workcrd
@@ -11,12 +11,12 @@ function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 
     useEffect(() => {
-        setFavorites(getFavorites());
+        setFavorites(LocalStorageManager.getFavorites());
     }, []);
 
     const handleRemoveFavorite = (id: number) => {
-        removeFromFavorites(id);
-        setFavorites(getFavorites());
+        LocalStorageManager.removeFromFavorites(id);
+        setFavorites(LocalStorageManager.getFavorites());
     };
 
     return (

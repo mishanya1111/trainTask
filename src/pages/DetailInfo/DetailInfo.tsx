@@ -5,14 +5,11 @@ import Overview from '@components/Overview';
 import { URL_DETAIL } from '@constants/URL';
 import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
 import ArtworkImage from '@utils/ArtworkImage';
-import {
-    addToFavorites,
-    isFavorite,
-    removeFromFavorites
-} from '@utils/favoritesUtils';
-import { useFetch } from '@utils/hooks/useFetch';
+import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { useFetch } from '../../api/useFetch';
 
 interface Artwork {
     id: number;
@@ -36,16 +33,16 @@ function DetailInfo(): JSX.Element {
 
     useEffect(() => {
         if (artwork) {
-            setIsFavorited(isFavorite(artwork.id));
+            setIsFavorited(LocalStorageManager.isFavorite(artwork.id));
         }
     }, [artwork]);
 
     const toggleFavorite = (): void => {
         if (artwork) {
             if (isFavorited) {
-                removeFromFavorites(artwork.id);
+                LocalStorageManager.removeFromFavorites(artwork.id);
             } else {
-                addToFavorites({
+                LocalStorageManager.addToFavorites({
                     ID: artwork.id,
                     title: artwork.title,
                     author: artwork.artist_title,
