@@ -1,6 +1,6 @@
-import { Component, ReactNode, ErrorInfo } from 'react';
 import { Navbar } from '@components/navbar/Root';
 import { ERROR_BOUNDARY_STATE } from '@constants/types';
+import { Component, ErrorInfo, ReactNode } from 'react';
 
 class ErrorBoundary extends Component<
     { children: ReactNode },

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { ArtworkError } from '@utils/class/ArtworkError';
+import { useEffect, useState } from 'react';
 
 export function useFetch<T>(url: string): {
     data: T | null;

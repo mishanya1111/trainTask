@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import '@pages/DetailInfo/DetailInfo.css';
-import {
-    addToFavorites,
-    removeFromFavorites,
-    isFavorite
-} from '@utils/favoritesUtils';
+
 import Loader from '@components/Loader/Loader';
-import ArtworkImage from '@utils/ArtworkImage';
-import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
-import { useFetch } from '@utils/hooks/useFetch';
 import Overview from '@components/Overview';
 import { URL_DETAIL } from '@constants/URL';
+import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
+import ArtworkImage from '@utils/ArtworkImage';
+import {
+    addToFavorites,
+    isFavorite,
+    removeFromFavorites
+} from '@utils/favoritesUtils';
+import { useFetch } from '@utils/hooks/useFetch';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface Artwork {
     id: number;

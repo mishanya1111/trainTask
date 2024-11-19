@@ -1,8 +1,8 @@
+import { SEARCH_FORM_INPUTS, SEARCH_SCREEN_PROPS } from '@constants/types';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { SEARCH_FORM_INPUTS, SEARCH_SCREEN_PROPS } from '@constants/types';
 
 const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
     // Схема валидации

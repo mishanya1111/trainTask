@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import SearchScreen from '@components/SearchScreen';
+import Loader from '@components/Loader/Loader';
 import OtherWorks from '@components/OtherWorks';
 import PaginatedWorks from '@components/Paginated/PaginatedWorks';
+import SearchScreen from '@components/SearchScreen';
+import { ARTWORK } from '@constants/types';
 import useArtworksFetcher from '@utils/hooks/useArtworkFetcher';
 import useDebounce from '@utils/hooks/useDebounce';
 import { useWindowWidth } from '@utils/hooks/useWindowWidth';
 import { sortArtworks } from '@utils/sortUtils';
-import Loader from '@components/Loader/Loader';
-import { ARTWORK } from '@constants/types';
+import { useState } from 'react';
 
 function Home(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState<string>('');

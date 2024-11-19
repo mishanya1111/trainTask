@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
 import '@pages/Favorites/favorites.css';
-import WorkCard from '@components/WorkCard';
+
 import bookmark from '@assets/img/svgBookmark.svg';
+import WorkCard from '@components/WorkCard';
 import { ARTWORK } from '@constants/types';
+import { getFavorites, removeFromFavorites } from '@utils/favoritesUtils';
+import { useEffect, useState } from 'react';
 
 //Использует FavoritesUtils для отображения тех кто туда попал, также использует workcrd
 function Favorites(): JSX.Element {

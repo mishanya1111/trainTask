@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
 import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
 import { ArtworkError } from '@utils/class/ArtworkError';
+import { useEffect, useState } from 'react';
 
 const useArtworksFetcher = (
     query: string

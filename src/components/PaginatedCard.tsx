@@ -1,10 +1,11 @@
-import React from 'react';
-import ArtworkImage from '@utils/ArtworkImage';
 import '@components/Paginated/PaginatedCard.css';
+
 import bookmark from '@assets/img/svgBookmark.svg';
-import { Link } from 'react-router-dom';
-import { PAGINATED_CARD_PROPS } from '@constants/types';
 import { DETAILS_PAGE_ROUTE } from '@constants/routes';
+import { PAGINATED_CARD_PROPS } from '@constants/types';
+import ArtworkImage from '@utils/ArtworkImage';
+import React from 'react';
+import { Link } from 'react-router-dom';
 // Отдельные карточки используемые для пагинации
 function PaginatedCard({
     linkID,

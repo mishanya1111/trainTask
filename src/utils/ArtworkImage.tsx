@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
 import defaultPage from '@assets/img/maxresdefault.jpg';
 import logo from '@assets/img/svg.svg';
 import { ARTWORK_IMAGE_PROPS } from '@constants/types';
+import { useEffect, useState } from 'react';
 
 function ArtworkImage({
     imageId,

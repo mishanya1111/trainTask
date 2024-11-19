@@ -1,6 +1,6 @@
 import WorkCard from '@components/WorkCard';
-import { addToFavorites } from '@utils/favoritesUtils';
 import { ARRAY_ARTWORK, ARTWORK } from '@constants/types';
+import { addToFavorites } from '@utils/favoritesUtils';
 
 //Отображает все карточки которые передаются из Home
 function OtherWorks({ works }: ARRAY_ARTWORK) {

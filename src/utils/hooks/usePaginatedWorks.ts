@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { PAGINATED_WORKS_PROPS } from '@constants/types';
+import { useState } from 'react';
 
 //Кастомный хук для управления пагинацией.
 
