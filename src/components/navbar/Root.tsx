@@ -6,7 +6,7 @@ import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/svgBookmarkNavbar.svg';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
-import { HOME_PAGE_ROUTE } from '@constants/routes';
+import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
 
 export const Navbar: React.FC = () => {
     const location = useLocation();
@@ -31,7 +31,7 @@ export const Navbar: React.FC = () => {
     return (
         <div className="navbar">
             <NavLink
-                to="/trainTask"
+                to={HOME_PAGE_ROUTE}
                 end
                 className={({ isActive, isPending }): string =>
                     isActive ? 'active' : isPending ? 'pending' : ''
@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
                     {!isHomePage && (
                         <li>
                             <NavLink
-                                to="/trainTask"
+                                to={HOME_PAGE_ROUTE}
                                 end
                                 className={({ isActive, isPending }): string =>
                                     isActive ? 'active' : isPending ? 'pending' : ''
@@ -75,7 +75,7 @@ export const Navbar: React.FC = () => {
                     )}
                     <li>
                         <NavLink
-                            to="/trainTask/favorites"
+                            to={FAVORITES_PAGE_ROUTE}
                             className={({ isActive, isPending }): string =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }
