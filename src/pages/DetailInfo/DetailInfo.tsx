@@ -9,7 +9,9 @@ import {
 import Loader from '@components/Loader/Loader';
 import ArtworkImage from '@utils/ArtworkImage';
 import ReplaceableBookmark from '@pages/DetailInfo/ReplaceableBookmark';
-import { ArtworkError } from '@utils/class/ArtworkError';
+import { useFetch } from '@utils/hooks/useFetch';
+import Overview from '@components/Overview';
+import { URL_DETAIL } from '@constants/URL';
 
 interface Artwork {
     id: number;
@@ -27,39 +29,15 @@ interface Artwork {
 //отображает детальую информацию о товаре, также присутствует больше иформации
 function DetailInfo(): JSX.Element {
     const { id } = useParams<{ id: string }>();
-    const [artwork, setArtwork] = useState<Artwork | null>(null);
     const [isFavorited, setIsFavorited] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
     const sizesImage: number[] = [863, 1686, 600, 400, 200];
-    useEffect(() => {
-        const fetchArtworkDetails = async (): Promise<void> => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await fetch(
-                    `https://api.artic.edu/api/v1/artworks/${id}`
-                );
-                if (!response.ok) {
-                    throw new ArtworkError('Network response was not ok');
-                }
-                const data = await response.json();
-                setArtwork(data.data);
-                setIsFavorited(isFavorite(data.data.id));
-            } catch (error) {
-                if (error instanceof ArtworkError) {
-                    setError(error.message);
-                } else {
-                    console.error('Unexpected error:', error);
-                    setError('An unexpected error occurred.');
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
+    const { data: artwork, loading, error } = useFetch<Artwork>(URL_DETAIL + id);
 
-        fetchArtworkDetails();
-    }, [id]);
+    useEffect(() => {
+        if (artwork) {
+            setIsFavorited(isFavorite(artwork.id));
+        }
+    }, [artwork]);
 
     const toggleFavorite = (): void => {
         if (artwork) {
@@ -101,23 +79,13 @@ function DetailInfo(): JSX.Element {
                         <strong>{artwork?.artist_title}</strong>
                     </h2>
                     <p>{artwork?.date_display}</p>
-                    <div className="overview">
-                        <h3>Overview</h3>
-                        <p>
-                            <strong>Artist nationality:</strong>{' '}
-                            {artwork?.artist_display}
-                        </p>
-                        <p>
-                            <strong>Dimensions:</strong> {artwork?.dimensions}
-                        </p>
-                        <p>
-                            <strong>Credit Line:</strong> {artwork?.credit_line}
-                        </p>
-                        <p>
-                            <strong>Repository:</strong> {artwork?.place_of_origin}
-                        </p>
-                        <p>{artwork?.is_public_domain ? 'Public' : 'Private'}</p>
-                    </div>
+                    <Overview
+                        artistDisplay={artwork?.artist_display || ''}
+                        dimensions={artwork?.dimensions || ''}
+                        creditLine={artwork?.credit_line || ''}
+                        placeOfOrigin={artwork?.place_of_origin || ''}
+                        isPublicDomain={artwork?.is_public_domain || false}
+                    />
                 </div>
             </div>
         </section>
