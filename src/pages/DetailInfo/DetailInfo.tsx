@@ -7,7 +7,7 @@ import ReplaceableBookmark from '@constants/ReplaceableBookmark';
 import { URL_DETAIL } from '@constants/URL';
 import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface Artwork {
@@ -26,7 +26,9 @@ interface Artwork {
 function DetailInfo(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [isFavorited, setIsFavorited] = useState<boolean>(false);
-    const sizesImage: number[] = [863, 1686, 600, 400, 200];
+
+    const sizesImage: number[] = useMemo(() => [863, 1686, 600, 400, 200], []);
+
     const { data: artwork, loading, error } = useFetch<Artwork>(URL_DETAIL + id);
 
     useEffect(() => {
@@ -35,7 +37,7 @@ function DetailInfo(): JSX.Element {
         }
     }, [artwork]);
 
-    const toggleFavorite = (): void => {
+    const toggleFavorite = useCallback((): void => {
         if (artwork) {
             if (isFavorited) {
                 LocalStorageManager.removeFromFavorites(artwork.id);
@@ -50,9 +52,9 @@ function DetailInfo(): JSX.Element {
             }
             setIsFavorited(!isFavorited);
         }
-    };
+    }, [artwork, isFavorited]);
 
-    if (loading) return <Loader />; // отображение Loader при загрузке
+    if (loading) return <Loader />;
 
     if (error) return <p className="error-message">{error}</p>;
 

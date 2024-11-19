@@ -1,6 +1,6 @@
 import { fetchArtworks } from '@api/artworks';
 import { ARTWORK } from '@constants/types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 const useArtworksFetcher = (
     query: string
@@ -9,24 +9,29 @@ const useArtworksFetcher = (
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const loadArtworks = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const artworks = await fetchArtworks(query);
-                setArtworks(artworks);
-            } catch (err) {
-                setError(err instanceof Error ? err.message : 'Unknown error');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadArtworks();
+    const loadArtworks = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const fetchedArtworks = await fetchArtworks(query);
+            setArtworks(fetchedArtworks);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Unknown error');
+        } finally {
+            setLoading(false);
+        }
     }, [query]);
 
-    return { artworks, loading, error };
+    useEffect(() => {
+        loadArtworks();
+    }, [loadArtworks]);
+
+    const result = useMemo(
+        () => ({ artworks, loading, error }),
+        [artworks, loading, error]
+    );
+
+    return result;
 };
 
 export default useArtworksFetcher;

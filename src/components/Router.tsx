@@ -4,9 +4,10 @@ import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
 import Favorites from '@pages/Favorites/Favorites';
 import Home from '@pages/Home';
+import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-export const Router: React.FC = () => {
+const Router: React.FC = () => {
     const router = createBrowserRouter([
         {
             path: HOME_PAGE_ROUTE,
@@ -14,7 +15,11 @@ export const Router: React.FC = () => {
             children: [
                 {
                     path: '',
-                    element: <Root />,
+                    element: (
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Root />
+                        </Suspense>
+                    ),
                     children: [
                         {
                             index: true,
@@ -35,3 +40,5 @@ export const Router: React.FC = () => {
     ]);
     return <RouterProvider router={router} />;
 };
+
+export default Router;

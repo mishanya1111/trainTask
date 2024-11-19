@@ -1,12 +1,12 @@
 import WorkCard from '@components/WorkCard';
 import { ARRAY_ARTWORK, ARTWORK } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
+import React, { useCallback } from 'react';
 
-//Отображает все карточки которые передаются из Home
 function OtherWorks({ works }: ARRAY_ARTWORK) {
-    const handleAddToFavorites = (work: ARTWORK) => {
+    const handleAddToFavorites = useCallback((work: ARTWORK) => {
         LocalStorageManager.addToFavorites(work);
-    };
+    }, []);
 
     return (
         <div className="other-works">
@@ -30,4 +30,4 @@ function OtherWorks({ works }: ARRAY_ARTWORK) {
     );
 }
 
-export default OtherWorks;
+export default React.memo(OtherWorks);

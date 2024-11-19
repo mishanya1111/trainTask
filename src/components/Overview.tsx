@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface OverviewProps {
     artistDisplay: string;
     dimensions: string;
@@ -6,7 +8,7 @@ interface OverviewProps {
     isPublicDomain: boolean;
 }
 
-const Overview: React.FC<OverviewProps> = ({
+const OverviewComponent: React.FC<OverviewProps> = ({
     artistDisplay,
     dimensions,
     creditLine,
@@ -30,5 +32,7 @@ const Overview: React.FC<OverviewProps> = ({
         <p>{isPublicDomain ? 'Public' : 'Private'}</p>
     </div>
 );
+
+const Overview = React.memo(OverviewComponent);
 
 export default Overview;
