@@ -3,6 +3,11 @@ import OtherWorks from '@components/OtherWorks';
 import PaginatedWorks from '@components/Paginated/PaginatedWorks';
 import SearchScreen from '@components/SearchScreen';
 import { ARTWORK } from '@constants/types';
+import {
+    MONITOR_WIDTH,
+    SMARTPHONE_WIDTH,
+    TABLET_WIDTH
+} from '@constants/winowsWidth';
 import useArtworksFetcher from '@utils/hooks/useArtworkFetcher';
 import useDebounce from '@utils/hooks/useDebounce';
 import { useWindowWidth } from '@utils/hooks/useWindowWidth';
@@ -17,11 +22,11 @@ function Home(): JSX.Element {
 
     const windowWidth = useWindowWidth();
     const cardsPerPage =
-        windowWidth <= 900
+        windowWidth <= SMARTPHONE_WIDTH
             ? 1
-            : windowWidth <= 1200
+            : windowWidth <= TABLET_WIDTH
               ? 2
-              : windowWidth <= 1920
+              : windowWidth <= MONITOR_WIDTH
                 ? 3
                 : 4;
 

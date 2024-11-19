@@ -1,5 +1,6 @@
 import '@pages/DetailInfo/DetailInfo.css';
 
+import { useFetch } from '@api/useFetch';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import { URL_DETAIL } from '@constants/URL';
@@ -8,8 +9,6 @@ import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { useFetch } from '../../api/useFetch';
 
 interface Artwork {
     id: number;
