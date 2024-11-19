@@ -1,11 +1,13 @@
-import path from 'path';
+/* eslint-disable @typescript-eslint/no-require-imports */
+const path = require('path');
+/* eslint-enable @typescript-eslint/no-require-imports */
 
 /**
  * Overrides the Webpack configuration to set custom aliases.
  * @param {object} config - The Webpack configuration object.
  * @returns {object} The modified Webpack configuration.
  */
-export default function override(config) {
+module.exports = function override(config) {
     config.resolve.alias = {
         ...config.resolve.alias,
         '@components': path.resolve(process.cwd(), 'src/components'),
@@ -16,4 +18,4 @@ export default function override(config) {
         '@api': path.resolve(process.cwd(), 'src/api')
     };
     return config;
-}
+};
