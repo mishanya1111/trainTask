@@ -4,7 +4,6 @@ import { ErrorPage } from '@components/ErrorPage';
 import Home from '@pages/Home';
 import Favorites from '@pages/Favorites/Favorites';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
-import React from 'react';
 import Root from '@components/navbar/Root';
 
 //в Случае ошибки отображается эта страница, в случае неправильного пути очень важно

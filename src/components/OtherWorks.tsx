@@ -1,4 +1,3 @@
-import React from 'react';
 import WorkCard from '@components/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
 import { ARRAY_ARTWORK } from '@constants/types';

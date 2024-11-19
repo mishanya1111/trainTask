@@ -1,6 +1,6 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import '@components/navbar/NavbarAndFooter.css';
-import React, { useRef, useState, RefObject } from 'react';
+import { useRef, useState, RefObject } from 'react';
 import logo from '@assets/img/svg.svg';
 import modsen from '@assets/img/modsen.svg';
 import bookmark from '@assets/img/svgBookmarkNavbar.svg';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import SearchScreen from '@components/SearchScreen';
 import OtherWorks from '@components/OtherWorks';
 import PaginatedWorks from '@components/Paginated/PaginatedWorks';

@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, ErrorInfo } from 'react';
+import { Component, ReactNode, ErrorInfo } from 'react';
 import { Navbar } from '@components/navbar/Root';
 import { ERROR_BOUNDARY_STATE } from '@constants/types';
 
