@@ -1,18 +1,17 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { Navbar } from '@components/navbar/Root';
+import { ERROR_BOUNDARY_STATE } from '@constants/types';
 
-interface ErrorBoundaryState {
-    hasError: boolean;
-    error: Error | null;
-}
-
-class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryState> {
+class ErrorBoundary extends Component<
+    { children: ReactNode },
+    ERROR_BOUNDARY_STATE
+> {
     constructor(props: { children: ReactNode }) {
         super(props);
         this.state = { hasError: false, error: null };
     }
 
-    static getDerivedStateFromError(_error: Error): ErrorBoundaryState {
+    static getDerivedStateFromError(_error: Error): ERROR_BOUNDARY_STATE {
         return { hasError: true, error: _error };
     }
 

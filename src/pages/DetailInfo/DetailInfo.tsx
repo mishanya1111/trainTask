@@ -54,9 +54,7 @@ function DetailInfo(): JSX.Element {
 
         fetchArtworkDetails();
     }, [id]);
-    //console.log(id);
-    //console.log(id);
-    //console.log(id);
+
     const toggleFavorite = (): void => {
         if (artwork) {
             if (isFavorited) {

@@ -20,15 +20,16 @@
     top: 10px;
     right: 10px;
     border-radius: 50%;
-
     cursor: pointer;
-    height: 50px;
-    width:50px;
-    background: white;
-    padding: 16px;
+    height: 59px;
+    width:59px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .bookmark-icon > img{
-    width: 90%;
+    width: 24px;
     
 }
 

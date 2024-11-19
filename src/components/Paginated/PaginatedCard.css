@@ -22,7 +22,7 @@
 
 .overlay-card {
     position: absolute;
-    width: 70%;
+    width: 75%;
     left: 50%;
     bottom: 0;
     transform: translate(-50%, 50%); /* Центрирование по горизонтали и вертикально наполовину */
@@ -31,6 +31,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: 1px solid #ddd;
 
 }
 .overlay-card > .work-info {

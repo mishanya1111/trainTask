@@ -3,7 +3,7 @@ import '@components/navbar/NavbarAndFooter.css';
 import React, { useRef, useState, RefObject } from 'react';
 import logo from '@assets/img/svg.svg';
 import modsen from '@assets/img/modsen.svg';
-import bookmark from '@assets/img/bookmark.png';
+import bookmark from '@assets/img/svgBookmarkNavbar.svg';
 import home from '@assets/img/home.svg';
 import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
 import { HOME_PAGE_ROUTE } from '@constants/routes';
@@ -68,9 +68,7 @@ export const Navbar: React.FC = () => {
                                     isActive ? 'active' : isPending ? 'pending' : ''
                                 }
                             >
-                                <span>
-                                    <img src={home} alt="home" />
-                                </span>
+                                <img src={home} alt="home" />
                                 Home
                             </NavLink>
                         </li>
@@ -82,9 +80,7 @@ export const Navbar: React.FC = () => {
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }
                         >
-                            <span>
-                                <img src={bookmark} alt="bookmark" />
-                            </span>
+                            <img src={bookmark} alt="bookmark" />
                             Your favorites
                         </NavLink>
                     </li>

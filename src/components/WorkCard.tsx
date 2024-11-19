@@ -3,16 +3,8 @@ import ArtworkImage from '@utils/ArtworkImage';
 import bookmark from '@assets/img/svgBookmark.svg';
 import unbookmark from '@assets/img/unbookmark.png';
 import { Link } from 'react-router-dom';
+import { WORK_CARD_PROPS } from '@constants/types';
 
-interface WorkCardProps {
-    favoritePage: boolean;
-    linkID: number;
-    title: string;
-    author: string | null;
-    imageId: string;
-    is_public_domain: boolean;
-    onClickHandler: () => void;
-}
 //Компонент используюшийся в двух местах, представляет собой блок с небольшой информацией
 function WorkCard({
     linkID,
@@ -22,7 +14,7 @@ function WorkCard({
     is_public_domain,
     onClickHandler,
     favoritePage
-}: WorkCardProps) {
+}: WORK_CARD_PROPS) {
     const sizesImage: number[] = [200, 863, 600, 400, 1686];
     return (
         <div className="work-card">

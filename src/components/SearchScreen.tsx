@@ -2,16 +2,9 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SEARCH_FORM_INPUTS, SEARCH_SCREEN_PROPS } from '@constants/types';
 
-interface SearchFormInputs {
-    query: string;
-}
-
-interface SearchScreenProps {
-    onSearch: (query: string) => void;
-}
-
-const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
+const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
     // Схема валидации
     const validationSchema = Yup.object({
         query: Yup.string()
@@ -28,7 +21,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
         watch,
         formState: { errors },
         trigger
-    } = useForm<SearchFormInputs>({
+    } = useForm<SEARCH_FORM_INPUTS>({
         resolver: yupResolver(validationSchema)
     });
 

@@ -32,15 +32,17 @@ a {
     text-align: center;
     /*background-color: #f5f5f5;*/
     width: 100%;
+
     margin-bottom: 32px;
 }
 
 .search-screen > h1 {
     margin: 0;
+    font-size: 64px;
 }
 
 .search-screen > h2 {
-    font-size: 32px;
+    font-size: 64px;
     margin: 0 0 32px 0;
 }
 
@@ -55,19 +57,15 @@ a {
 }
 
 .search-input {
-    width: 300px;
+    width: 762px;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-
+    border-radius: 16px;
+    background-color: #3939390D;
 }
 
 
-.other-works {
-    margin: 32px;
-
-}
 
 .other-works > h2 {
     text-align: center;
@@ -87,7 +85,7 @@ a {
 
 .work-card-container {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -98,8 +96,8 @@ a {
     align-items: center;
     padding: 16px;
     border: 1px solid #ddd;
-    border-radius: 8px;
     position: relative;
+    background-color: #FFFFFF;
 }
 
 .image-placeholder {
@@ -225,12 +223,12 @@ a {
 }
 
 .pagination-controls button.active {
-    background-color: orange;
+    background-color: #F17900;
     color: white;
 }
 
 .pagination-controls button:hover:not(.active) {
-    background-color: orange;
+    background-color: #F17900;
     opacity: 0.7;
 }
 
