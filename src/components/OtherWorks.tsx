@@ -1,9 +1,13 @@
 import WorkCard from '@components/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
-import { ARRAY_ARTWORK } from '@constants/types';
+import { ARRAY_ARTWORK, ARTWORK } from '@constants/types';
 
 //Отображает все карточки которые передаются из Home
 function OtherWorks({ works }: ARRAY_ARTWORK) {
+    const handleAddToFavorites = (work: ARTWORK) => {
+        addToFavorites(work);
+    };
+
     return (
         <div className="other-works">
             <h4> Here some more</h4>
@@ -17,7 +21,7 @@ function OtherWorks({ works }: ARRAY_ARTWORK) {
                         author={work.author}
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
-                        onClickHandler={() => addToFavorites(work)}
+                        onClickHandler={() => handleAddToFavorites(work)}
                         favoritePage={false}
                     />
                 ))}

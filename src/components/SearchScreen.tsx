@@ -27,13 +27,15 @@ const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
 
     const query = watch('query', '');
     //дебаунс
+    const handleDebounceSearch = async () => {
+        const isValid = await trigger('query');
+        if (isValid) {
+            onSearch(query);
+        }
+    };
+
     useEffect(() => {
-        const delayDebounce = setTimeout(async () => {
-            const isValid = await trigger('query');
-            if (isValid) {
-                onSearch(query);
-            }
-        }, 1000);
+        const delayDebounce = setTimeout(handleDebounceSearch, 1000);
 
         return () => clearTimeout(delayDebounce);
     }, [query, onSearch, trigger]);
