@@ -1,13 +1,10 @@
 import React from 'react';
 import WorkCard from '@components/WorkCard';
 import { addToFavorites } from '@utils/favoritesUtils';
-import { ARTWORK } from '@constants/types';
+import { ARRAY_ARTWORK } from '@constants/types';
 
-interface OtherWorksProps {
-    works: ARTWORK[];
-}
 //Отображает все карточки которые передаются из Home
-function OtherWorks({ works }: OtherWorksProps) {
+function OtherWorks({ works }: ARRAY_ARTWORK) {
     return (
         <div className="other-works">
             <h4> Here some more</h4>

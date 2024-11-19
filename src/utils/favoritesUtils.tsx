@@ -7,6 +7,7 @@ export const getFavorites = (): ARTWORK[] => {
 //Проверить является ли
 export const isFavorite = (ID: number): boolean =>
     getFavorites().some((fav: ARTWORK) => fav.ID === ID);
+
 // добавь в список любимчиков
 export const addToFavorites = (artwork: ARTWORK): void => {
     const favorites = getFavorites();

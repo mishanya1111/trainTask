@@ -4,6 +4,7 @@ import '@components/Paginated/PaginatedCard.css';
 import bookmark from '@assets/img/svgBookmark.svg';
 import { Link } from 'react-router-dom';
 import { PAGINATED_CARD_PROPS } from '@constants/types';
+import { DETAILS_PAGE_ROUTE } from '@constants/routes';
 // Отдельные карточки используемые для пагинации
 function PaginatedCard({
     linkID,
@@ -18,13 +19,13 @@ function PaginatedCard({
     return (
         <div className="paginated-work-card">
             <div className="paginated-image-placeholder">
-                <Link to={`/trainTask/details/${linkID}`}>
+                <Link to={DETAILS_PAGE_ROUTE + `/${linkID}`}>
                     <ArtworkImage sizes={sizesImage} imageId={imageId} alt={title} />
                 </Link>
             </div>
             <div className="overlay-card">
                 <div className="work-info">
-                    <Link to={`/trainTask/details/${linkID}`}>
+                    <Link to={DETAILS_PAGE_ROUTE + `/${linkID}`}>
                         <h3 className="work-title">{title}</h3>
                     </Link>
                     <p className="work-author">{author}</p>

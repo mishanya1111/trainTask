@@ -47,16 +47,20 @@
     color: #E0A449;
 }
 
-
-.navbar-right img{
-    height: 16px;
+.navbar-right ul > li > a > img  {
+    height: 24px;
+    margin-right: 4px;
 }
 .navbar-right ul {
     list-style: none;
     display: flex;
-    gap: 24px;
+    gap: 16px;
     margin: 0;
     font-size: 24px;
+}
+.navbar-right ul li a {
+    display: flex;
+    align-items: center;
 }
 
 .navbar-right ul li a.active {
@@ -78,7 +82,10 @@
 }
 
 @media (max-width: 900px) {
-
+    .navbar-right ul li a {
+        display: block;
+        align-items: center;
+    }
     .navbar-right {
         display: none;
         position: absolute;

@@ -1,6 +1,7 @@
 import React from 'react'; //для Eslist
 import { useRouteError, Link } from 'react-router-dom';
 import { Navbar } from '@components/navbar/Root';
+import { HOME_PAGE_ROUTE } from '@constants/routes';
 
 //в Случае ошибки отображается эта страница, в случае неправильного пути очень важно
 export const ErrorPage: React.FC = () => {
@@ -14,7 +15,7 @@ export const ErrorPage: React.FC = () => {
                     <div className="not-found-container">
                         <h1>404 - Not Found</h1>
                         <p>The page you are looking for does not exist.</p>
-                        <Link to="/trainTask">Go to Home</Link>
+                        <Link to={HOME_PAGE_ROUTE}>Go to Home</Link>
                     </div>
                 ) : (
                     <h1>

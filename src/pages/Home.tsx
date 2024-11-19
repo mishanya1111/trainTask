@@ -7,7 +7,6 @@ import useDebounce from '@utils/Hooks/useDebounce';
 import Loader from '@components/Loader/Loader';
 import { ARTWORK } from '@constants/types';
 
-//function Favorites():JSX.Element
 function Home(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const debouncedQuery = useDebounce(searchQuery, 500);
@@ -68,8 +67,7 @@ function Home(): JSX.Element {
     );
 
     if (error) return <p>Error in home page: {error}</p>;
-    //console.log(artworks);
-    //console.log(sortedArtworks);
+
     return (
         <div>
             <aside>
