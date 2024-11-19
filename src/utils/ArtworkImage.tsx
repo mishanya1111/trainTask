@@ -15,7 +15,7 @@ function ArtworkImage({
 
     const testImageSrc = (size: number) => {
         if (!imageId) return logo; // Если ID отсутствует, возвращаем лого
-        return `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`;
+        return `https://www.artic.edu/iiif/2/${imageId}/full/${size},/0/default.jpg`; //Не вижу смысла выносить эту ссылку
     };
 
     const loadImage = (url: string) => {

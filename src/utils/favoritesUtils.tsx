@@ -1,26 +1,41 @@
 import { ARTWORK } from '@constants/types';
-//Получить всех
-export const getFavorites = (): ARTWORK[] => {
-    const favorites = localStorage.getItem('favorites');
-    return favorites ? JSON.parse(favorites) : [];
-};
-//Проверить является ли
-export const isFavorite = (ID: number): boolean =>
-    getFavorites().some((fav: ARTWORK) => fav.ID === ID);
 
-// добавь в список любимчиков
-export const addToFavorites = (artwork: ARTWORK): void => {
-    const favorites = getFavorites();
-    const isAlreadyFavorite = isFavorite(artwork.ID);
+class LocalStorageManager {
+    private static readonly KEY = 'favorites';
 
-    if (!isAlreadyFavorite) {
-        const updatedFavorites = [...favorites, artwork];
-        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    // Получить данные из localStorage
+    public static getFavorites(): ARTWORK[] {
+        const favorites = localStorage.getItem(this.KEY);
+        return favorites ? JSON.parse(favorites) : [];
     }
-};
-//удалить из списка
-export const removeFromFavorites = (id: number): void => {
-    const favorites = getFavorites();
-    const updatedFavorites = favorites.filter((item: ARTWORK) => item.ID !== id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-};
+
+    // Проверить, является ли элемент любимым
+    public static isFavorite(ID: number): boolean {
+        return this.getFavorites().some((fav: ARTWORK) => fav.ID === ID);
+    }
+
+    // Добавить элемент в список любимчиков
+    public static addToFavorites(artwork: ARTWORK): void {
+        const favorites = this.getFavorites();
+        const isAlreadyFavorite = this.isFavorite(artwork.ID);
+
+        if (!isAlreadyFavorite) {
+            const updatedFavorites = [...favorites, artwork];
+            localStorage.setItem(this.KEY, JSON.stringify(updatedFavorites));
+        }
+    }
+
+    // Удалить элемент из списка
+    public static removeFromFavorites(ID: number): void {
+        const favorites = this.getFavorites();
+        const updatedFavorites = favorites.filter((item: ARTWORK) => item.ID !== ID);
+        localStorage.setItem(this.KEY, JSON.stringify(updatedFavorites));
+    }
+
+    // Очистить весь список
+    public static clearFavorites(): void {
+        localStorage.removeItem(this.KEY);
+    }
+}
+
+export default LocalStorageManager;

@@ -1,11 +1,11 @@
 import WorkCard from '@components/WorkCard';
 import { ARRAY_ARTWORK, ARTWORK } from '@constants/types';
-import { addToFavorites } from '@utils/favoritesUtils';
+import LocalStorageManager from '@utils/favoritesUtils';
 
 //Отображает все карточки которые передаются из Home
 function OtherWorks({ works }: ARRAY_ARTWORK) {
     const handleAddToFavorites = (work: ARTWORK) => {
-        addToFavorites(work);
+        LocalStorageManager.addToFavorites(work);
     };
 
     return (
