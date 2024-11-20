@@ -4,7 +4,7 @@ import { useFetch } from '@api/hooks/useFetch';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import ReplaceableBookmark from '@constants/ReplaceableBookmark';
-import { URL_DETAIL } from '@constants/URL';
+import { URL_ARTWORKS } from '@constants/URL';
 import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -29,7 +29,11 @@ function DetailInfo(): JSX.Element {
 
     const sizesImage: number[] = useMemo(() => [863, 1686, 600, 400, 200], []);
 
-    const { data: artwork, loading, error } = useFetch<Artwork>(URL_DETAIL + id);
+    const {
+        data: artwork,
+        loading,
+        error
+    } = useFetch<Artwork>(URL_ARTWORKS + '/' + id);
 
     useEffect(() => {
         if (artwork) {

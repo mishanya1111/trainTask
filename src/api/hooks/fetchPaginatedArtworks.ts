@@ -1,20 +1,24 @@
 import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
-import { API_BASE_URL } from '@constants/URL';
+import { URL_ARTWORKS } from '@constants/URL';
+const cache: Record<string, { artworks: ARTWORK[]; totalPages: number }> = {};
 
 export const fetchPaginatedArtworks = async (
     page: number,
     limit: number
 ): Promise<{ artworks: ARTWORK[]; totalPages: number }> => {
-    const response = await fetch(
-        `${API_BASE_URL}/artworks?page=${page}&limit=${limit}`
-    );
+    const cacheKey = `${page}-${limit}`;
+    if (cache[cacheKey]) {
+        return cache[cacheKey]; // Возврат данных из кэша
+    }
+
+    const response = await fetch(`${URL_ARTWORKS}?page=${page}&limit=${limit}`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch artworks');
     }
 
     const data = await response.json();
-    return {
+    const result = {
         artworks: data.data.map(
             (artwork: ARTWORK_FETCH): ARTWORK => ({
                 ID: artwork.id,
@@ -27,4 +31,7 @@ export const fetchPaginatedArtworks = async (
         ),
         totalPages: data.pagination.total_pages
     };
+
+    cache[cacheKey] = result; // Сохраняем в кэш
+    return result;
 };
