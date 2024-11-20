@@ -18,8 +18,8 @@ function Home(): JSX.Element {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const debouncedQuery = useDebounce(searchQuery, 500);
     const { artworks, loading, error } = useArtworksFetcher(debouncedQuery);
-    const [sortCriterion, setSortCriterion] = useState<string>('name');
-
+    //const [sortCriterion, setSortCriterion] = useState<string>('name');
+    const sortCriterion = 'name';
     const windowWidth = useWindowWidth();
 
     const cardsPerPage = useMemo(() => {
@@ -31,9 +31,9 @@ function Home(): JSX.Element {
 
     const handleSearch = (query: string) => setSearchQuery(query);
 
-    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    /*const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortCriterion(event.target.value);
-    };
+    };*/
 
     const sortedArtworks: ARTWORK[] = useMemo(
         () => sortArtworks(artworks, sortCriterion),
@@ -52,12 +52,7 @@ function Home(): JSX.Element {
                     <Loader />
                 ) : (
                     <>
-                        <PaginatedWorks
-                            works={sortedArtworks}
-                            cardsPerPage={cardsPerPage}
-                            sortCriterion={sortCriterion}
-                            onSortChange={handleSortChange}
-                        />
+                        <PaginatedWorks cardsPerPage={cardsPerPage} />
                         <OtherWorks works={sortedArtworks} />
                     </>
                 )}

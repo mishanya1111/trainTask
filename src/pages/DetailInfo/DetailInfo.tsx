@@ -1,6 +1,6 @@
 import '@pages/DetailInfo/DetailInfo.css';
 
-import { useFetch } from '@api/useFetch';
+import { useFetch } from '@api/hooks/useFetch';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import ReplaceableBookmark from '@constants/ReplaceableBookmark';

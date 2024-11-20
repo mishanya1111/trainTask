@@ -1,19 +1,46 @@
-import { PAGINATED_WORKS_PROPS } from '@constants/types';
-import { useCallback, useMemo, useState } from 'react';
+import { fetchPaginatedArtworks } from '@api/hooks/fetchPaginatedArtworks';
+import { ARTWORK } from '@constants/types';
+import { useCallback, useEffect, useState } from 'react';
 
-export default function usePaginatedWorks(
-    works: PAGINATED_WORKS_PROPS['works'],
-    cardsPerPage: number
-) {
+export default function usePaginatedWorks(cardsPerPage: number): {
+    currentWorks: ARTWORK[];
+    currentPage: number;
+    totalPages: number;
+    loading: boolean;
+    handlePageChange: (page: number) => void;
+    handleNextFour: () => void;
+    handlePrevFour: () => void;
+} {
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [currentWorks, setCurrentWorks] = useState<ARTWORK[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const totalPages = useMemo(
-        () => Math.ceil(works.length / cardsPerPage),
-        [works.length, cardsPerPage]
+    const loadPageData = useCallback(
+        async (page: number) => {
+            setLoading(true);
+            try {
+                const { artworks, totalPages } = await fetchPaginatedArtworks(
+                    page,
+                    cardsPerPage
+                );
+                setCurrentWorks(artworks);
+                setTotalPages(totalPages);
+            } catch (error) {
+                console.error('Failed to load paginated artworks', error);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [cardsPerPage]
     );
 
-    const handlePageChange = useCallback((newPage: number) => {
-        setCurrentPage(newPage);
+    useEffect(() => {
+        loadPageData(currentPage);
+    }, [currentPage, loadPageData]);
+
+    const handlePageChange = useCallback((page: number) => {
+        setCurrentPage(page);
     }, []);
 
     const handleNextFour = useCallback(() => {
@@ -24,34 +51,13 @@ export default function usePaginatedWorks(
         setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
     }, []);
 
-    const indexOfLastCard = useMemo(
-        () => currentPage * cardsPerPage,
-        [currentPage, cardsPerPage]
-    );
-    const indexOfFirstCard = useMemo(
-        () => indexOfLastCard - cardsPerPage,
-        [indexOfLastCard, cardsPerPage]
-    );
-
-    const currentWorks = useMemo(
-        () => works.slice(indexOfFirstCard, indexOfLastCard),
-        [works, indexOfFirstCard, indexOfLastCard]
-    );
-
-    const startPage = useMemo(() => Math.max(1, currentPage - 2), [currentPage]);
-    const endPage = useMemo(
-        () => Math.min(totalPages, startPage + 3),
-        [totalPages, startPage]
-    );
-
     return {
         currentWorks,
         currentPage,
         totalPages,
+        loading,
         handlePageChange,
         handleNextFour,
-        handlePrevFour,
-        startPage,
-        endPage
+        handlePrevFour
     };
 }

@@ -1,5 +1,5 @@
-import { ARTWORK,ARTWORK_FETCH } from '@constants/types';
-import { API_BASE_URL, FIELDS, URL_DETAIL } from '@constants/URL';
+import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
+import { API_BASE_URL, FIELDS, LIMITS, URL_DETAIL } from '@constants/URL';
 import { ArtworkError } from '@utils/class/ArtworkError';
 
 export const fetchArtworkDetails = async (id: string): Promise<ARTWORK> => {
@@ -14,8 +14,8 @@ export const fetchArtworkDetails = async (id: string): Promise<ARTWORK> => {
 export const fetchArtworks = async (query: string): Promise<ARTWORK[]> => {
     const url = query
         ? API_BASE_URL +
-          `/artworks/search?q=${encodeURIComponent(query) + '&' + FIELDS}`
-        : API_BASE_URL + '/artworks/?' + FIELDS;
+          `/artworks/search?q=${encodeURIComponent(query) + '&' + FIELDS + '&' + LIMITS}  `
+        : API_BASE_URL + '/artworks/?' + FIELDS + '&' + LIMITS;
 
     const response = await fetch(url);
     if (!response.ok) {
