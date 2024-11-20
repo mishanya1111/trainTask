@@ -113,10 +113,16 @@ a {
 
 .work-info {
     flex-grow: 1;
-    width: calc(100% - 80px);
+    margin-right: 60px;
+    width: calc(100% - 96px);
     word-wrap: break-word;
-
 }
+/*.work-card .work-info {
+    flex-grow: 1;
+    width: calc(100% - 96px); !* Учитываем ширину кнопки закладки (59px) и отступ (16px) *!
+    margin-right: 60px; !* Отступ для кнопки закладки *!
+    word-wrap: break-word;
+}*/
 
 .work-title {
     font-size: 17.54px;
