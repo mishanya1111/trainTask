@@ -1,9 +1,10 @@
 import '@pages/DetailInfo/DetailInfo.css';
 
 import { useFetch } from '@api/hooks/useFetch';
+import bookmarkAdd from '@assets/img/svgBookmark.svg';
+import bookmarkRemove from '@assets/img/svgBookmarkIsFavorited.svg';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
-import ReplaceableBookmark from '@constants/ReplaceableBookmark';
 import { URL_ARTWORKS } from '@constants/URL';
 import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
@@ -51,7 +52,8 @@ function DetailInfo(): JSX.Element {
                     title: artwork.title,
                     author: artwork.artist_title,
                     is_public_domain: artwork.is_public_domain,
-                    imageId: artwork.image_id
+                    imageId: artwork.image_id,
+                    isFavorite: true
                 });
             }
             setIsFavorited(!isFavorited);
@@ -71,8 +73,14 @@ function DetailInfo(): JSX.Element {
                         sizes={sizesImage}
                         alt={artwork?.title}
                     />
-                    <div className="bookmark-icon" onClick={toggleFavorite}>
-                        <ReplaceableBookmark isFavorited={isFavorited} />
+                    <div
+                        className={`bookmark-icon ${isFavorited ? 'bookmark-is-favorite' : ''}`}
+                        onClick={toggleFavorite}
+                    >
+                        <img
+                            src={isFavorited ? bookmarkRemove : bookmarkAdd}
+                            alt="bookmark"
+                        />
                     </div>
                 </div>
                 <div className="info-container">

@@ -1,5 +1,6 @@
 import { ARTWORK, ARTWORK_FETCH } from '@constants/types';
 import { URL_ARTWORKS } from '@constants/URL';
+import LocalStorageManager from '@utils/favoritesUtils';
 const cache: Record<string, { artworks: ARTWORK[]; totalPages: number }> = {};
 
 export const fetchPaginatedArtworks = async (
@@ -26,7 +27,8 @@ export const fetchPaginatedArtworks = async (
                 author: artwork.artist_title || null,
                 is_public_domain: artwork.is_public_domain,
                 imageId: artwork.image_id,
-                year: artwork.fiscal_year ?? undefined
+                year: artwork.fiscal_year ?? undefined,
+                isFavorite: LocalStorageManager.isFavorite(artwork.id)
             })
         ),
         totalPages: data.pagination.total_pages

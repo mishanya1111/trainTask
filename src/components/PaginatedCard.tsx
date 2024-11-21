@@ -1,6 +1,7 @@
 import '@components/Paginated/PaginatedCard.css';
 
 import bookmark from '@assets/img/svgBookmark.svg';
+import unbookmark from '@assets/img/svgBookmarkIsFavorited.svg';
 import { DETAILS_PAGE_ROUTE } from '@constants/routes';
 import { PAGINATED_CARD_PROPS } from '@constants/types';
 import ArtworkImage from '@utils/ArtworkImage';
@@ -8,7 +9,15 @@ import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 const PaginatedCard: React.FC<PAGINATED_CARD_PROPS> = React.memo(
-    ({ linkID, title, author, imageId, is_public_domain, onClickHandler }) => {
+    ({
+        linkID,
+        title,
+        author,
+        imageId,
+        is_public_domain,
+        onClickHandler,
+        isFavorite
+    }) => {
         const sizesImage = [863, 1686, 600, 400, 200];
 
         const handleBookmarkClick = useCallback(() => {
@@ -36,8 +45,14 @@ const PaginatedCard: React.FC<PAGINATED_CARD_PROPS> = React.memo(
                             {is_public_domain ? 'public' : 'private'}
                         </p>
                     </div>
-                    <button className="bookmark-btn" onClick={handleBookmarkClick}>
-                        <img src={bookmark} alt="bookmark" />
+                    <button
+                        className={`bookmark-btn ${isFavorite ? 'bookmark-is-favorite' : ''}`}
+                        onClick={handleBookmarkClick}
+                    >
+                        <img
+                            src={isFavorite ? unbookmark : bookmark}
+                            alt="bookmark"
+                        />
                     </button>
                 </div>
             </div>

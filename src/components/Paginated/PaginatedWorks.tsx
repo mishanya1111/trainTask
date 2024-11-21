@@ -1,8 +1,9 @@
 import Loader from '@components/Loader/Loader';
 import PaginatedCard from '@components/PaginatedCard';
-import LocalStorageManager from '@utils/favoritesUtils';
+import { ARTWORK } from '@constants/types';
+import { handleToggleFavorite } from '@utils/handleToggleFavorite';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element {
     const {
@@ -14,6 +15,18 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
         handleNextFour,
         handlePrevFour
     } = usePaginatedWorks(cardsPerPage);
+    const [updatedWorks, setUpdatedWorks] = useState<ARTWORK[]>(currentWorks);
+    useEffect(() => {
+        setUpdatedWorks(currentWorks);
+    }, [currentWorks]);
+    const handleFavoriteToggle = (work: ARTWORK) => {
+        const wasAdded = handleToggleFavorite(work);
+        setUpdatedWorks(prevWorks =>
+            prevWorks.map(item =>
+                item.ID === work.ID ? { ...item, isFavorite: wasAdded } : item
+            )
+        );
+    };
 
     const startPage = useMemo(() => Math.max(1, currentPage - 2), [currentPage]);
     const endPage = useMemo(
@@ -28,7 +41,7 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
             ) : (
                 <>
                     <div className="paginated-work-card-container">
-                        {currentWorks.map(work => (
+                        {updatedWorks.map(work => (
                             <PaginatedCard
                                 key={work.ID}
                                 linkID={work.ID}
@@ -36,9 +49,8 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
                                 author={work.author}
                                 imageId={work.imageId}
                                 is_public_domain={work.is_public_domain}
-                                onClickHandler={() =>
-                                    LocalStorageManager.addToFavorites(work)
-                                }
+                                isFavorite={work.isFavorite}
+                                onClickHandler={() => handleFavoriteToggle(work)}
                             />
                         ))}
                     </div>
@@ -64,7 +76,9 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
                         <button
                             onClick={handleNextFour}
                             className={
-                                currentPage > totalPages - 2 ? 'hidden' : 'next-four'
+                                currentPage >= totalPages - 2
+                                    ? 'hidden'
+                                    : 'next-four'
                             }
                         >
                             {'>'}

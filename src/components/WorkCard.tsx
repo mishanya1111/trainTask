@@ -1,5 +1,5 @@
 import bookmark from '@assets/img/svgBookmark.svg';
-import unbookmark from '@assets/img/unbookmark.png';
+import unbookmark from '@assets/img/svgBookmarkIsFavorited.svg';
 import { DETAILS_PAGE_ROUTE } from '@constants/routes';
 import { WORK_CARD_PROPS } from '@constants/types';
 import ArtworkImage from '@utils/ArtworkImage';
@@ -14,7 +14,7 @@ const WorkCard: React.FC<WORK_CARD_PROPS> = React.memo(
         imageId,
         is_public_domain,
         onClickHandler,
-        favoritePage
+        isFavorite
     }) => {
         const sizesImage: number[] = [200, 863, 600, 400, 1686];
 
@@ -42,8 +42,11 @@ const WorkCard: React.FC<WORK_CARD_PROPS> = React.memo(
                         {is_public_domain ? 'public' : 'private'}
                     </p>
                 </div>
-                <button className="bookmark-btn" onClick={handleBookmarkClick}>
-                    <img src={favoritePage ? unbookmark : bookmark} alt="bookmark" />
+                <button
+                    className={`bookmark-btn ${isFavorite ? 'bookmark-is-favorite' : ''}`}
+                    onClick={handleBookmarkClick}
+                >
+                    <img src={isFavorite ? unbookmark : bookmark} alt="bookmark" />
                 </button>
             </div>
         );

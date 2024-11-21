@@ -11,7 +11,8 @@ describe('Favorites Utilities', () => {
             title: 'Mona Lisa',
             author: 'Leonardo da Vinci',
             is_public_domain: true,
-            imageId: 'abc123'
+            imageId: 'abc123',
+            isFavorite: true
         };
 
         LocalStorageManager.addToFavorites(artwork);
@@ -27,7 +28,8 @@ describe('Favorites Utilities', () => {
             title: 'Mona Lisa',
             author: 'Leonardo da Vinci',
             is_public_domain: true,
-            imageId: 'abc123'
+            imageId: 'abc123',
+            isFavorite: true
         };
 
         LocalStorageManager.addToFavorites(artwork);

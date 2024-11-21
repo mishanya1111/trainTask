@@ -1,10 +1,10 @@
-import { ErrorPage } from '@components/ErrorPage';
 import Root from '@components/navbar/Root';
 import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
 import DetailInfo from '@pages/DetailInfo/DetailInfo';
+import { ErrorPage } from '@pages/ErrorPage';
 import Favorites from '@pages/Favorites/Favorites';
 import Home from '@pages/Home';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Router: React.FC = () => {

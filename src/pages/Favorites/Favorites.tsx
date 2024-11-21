@@ -4,7 +4,8 @@ import bookmark from '@assets/img/svgBookmark.svg';
 import WorkCard from '@components/WorkCard';
 import { ARTWORK } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
-import { useCallback, useEffect, useState } from 'react';
+import { handleToggleFavorite } from '@utils/handleToggleFavorite';
+import { useEffect, useState } from 'react';
 
 function Favorites(): JSX.Element {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
@@ -13,10 +14,10 @@ function Favorites(): JSX.Element {
         setFavorites(LocalStorageManager.getFavorites());
     }, []);
 
-    const handleRemoveFavorite = useCallback((id: number) => {
-        LocalStorageManager.removeFromFavorites(id);
+    const handleFavoriteToggle = (work: ARTWORK) => {
+        handleToggleFavorite(work);
         setFavorites(LocalStorageManager.getFavorites());
-    }, []);
+    };
 
     return (
         <section>
@@ -42,10 +43,8 @@ function Favorites(): JSX.Element {
                                 author={artwork.author}
                                 imageId={artwork.imageId}
                                 is_public_domain={artwork.is_public_domain}
-                                onClickHandler={() =>
-                                    handleRemoveFavorite(artwork.ID)
-                                }
-                                favoritePage={true}
+                                onClickHandler={() => handleFavoriteToggle(artwork)}
+                                isFavorite={artwork.isFavorite}
                             />
                         ))
                     ) : (

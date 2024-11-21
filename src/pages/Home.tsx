@@ -37,7 +37,7 @@ function Home(): JSX.Element {
             is_public_domain: artwork.is_public_domain,
             imageId: artwork.image_id,
             year: artwork.fiscal_year ?? undefined,
-            favoritePage: LocalStorageManager.isFavorite(artwork.id)
+            isFavorite: LocalStorageManager.isFavorite(artwork.id)
         }));
     }, [artworks]);
 

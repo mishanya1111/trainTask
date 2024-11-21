@@ -163,6 +163,9 @@ a {
     right: 16px;
     cursor: pointer;
 }
+.bookmark-is-favorite{
+    background-color: #FBD7B24D;
+}
 
 
 .card-image {
