@@ -1,4 +1,4 @@
-import LocalStorageManager from '@utils/favoritesUtils';
+import LocalStorageManager from '../utils/favoritesUtils';
 
 describe('Favorites Utilities', () => {
     beforeEach(() => {

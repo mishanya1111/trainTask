@@ -1,3 +1,4 @@
+import Filter from '@components/Filter';
 import WorkCard from '@components/WorkCard';
 import { ARRAY_ARTWORK } from '@constants/types';
 import { useArtworksContext } from '@utils/ArtworksContext';
@@ -8,8 +9,7 @@ function OtherWorks({ works }: ARRAY_ARTWORK) {
 
     return (
         <div className="other-works">
-            <h4>Here some more</h4>
-            <h2>Other works for you</h2>
+            <Filter />
             <div className="work-card-container">
                 {works.map(work => (
                     <WorkCard

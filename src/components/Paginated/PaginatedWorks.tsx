@@ -13,8 +13,8 @@ function PaginatedWorks(): JSX.Element {
         toggleFavorite,
         errorPaginating
     } = useArtworksContext();
-    const { handlePageChange, handleNextFour, handlePrevFour } = usePaginatedWorks();
 
+    const { handlePageChange, handleNextFour, handlePrevFour } = usePaginatedWorks();
     const startPage = useMemo(
         () => Math.max(1, currentPaginatedPage - 2),
         [currentPaginatedPage]
@@ -31,19 +31,24 @@ function PaginatedWorks(): JSX.Element {
                 <Loader />
             ) : (
                 <>
+                    <h2>Other works for you</h2>
                     <div className="paginated-work-card-container">
-                        {paginatedArtworks.map(work => (
-                            <PaginatedCard
-                                key={work.ID}
-                                linkID={work.ID}
-                                title={work.title}
-                                author={work.author}
-                                imageId={work.imageId}
-                                is_public_domain={work.is_public_domain}
-                                isFavorite={work.isFavorite}
-                                onClickHandler={() => toggleFavorite(work.ID)}
-                            />
-                        ))}
+                        {paginatedArtworks.length !== 0 ? (
+                            paginatedArtworks.map(work => (
+                                <PaginatedCard
+                                    key={work.ID}
+                                    linkID={work.ID}
+                                    title={work.title}
+                                    author={work.author}
+                                    imageId={work.imageId}
+                                    is_public_domain={work.is_public_domain}
+                                    isFavorite={work.isFavorite}
+                                    onClickHandler={() => toggleFavorite(work.ID)}
+                                />
+                            ))
+                        ) : (
+                            <h1> Nothing was found for your query</h1>
+                        )}
                     </div>
                     <div className="pagination-controls">
                         <button

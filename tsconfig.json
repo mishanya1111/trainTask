@@ -19,14 +19,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@pages/*": ["src/pages/*"],
-      "@utils/*": ["src/utils/*"],
-      "@constants/*": ["src/constants/*"],
-      "@api/*": ["src/api/*"]
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      "@utils/*": ["utils/*"],
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": [

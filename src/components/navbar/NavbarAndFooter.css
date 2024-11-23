@@ -26,7 +26,6 @@
 
 .navbar-logo img , .footer-logo img {
     width: 46px;
-    height: 48px;
     object-fit: cover;
 }
 

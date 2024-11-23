@@ -64,12 +64,12 @@ a {
 
 
 
-.other-works > h2 {
+.other-works .filter-container  h2 {
     text-align: center;
     margin: 0 0 16px 0;
 }
 
-.other-works > h4 {
+.other-works .filter-container h4 {
     margin: 0;
     text-align: center;
     color: #E0A449;

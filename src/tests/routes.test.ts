@@ -1,4 +1,4 @@
-import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
+import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '../constants/routes';
 
 describe('Routes constants', () => {
     it('should define HOME_PAGE_ROUTE correctly', () => {

@@ -14,6 +14,7 @@ import React, {
     createContext,
     useCallback,
     useContext,
+    useEffect,
     useMemo,
     useState
 } from 'react';
@@ -33,6 +34,8 @@ interface ArtworksContextProps {
     errorPaginating: string | null;
     loadingOther: boolean;
     errorOther: string | null;
+    sortCriterion: string;
+    setSortCriterion: (sortCriterion: string) => void;
 }
 
 const ArtworksContext = createContext<ArtworksContextProps | undefined>(undefined);
@@ -46,6 +49,8 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
     const [paginatedArtworks, setPaginatedArtworks] = useState<ARTWORK[]>([]);
     const [otherWorks, setOtherWorks] = useState<ARTWORK[]>([]);
     const [totalPaginatedPages, setTotalPaginatedPages] = useState(0);
+    const [sortCriterion, setSortCriterion] = useState<string>('name');
+
     const windowWidth = useWindowWidth();
 
     const cardsPerPage = useMemo(() => {
@@ -139,6 +144,26 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
         [paginatedArtworks, otherWorks]
     );
 
+    useEffect(() => {
+        setOtherWorks(prevWorks =>
+            [...prevWorks].sort((a, b) => {
+                if (sortCriterion === 'name') {
+                    return a.title.localeCompare(b.title);
+                }
+                if (sortCriterion === 'author') {
+                    return (a.author || '').localeCompare(b.author || '');
+                }
+                if (sortCriterion === 'year') {
+                    return (a.year || 0) - (b.year || 0);
+                }
+                if (sortCriterion === 'availability') {
+                    return Number(b.is_public_domain) - Number(a.is_public_domain);
+                }
+                return 0;
+            })
+        );
+    }, [sortCriterion]);
+
     return (
         <ArtworksContext.Provider
             value={{
@@ -155,7 +180,9 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
                 loadingPaginating,
                 errorPaginating,
                 loadingOther,
-                errorOther
+                errorOther,
+                sortCriterion,
+                setSortCriterion
             }}
         >
             {children}

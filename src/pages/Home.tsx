@@ -5,9 +5,7 @@ import SearchScreen from '@components/SearchScreen';
 import { useArtworksContext } from '@utils/ArtworksContext';
 
 function Home(): JSX.Element {
-    //const sortCriterion = 'name';
     const { otherWorks, loadingOther, errorOther } = useArtworksContext();
-
     if (errorOther) return <p>Error in home page: {errorOther}</p>;
 
     return (

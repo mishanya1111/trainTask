@@ -1,6 +1,7 @@
-import { Navbar } from '@components/navbar/Root';
+import { HOME_PAGE_ROUTE } from '@constants/routes';
 import { ERROR_BOUNDARY_STATE } from '@constants/types';
-import { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 class ErrorBoundary extends Component<
     { children: ReactNode },
@@ -11,26 +12,27 @@ class ErrorBoundary extends Component<
         this.state = { hasError: false, error: null };
     }
 
-    static getDerivedStateFromError(_error: Error): ERROR_BOUNDARY_STATE {
-        return { hasError: true, error: _error };
+    static getDerivedStateFromError(error: Error): ERROR_BOUNDARY_STATE {
+        return { hasError: true, error };
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
         console.error('Error caught by ErrorBoundary:', error, errorInfo);
-        this.setState({ error });
     }
 
     render() {
         if (this.state.hasError) {
             return (
                 <>
-                    <Navbar />
                     <div className="errorContainer">
                         <h1>
                             Error:{' '}
-                            {this.state.error
-                                ? this.state.error.message
-                                : 'An unknown error occurred'}
+                            {this.state.error?.message ||
+                                'An unknown error occurred'}
+                        </h1>
+                        <h1>
+                            {' '}
+                            <Link to={HOME_PAGE_ROUTE}>Go to Home</Link>
                         </h1>
                     </div>
                 </>
