@@ -61,7 +61,3 @@ export interface ARTWORK_FETCH {
 export interface SEARCH_FORM_INPUTS {
     query: string;
 }
-
-export interface SEARCH_SCREEN_PROPS {
-    onSearch: (query: string) => void;
-}

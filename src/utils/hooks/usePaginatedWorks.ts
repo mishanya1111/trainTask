@@ -1,61 +1,32 @@
-import { fetchPaginatedArtworks } from '@api/hooks/fetchPaginatedArtworks';
-import { ARTWORK } from '@constants/types';
-import { useCallback, useEffect, useState } from 'react';
+import { useArtworksContext } from '@utils/ArtworksContext';
+import { useCallback } from 'react';
 
-export default function usePaginatedWorks(cardsPerPage: number): {
-    currentWorks: ARTWORK[];
-    currentPage: number;
-    totalPages: number;
-    loading: boolean;
+export default function usePaginatedWorks(): {
     handlePageChange: (page: number) => void;
     handleNextFour: () => void;
     handlePrevFour: () => void;
 } {
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalPages, setTotalPages] = useState<number>(1);
-    const [currentWorks, setCurrentWorks] = useState<ARTWORK[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const { setCurrentPaginatedPage, totalPaginatedPages, currentPaginatedPage } =
+        useArtworksContext();
 
-    const loadPageData = useCallback(
-        async (page: number) => {
-            setLoading(true);
-            try {
-                const { artworks, totalPages } = await fetchPaginatedArtworks(
-                    page,
-                    cardsPerPage
-                );
-                setCurrentWorks(artworks);
-                setTotalPages(totalPages);
-            } catch (error) {
-                console.error('Failed to load paginated artworks', error);
-            } finally {
-                setLoading(false);
-            }
+    const handlePageChange = useCallback(
+        (page: number) => {
+            setCurrentPaginatedPage(page);
         },
-        [cardsPerPage]
+        [setCurrentPaginatedPage]
     );
 
-    useEffect(() => {
-        loadPageData(currentPage);
-    }, [currentPage, loadPageData]);
-
-    const handlePageChange = useCallback((page: number) => {
-        setCurrentPage(page);
-    }, []);
-
     const handleNextFour = useCallback(() => {
-        setCurrentPage(prevPage => Math.min(prevPage + 4, totalPages));
-    }, [totalPages]);
+        setCurrentPaginatedPage(
+            Math.min(currentPaginatedPage + 4, totalPaginatedPages)
+        );
+    }, [totalPaginatedPages, currentPaginatedPage, setCurrentPaginatedPage]);
 
     const handlePrevFour = useCallback(() => {
-        setCurrentPage(prevPage => Math.max(prevPage - 4, 1));
-    }, []);
+        setCurrentPaginatedPage(Math.max(currentPaginatedPage - 4, 1));
+    }, [currentPaginatedPage, setCurrentPaginatedPage]);
 
     return {
-        currentWorks,
-        currentPage,
-        totalPages,
-        loading,
         handlePageChange,
         handleNextFour,
         handlePrevFour

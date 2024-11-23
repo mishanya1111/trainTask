@@ -1,12 +1,12 @@
 import '@pages/DetailInfo/DetailInfo.css';
 
+import ArtworkImage from '@api/ArtworkImage';
 import { useFetch } from '@api/hooks/useFetch';
 import bookmarkAdd from '@assets/img/svgBookmark.svg';
 import bookmarkRemove from '@assets/img/svgBookmarkIsFavorited.svg';
 import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import { URL_ARTWORKS } from '@constants/URL';
-import ArtworkImage from '@utils/ArtworkImage';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';

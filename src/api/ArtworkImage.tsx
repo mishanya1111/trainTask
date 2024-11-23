@@ -25,7 +25,7 @@ function ArtworkImage({
         () => testImageSrc(sizes[currentSizeIndex]),
         [currentSizeIndex, sizes, testImageSrc]
     );
-
+    console.log(currentImageSrc);
     const loadImage = useCallback(
         (url: string) => {
             const img = new Image();

@@ -1,8 +1,8 @@
+import ArtworkImage from '@api/ArtworkImage';
 import bookmark from '@assets/img/svgBookmark.svg';
 import unbookmark from '@assets/img/svgBookmarkIsFavorited.svg';
 import { DETAILS_PAGE_ROUTE } from '@constants/routes';
 import { WORK_CARD_PROPS } from '@constants/types';
-import ArtworkImage from '@utils/ArtworkImage';
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 

@@ -1,47 +1,38 @@
 import Loader from '@components/Loader/Loader';
 import PaginatedCard from '@components/PaginatedCard';
-import { ARTWORK } from '@constants/types';
-import { handleToggleFavorite } from '@utils/handleToggleFavorite';
+import { useArtworksContext } from '@utils/ArtworksContext';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
-function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element {
+function PaginatedWorks(): JSX.Element {
     const {
-        currentWorks,
-        currentPage,
-        totalPages,
-        loading,
-        handlePageChange,
-        handleNextFour,
-        handlePrevFour
-    } = usePaginatedWorks(cardsPerPage);
-    const [updatedWorks, setUpdatedWorks] = useState<ARTWORK[]>(currentWorks);
-    useEffect(() => {
-        setUpdatedWorks(currentWorks);
-    }, [currentWorks]);
-    const handleFavoriteToggle = (work: ARTWORK) => {
-        const wasAdded = handleToggleFavorite(work);
-        setUpdatedWorks(prevWorks =>
-            prevWorks.map(item =>
-                item.ID === work.ID ? { ...item, isFavorite: wasAdded } : item
-            )
-        );
-    };
+        currentPaginatedPage,
+        paginatedArtworks,
+        totalPaginatedPages,
+        loadingPaginating,
+        toggleFavorite,
+        errorPaginating
+    } = useArtworksContext();
+    const { handlePageChange, handleNextFour, handlePrevFour } = usePaginatedWorks();
 
-    const startPage = useMemo(() => Math.max(1, currentPage - 2), [currentPage]);
-    const endPage = useMemo(
-        () => Math.min(totalPages, startPage + 3),
-        [totalPages, startPage]
+    const startPage = useMemo(
+        () => Math.max(1, currentPaginatedPage - 2),
+        [currentPaginatedPage]
     );
+    const endPage = useMemo(
+        () => Math.min(totalPaginatedPages, startPage + 3),
+        [totalPaginatedPages, startPage]
+    );
+    if (errorPaginating) return <h1>{errorPaginating}</h1>;
 
     return (
         <div className="paginated-works">
-            {loading ? (
+            {loadingPaginating ? (
                 <Loader />
             ) : (
                 <>
                     <div className="paginated-work-card-container">
-                        {updatedWorks.map(work => (
+                        {paginatedArtworks.map(work => (
                             <PaginatedCard
                                 key={work.ID}
                                 linkID={work.ID}
@@ -50,14 +41,16 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
                                 imageId={work.imageId}
                                 is_public_domain={work.is_public_domain}
                                 isFavorite={work.isFavorite}
-                                onClickHandler={() => handleFavoriteToggle(work)}
+                                onClickHandler={() => toggleFavorite(work.ID)}
                             />
                         ))}
                     </div>
                     <div className="pagination-controls">
                         <button
                             onClick={handlePrevFour}
-                            className={currentPage <= 2 ? 'hidden' : 'prev-four'}
+                            className={
+                                currentPaginatedPage <= 2 ? 'hidden' : 'prev-four'
+                            }
                         >
                             {'<'}
                         </button>
@@ -68,7 +61,9 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
                             <button
                                 key={page}
                                 onClick={() => handlePageChange(page)}
-                                className={currentPage === page ? 'active' : ''}
+                                className={
+                                    currentPaginatedPage === page ? 'active' : ''
+                                }
                             >
                                 {page}
                             </button>
@@ -76,7 +71,7 @@ function PaginatedWorks({ cardsPerPage }: { cardsPerPage: number }): JSX.Element
                         <button
                             onClick={handleNextFour}
                             className={
-                                currentPage >= totalPages - 2
+                                currentPaginatedPage >= totalPaginatedPages - 2
                                     ? 'hidden'
                                     : 'next-four'
                             }

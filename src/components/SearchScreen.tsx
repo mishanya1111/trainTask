@@ -1,10 +1,12 @@
-import { SEARCH_FORM_INPUTS, SEARCH_SCREEN_PROPS } from '@constants/types';
+import { SEARCH_FORM_INPUTS } from '@constants/types';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useArtworksContext } from '@utils/ArtworksContext';
 import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
-const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
+const SearchScreen: React.FC = () => {
+    const { setSearchQuery } = useArtworksContext();
     const validationSchema = Yup.object({
         query: Yup.string()
             .min(3, 'Enter at least 3 characters')
@@ -29,9 +31,9 @@ const SearchScreen: React.FC<SEARCH_SCREEN_PROPS> = ({ onSearch }) => {
     const handleDebounceSearch = useCallback(async () => {
         const isValid = await trigger('query');
         if (isValid) {
-            onSearch(query);
+            setSearchQuery(query);
         }
-    }, [query, onSearch, trigger]);
+    }, [query, setSearchQuery, trigger]);
 
     useEffect(() => {
         const delayDebounce = setTimeout(handleDebounceSearch, 1000);

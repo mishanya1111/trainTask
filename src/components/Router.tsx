@@ -4,6 +4,7 @@ import DetailInfo from '@pages/DetailInfo/DetailInfo';
 import { ErrorPage } from '@pages/ErrorPage';
 import Favorites from '@pages/Favorites/Favorites';
 import Home from '@pages/Home';
+import { ArtworksProvider } from '@utils/ArtworksContext';
 import { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -23,7 +24,11 @@ const Router: React.FC = () => {
                     children: [
                         {
                             index: true,
-                            element: <Home />
+                            element: (
+                                <ArtworksProvider>
+                                    <Home />
+                                </ArtworksProvider>
+                            )
                         },
                         {
                             path: FAVORITES_PAGE_ROUTE,
