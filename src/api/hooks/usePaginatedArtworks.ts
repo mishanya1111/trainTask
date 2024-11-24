@@ -16,7 +16,7 @@ export function usePaginatedArtworks<T>(url: string): {
         setLoading(true);
         setError(null);
 
-        const cachedData = sessionStorage.getItem(url); // Проверка кэша
+        const cachedData = sessionStorage.getItem(url);
         if (cachedData) {
             setData(JSON.parse(cachedData));
             setLoading(false);

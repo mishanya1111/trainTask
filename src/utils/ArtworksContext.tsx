@@ -60,7 +60,7 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
         return 4;
     }, [windowWidth]);
     const debouncedQuery = useDebounce(searchQuery, 500);
-    // Fetch paginated data
+
     const paginatedUrl = useMemo(() => {
         const queryParam = searchQuery
             ? `/search?q=${encodeURIComponent(searchQuery)}&`
@@ -109,7 +109,6 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
         setOtherWorks(updatedOtherWorks);
     }, [otherWorksFetchData]);
 
-    // Toggle favorite
     const toggleFavorite = useCallback(
         (id: number) => {
             const isCurrentlyFavorite = LocalStorageManager.isFavorite(id);
@@ -129,7 +128,6 @@ export const ArtworksProvider: React.FC<{ children: React.ReactNode }> = ({
                 }
             }
 
-            // Update both data sets
             const updateFavorites = (works: ARTWORK[]) =>
                 works.map(work =>
                     work.ID === id
