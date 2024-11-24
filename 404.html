@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="refresh" content="0;url=/" />
     <script>
-        const redirectTo = window.location.pathname.split('/').slice(1).join('/');
+        const redirectTo = window.location.pathname.split('/').slice(2).join('/');
+        console.log(redirectTo);
         window.location.replace('/trainTask/' + redirectTo); //можно достать путь из константы
     </script>
 </head>
