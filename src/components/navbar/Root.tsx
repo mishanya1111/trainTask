@@ -4,7 +4,7 @@ import home from '@assets/img/home.svg';
 import modsen from '@assets/img/modsen.svg';
 import logo from '@assets/img/svg.svg';
 import bookmark from '@assets/img/svgBookmarkNavbar.svg';
-import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
+import { FAVORITES_PAGE_ROUTE } from '@constants/routes';
 import { useOutsideClick } from '@utils/hooks/useOutsideClick';
 import { RefObject, useCallback, useRef, useState } from 'react';
 import React from 'react';
@@ -12,9 +12,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 export const Navbar: React.FC = React.memo(() => {
     const location = useLocation();
-    const isHomePage =
-        location.pathname === HOME_PAGE_ROUTE ||
-        location.pathname === `${HOME_PAGE_ROUTE}/`;
+    const isHomePage = location.pathname === '' || location.pathname === '/';
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -32,7 +30,7 @@ export const Navbar: React.FC = React.memo(() => {
     return (
         <div className="navbar">
             <NavLink
-                to={HOME_PAGE_ROUTE}
+                to={''}
                 end
                 className={({ isActive, isPending }): string =>
                     isActive ? 'active' : isPending ? 'pending' : ''
@@ -62,7 +60,7 @@ export const Navbar: React.FC = React.memo(() => {
                     {!isHomePage && (
                         <li>
                             <NavLink
-                                to={HOME_PAGE_ROUTE}
+                                to={''}
                                 end
                                 className={({ isActive, isPending }): string =>
                                     isActive ? 'active' : isPending ? 'pending' : ''

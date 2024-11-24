@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        const basePath = '/trainTask';
+        const currentPath = window.location.pathname;
+        if (!currentPath.startsWith(basePath)) {
+            const relativePath = currentPath.replace(/^\//, ''); // Удаляем начальный "/"
+            const newUrl = `${basePath}/${relativePath}`;
+            window.location.replace(newUrl);
+        }
+    </script>
+</head>
+<body>
+Redirecting...
+</body>
+</html>
