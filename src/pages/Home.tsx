@@ -3,10 +3,14 @@ import OtherWorks from '@components/OtherWorks';
 import PaginatedWorks from '@components/Paginated/PaginatedWorks';
 import SearchScreen from '@components/SearchScreen';
 import { useArtworksContext } from '@utils/ArtworksContext';
+import React from 'react';
 
-function Home(): JSX.Element {
-    const { otherWorks, loadingOther, errorOther } = useArtworksContext();
-    if (errorOther) return <p>Error in home page: {errorOther}</p>;
+const Home: React.FC = () => {
+    const { loadingOther, errorOther } = useArtworksContext();
+
+    if (errorOther) {
+        return <p>Error in home page: {errorOther}</p>;
+    }
 
     return (
         <div>
@@ -14,17 +18,9 @@ function Home(): JSX.Element {
                 <SearchScreen />
             </aside>
             <PaginatedWorks />
-            <section>
-                {loadingOther ? (
-                    <Loader />
-                ) : (
-                    <>
-                        <OtherWorks works={otherWorks} />
-                    </>
-                )}
-            </section>
+            <section>{loadingOther ? <Loader /> : <OtherWorks />}</section>
         </div>
     );
-}
+};
 
 export default Home;

@@ -1,11 +1,10 @@
 import Filter from '@components/Filter';
 import WorkCard from '@components/WorkCard';
-import { ARRAY_ARTWORK } from '@constants/types';
 import { useArtworksContext } from '@utils/ArtworksContext';
 import React from 'react';
 
-function OtherWorks({ works }: ARRAY_ARTWORK) {
-    const { toggleFavorite } = useArtworksContext();
+function OtherWorks() {
+    const { toggleFavorite, otherWorks: works } = useArtworksContext();
 
     return (
         <div className="other-works">

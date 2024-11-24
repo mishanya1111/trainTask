@@ -5,19 +5,43 @@ import WorkCard from '@components/WorkCard';
 import { ARTWORK } from '@constants/types';
 import LocalStorageManager from '@utils/favoritesUtils';
 import { handleToggleFavorite } from '@utils/handleToggleFavorite';
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-function Favorites(): JSX.Element {
+const Favorites: React.FC = React.memo(() => {
     const [favorites, setFavorites] = useState<ARTWORK[]>([]);
 
     useEffect(() => {
         setFavorites(LocalStorageManager.getFavorites());
     }, []);
 
-    const handleFavoriteToggle = (work: ARTWORK) => {
+    const handleFavoriteToggle = useCallback((work: ARTWORK) => {
         handleToggleFavorite(work);
         setFavorites(LocalStorageManager.getFavorites());
-    };
+    }, []);
+
+    const renderWorkCard = useCallback(
+        (artwork: ARTWORK) => (
+            <WorkCard
+                key={artwork.ID}
+                linkID={artwork.ID}
+                title={artwork.title}
+                author={artwork.author}
+                imageId={artwork.imageId}
+                is_public_domain={artwork.is_public_domain}
+                onClickHandler={() => handleFavoriteToggle(artwork)}
+                isFavorite={artwork.isFavorite}
+            />
+        ),
+        [handleFavoriteToggle]
+    );
+
+    const workCards = useMemo(() => {
+        return favorites.length > 0 ? (
+            favorites.map(renderWorkCard)
+        ) : (
+            <h4>No favorites added yet.</h4>
+        );
+    }, [favorites, renderWorkCard]);
 
     return (
         <section>
@@ -33,27 +57,11 @@ function Favorites(): JSX.Element {
                     <h4>Saved by you</h4>
                     <p>Your favorites list</p>
                 </div>
-                <div className="favorites-container">
-                    {favorites.length > 0 ? (
-                        favorites.map(artwork => (
-                            <WorkCard
-                                linkID={artwork.ID}
-                                key={artwork.ID}
-                                title={artwork.title}
-                                author={artwork.author}
-                                imageId={artwork.imageId}
-                                is_public_domain={artwork.is_public_domain}
-                                onClickHandler={() => handleFavoriteToggle(artwork)}
-                                isFavorite={artwork.isFavorite}
-                            />
-                        ))
-                    ) : (
-                        <h4>No favorites added yet.</h4>
-                    )}
-                </div>
+                <div className="favorites-container">{workCards}</div>
             </div>
         </section>
     );
-}
+});
 
+Favorites.displayName = 'Favorites';
 export default Favorites;

@@ -1,10 +1,11 @@
-import { SEARCH_FORM_INPUTS } from '@constants/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useArtworksContext } from '@utils/ArtworksContext';
 import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-
+interface SEARCH_FORM_INPUTS {
+    query: string;
+}
 const SearchScreen: React.FC = () => {
     const { setSearchQuery } = useArtworksContext();
     const validationSchema = Yup.object({

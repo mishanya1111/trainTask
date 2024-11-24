@@ -4,7 +4,7 @@ import { useArtworksContext } from '@utils/ArtworksContext';
 import usePaginatedWorks from '@utils/hooks/usePaginatedWorks';
 import React, { useMemo } from 'react';
 
-function PaginatedWorks(): JSX.Element {
+const PaginatedWorks: React.FC = () => {
     const {
         currentPaginatedPage,
         paginatedArtworks,
@@ -15,14 +15,17 @@ function PaginatedWorks(): JSX.Element {
     } = useArtworksContext();
 
     const { handlePageChange, handleNextFour, handlePrevFour } = usePaginatedWorks();
+
     const startPage = useMemo(
         () => Math.max(1, currentPaginatedPage - 2),
         [currentPaginatedPage]
     );
+
     const endPage = useMemo(
         () => Math.min(totalPaginatedPages, startPage + 3),
         [totalPaginatedPages, startPage]
     );
+
     if (errorPaginating) return <h1>{errorPaginating}</h1>;
 
     return (
@@ -47,7 +50,7 @@ function PaginatedWorks(): JSX.Element {
                                 />
                             ))
                         ) : (
-                            <h1> Nothing was found for your query</h1>
+                            <h1>Nothing was found for your query</h1>
                         )}
                     </div>
                     <div className="pagination-controls">
@@ -88,6 +91,6 @@ function PaginatedWorks(): JSX.Element {
             )}
         </div>
     );
-}
+};
 
 export default PaginatedWorks;

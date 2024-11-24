@@ -1,8 +1,11 @@
 import defaultPage from '@assets/img/maxresdefault.jpg';
 import logo from '@assets/img/svg.svg';
-import { ARTWORK_IMAGE_PROPS } from '@constants/types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-
+interface ARTWORK_IMAGE_PROPS {
+    imageId: string | undefined;
+    sizes?: number[];
+    alt?: string;
+}
 function ArtworkImage({
     imageId,
     sizes = [843, 500, 300, 200],

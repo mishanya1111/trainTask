@@ -4,9 +4,18 @@ import ArtworkImage from '@api/ArtworkImage';
 import bookmark from '@assets/img/svgBookmark.svg';
 import unbookmark from '@assets/img/svgBookmarkIsFavorited.svg';
 import { DETAILS_PAGE_ROUTE } from '@constants/routes';
-import { PAGINATED_CARD_PROPS } from '@constants/types';
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+
+interface PAGINATED_CARD_PROPS {
+    linkID: number;
+    title: string;
+    author: string | null;
+    imageId: string;
+    is_public_domain: boolean;
+    onClickHandler: () => void;
+    isFavorite: boolean;
+}
 
 const PaginatedCard: React.FC<PAGINATED_CARD_PROPS> = React.memo(
     ({

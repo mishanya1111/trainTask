@@ -8,6 +8,7 @@ import Loader from '@components/Loader/Loader';
 import Overview from '@components/Overview';
 import { URL_ARTWORKS } from '@constants/URL';
 import LocalStorageManager from '@utils/favoritesUtils';
+import { handleToggleFavorite } from '@utils/handleToggleFavorite';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -44,21 +45,18 @@ function DetailInfo(): JSX.Element {
 
     const toggleFavorite = useCallback((): void => {
         if (artwork) {
-            if (isFavorited) {
-                LocalStorageManager.removeFromFavorites(artwork.id);
-            } else {
-                LocalStorageManager.addToFavorites({
+            setIsFavorited(
+                handleToggleFavorite({
                     ID: artwork.id,
                     title: artwork.title,
                     author: artwork.artist_title,
                     is_public_domain: artwork.is_public_domain,
                     imageId: artwork.image_id,
                     isFavorite: true
-                });
-            }
-            setIsFavorited(!isFavorited);
+                })
+            );
         }
-    }, [artwork, isFavorited]);
+    }, [artwork]);
 
     if (loading) return <Loader />;
 
