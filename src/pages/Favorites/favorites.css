@@ -4,17 +4,17 @@
     align-items: center;
     margin: 0;
 }
-.favorites  h4 {
+.favorites h4 {
     text-align: center;
 }
 
-.favorites  h2 {
+.favorites h2 {
     font-size: 64px;
     margin: 0;
-    color: #F17900;
+    color: #f17900;
 }
-.favorites > .search-screen > h2 > img{
-   height: 50px;
+.favorites > .search-screen > h2 > img {
+    height: 50px;
     margin: 5px 20px 0 0;
 }
 
@@ -29,7 +29,7 @@
 
 .favorites-intro > h4 {
     font-size: 16px;
-    color: #F17900;
+    color: #f17900;
     margin: 0;
 }
 
@@ -45,7 +45,7 @@
     gap: 16px;
     width: 100%;
 }
-.favorites-container p{
+.favorites-container p {
     width: 100%;
     align-items: center;
 }

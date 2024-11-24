@@ -7,7 +7,6 @@ import React from 'react';
 
 const Home: React.FC = () => {
     const { loadingOther, errorOther } = useArtworksContext();
-
     if (errorOther) {
         return <p>Error in home page: {errorOther}</p>;
     }

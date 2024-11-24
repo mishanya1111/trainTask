@@ -6,11 +6,11 @@
 .image-container {
     position: relative;
     margin-right: 32px;
-    width:50%;
+    width: 50%;
 }
 
 .image-container > img {
-    width:100%;
+    width: 100%;
     height: auto;
     object-fit: cover;
 }
@@ -22,15 +22,14 @@
     border-radius: 50%;
     cursor: pointer;
     height: 59px;
-    width:59px;
-    background: #FFFFFF;
+    width: 59px;
+    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.bookmark-icon > img{
+.bookmark-icon > img {
     width: 24px;
-    
 }
 
 .info-container {
@@ -49,15 +48,16 @@
 .overview > p {
     margin: 8px 0;
 }
-.detail-info strong{
-    color:#E0A449;
+.detail-info strong {
+    color: #e0a449;
 }
 
 @media (max-width: 900px) {
     .detail-info {
         display: block;
     }
-    .info-container, .image-container {
+    .info-container,
+    .image-container {
         width: 100%;
     }
 }

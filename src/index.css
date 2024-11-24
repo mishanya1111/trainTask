@@ -1,16 +1,15 @@
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 a {
@@ -20,7 +19,7 @@ a {
 
 #detail {
     margin: 120px 16%;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
 }
 
 .search-screen {
@@ -50,7 +49,7 @@ a {
 }
 
 .highlight {
-    color: #F17900;
+    color: #f17900;
 }
 
 .search-input {
@@ -59,12 +58,10 @@ a {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 16px;
-    background-color: #3939390D;
+    background-color: #3939390d;
 }
 
-
-
-.other-works .filter-container  h2 {
+.other-works .filter-container h2 {
     text-align: center;
     margin: 0 0 16px 0;
 }
@@ -72,9 +69,8 @@ a {
 .other-works .filter-container h4 {
     margin: 0;
     text-align: center;
-    color: #E0A449;
+    color: #e0a449;
 }
-
 
 .title {
     margin-top: 8px;
@@ -86,7 +82,6 @@ a {
     flex-wrap: wrap;
 }
 
-
 .work-card {
     width: calc(25% - 64px);
     display: flex;
@@ -94,7 +89,7 @@ a {
     padding: 16px;
     border: 1px solid #ddd;
     position: relative;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 .image-placeholder {
@@ -137,7 +132,7 @@ a {
 
 .work-author {
     font-size: 15.35px;
-    color: #E0A449;
+    color: #e0a449;
     margin: 4px 0;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -151,7 +146,7 @@ a {
 }
 
 .bookmark-btn {
-    background-color: #F9F9F9;
+    background-color: #f9f9f9;
     border: none;
     border-radius: 50%;
     width: 59px;
@@ -163,10 +158,9 @@ a {
     right: 16px;
     cursor: pointer;
 }
-.bookmark-is-favorite{
-    background-color: #FBD7B24D;
+.bookmark-is-favorite {
+    background-color: #fbd7b24d;
 }
-
 
 .card-image {
     width: 100%;
@@ -174,12 +168,10 @@ a {
     object-fit: cover;
 }
 
-
 .pagination-controls button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
-
 
 .paginated-works {
     display: flex;
@@ -202,7 +194,6 @@ a {
     margin-bottom: 20px;
     min-height: 400px;
     width: 100%;
-
 }
 
 .pagination-controls {
@@ -214,7 +205,6 @@ a {
 }
 
 .pagination-controls button {
-
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -225,12 +215,12 @@ a {
 }
 
 .pagination-controls button.active {
-    background-color: #F17900;
+    background-color: #f17900;
     color: white;
 }
 
 .pagination-controls button:hover:not(.active) {
-    background-color: #F17900;
+    background-color: #f17900;
     opacity: 0.7;
 }
 
@@ -260,9 +250,8 @@ a {
     }
 
     #detail {
-        margin: 80px 8%
+        margin: 80px 8%;
     }
-
 }
 
 @media (max-width: 900px) {
@@ -275,8 +264,6 @@ a {
     }
 
     #detail {
-        margin: 40px 4%
+        margin: 40px 4%;
     }
-
 }
-

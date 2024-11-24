@@ -5,7 +5,6 @@ import React from 'react';
 
 function OtherWorks() {
     const { toggleFavorite, otherWorks: works } = useArtworksContext();
-
     return (
         <div className="other-works">
             <Filter />
