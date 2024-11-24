@@ -2,11 +2,18 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0;url=/" />
     <script>
-        const redirectTo = window.location.pathname.split('/').slice(2).join('/');
-        console.log(redirectTo);
-        window.location.replace('/trainTask/' + redirectTo); //можно достать путь из константы
+
+        import { HOME_PAGE_ROUTE } from '../src/constants/routes';
+
+        const basePath =  HOME_PAGE_ROUTE;
+        const currentPath = window.location.pathname;
+
+        if (!currentPath.startsWith(basePath)) {
+            const redirectTo = currentPath.split('/').slice(2).join('/');
+            const newUrl = `${basePath}/${redirectTo}`;
+            window.location.replace(newUrl);
+        }
     </script>
 </head>
 <body>
