@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        const basePath = '/trainTask';
-        const currentPath = window.location.pathname;
-        if (!currentPath.startsWith(basePath)) {
+
+        (function() {
+            const basePath = '/trainTask';
+            const currentPath = window.location.pathname;
             const relativePath = currentPath.replace(/^\//, ''); // Удаляем начальный "/"
             const newUrl = `${basePath}/${relativePath}`;
-            window.location.replace(newUrl);
-        }
+            if (!currentPath.startsWith(basePath)) {
+                window.location.replace(newUrl);
+            }
+            document.getElementById("link2").setAttribute("href",newUrl);
+        })();
     </script>
 </head>
 <body>
+<a id="link2">
 Redirecting...
+</a>
 </body>
 </html>
