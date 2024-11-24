@@ -1,7 +1,7 @@
-// src/utils/ErrorBoundary.test.tsx
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ErrorBoundary from './ErrorBoundary';
+import React from 'react';
+
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const ProblematicComponent = () => {
     throw new Error('Test error');

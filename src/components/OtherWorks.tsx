@@ -1,28 +1,24 @@
-import React from 'react';
+import Filter from '@components/Filter';
 import WorkCard from '@components/WorkCard';
-import { addToFavorites } from '@utils/favoritesUtils';
-import { ARTWORK } from '@constants/types';
+import { useArtworksContext } from '@utils/ArtworksContext';
+import React from 'react';
 
-interface OtherWorksProps {
-    works: ARTWORK[];
-}
-//Отображает все карточки которые передаются из Home
-function OtherWorks({ works }: OtherWorksProps) {
+function OtherWorks() {
+    const { toggleFavorite, otherWorks: works } = useArtworksContext();
     return (
         <div className="other-works">
-            <h4> Here some more</h4>
-            <h2>Other works for you</h2>
+            <Filter />
             <div className="work-card-container">
-                {works.map((work, index) => (
+                {works.map(work => (
                     <WorkCard
-                        key={index}
+                        key={work.ID}
                         linkID={work.ID}
                         title={work.title}
                         author={work.author}
                         imageId={work.imageId}
                         is_public_domain={work.is_public_domain}
-                        onClickHandler={() => addToFavorites(work)}
-                        favoritePage={false}
+                        onClickHandler={() => toggleFavorite(work.ID)}
+                        isFavorite={work.isFavorite}
                     />
                 ))}
             </div>
@@ -30,4 +26,4 @@ function OtherWorks({ works }: OtherWorksProps) {
     );
 }
 
-export default OtherWorks;
+export default React.memo(OtherWorks);

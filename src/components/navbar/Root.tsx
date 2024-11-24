@@ -1,36 +1,38 @@
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import '@components/navbar/NavbarAndFooter.css';
-import React, { useRef, useState, RefObject } from 'react';
-import logo from '@assets/img/svg.svg';
-import modsen from '@assets/img/modsen.svg';
-import bookmark from '@assets/img/bookmark.png';
+
 import home from '@assets/img/home.svg';
-import { useOutsideClick } from '@utils/Hooks/useOutsideClick';
-import { HOME_PAGE_ROUTE } from '@constants/routes';
-export const Navbar: React.FC = () => {
+import modsen from '@assets/img/modsen.svg';
+import logo from '@assets/img/svg.svg';
+import bookmark from '@assets/img/svgBookmarkNavbar.svg';
+import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes';
+import { useOutsideClick } from '@utils/hooks/useOutsideClick';
+import { RefObject, useCallback, useRef, useState } from 'react';
+import React from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+
+export const Navbar: React.FC = React.memo(() => {
     const location = useLocation();
-    const isHomePage: boolean =
+    const isHomePage =
         location.pathname === HOME_PAGE_ROUTE ||
-        location.pathname === HOME_PAGE_ROUTE + '/'; //проверка на Home
+        location.pathname === `${HOME_PAGE_ROUTE}/`;
     const [isBurgerOpen, setIsBurgerOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
-    const buttonRef = useRef<HTMLButtonElement | null>(null); // Реф для кнопки бургер-меню
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const toggleBurgerMenu = (): void => {
+    const toggleBurgerMenu = useCallback(() => {
         setIsBurgerOpen(prev => !prev);
-    };
+    }, []);
 
-    // Закрытие меню при клике вне его  с проверкой на нажатие на самоу кнопку бургер меню
     useOutsideClick(menuRef, (event: MouseEvent) => {
         if (!buttonRef.current?.contains(event.target as Node)) {
             setIsBurgerOpen(false);
         }
     });
-    //наверное можно было убрать у NavLInk classNAme
+
     return (
         <div className="navbar">
             <NavLink
-                to="/trainTask"
+                to={HOME_PAGE_ROUTE}
                 end
                 className={({ isActive, isPending }): string =>
                     isActive ? 'active' : isPending ? 'pending' : ''
@@ -52,7 +54,6 @@ export const Navbar: React.FC = () => {
             >
                 ☰
             </button>
-
             <nav
                 ref={menuRef as RefObject<HTMLDivElement>}
                 className={`navbar-right ${isBurgerOpen ? 'open' : ''}`}
@@ -61,29 +62,25 @@ export const Navbar: React.FC = () => {
                     {!isHomePage && (
                         <li>
                             <NavLink
-                                to="/trainTask"
+                                to={HOME_PAGE_ROUTE}
                                 end
                                 className={({ isActive, isPending }): string =>
                                     isActive ? 'active' : isPending ? 'pending' : ''
                                 }
                             >
-                                <span>
-                                    <img src={home} alt="home" />
-                                </span>
+                                <img src={home} alt="home" />
                                 Home
                             </NavLink>
                         </li>
                     )}
                     <li>
                         <NavLink
-                            to="/trainTask/favorites"
+                            to={FAVORITES_PAGE_ROUTE}
                             className={({ isActive, isPending }): string =>
                                 isActive ? 'active' : isPending ? 'pending' : ''
                             }
                         >
-                            <span>
-                                <img src={bookmark} alt="bookmark" />
-                            </span>
+                            <img src={bookmark} alt="bookmark" />
                             Your favorites
                         </NavLink>
                     </li>
@@ -91,9 +88,11 @@ export const Navbar: React.FC = () => {
             </nav>
         </div>
     );
-};
+});
 
-const Footer: React.FC = () => {
+Navbar.displayName = 'Navbar';
+
+const Footer: React.FC = React.memo(() => {
     return (
         <div className="footer">
             <div className="footer-left">
@@ -104,24 +103,29 @@ const Footer: React.FC = () => {
                     Museum of <span className="highlight">Art</span>
                 </div>
             </div>
-            <div></div>
             <nav className="footer-right">
                 <img src={modsen} alt="modsen" />
             </nav>
         </div>
     );
-};
+});
+
+Footer.displayName = 'Footer';
 
 const Root: React.FC = () => {
     return (
         <>
-            <Navbar />
-            <div id="detail">
+            <header>
+                <Navbar />
+            </header>
+            <main id="detail">
                 <Outlet />
-            </div>
-            <Footer />
+            </main>
+            <footer>
+                <Footer />
+            </footer>
         </>
     );
 };
 
-export default Root;
+export default React.memo(Root);

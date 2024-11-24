@@ -2,8 +2,13 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
-    padding: 1rem 2rem;
+    background: linear-gradient(
+        90deg,
+        #343333 38.05%,
+        #484848 69.22%,
+        #282828 98.98%
+    );
+    padding: 16px 32px;
     color: white;
     height: 127px;
 }
@@ -12,51 +17,55 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: white;
-    padding: 1rem 2rem;
+    padding: 16px 32px;
     color: black;
     height: 127px;
 }
 
-.navbar-left , .footer-left {
+.navbar-left,
+.footer-left {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
-
-.navbar-logo img , .footer-logo img {
-    width: 2.8rem;
-    height: 3rem;
+.navbar-logo img,
+.footer-logo img {
+    width: 46px;
     object-fit: cover;
 }
 
-
 .navbar-text {
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: bold;
     color: #fff;
 }
 
 .footer-text {
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: bold;
     color: black;
 }
 
-.navbar-text .highlight , .footer-text .highlight {
-    color: #d4a017;
+.navbar-text .highlight,
+.footer-text .highlight {
+    color: #e0a449;
 }
 
-
-.navbar-right img{
-    height: 1rem;
+.navbar-right ul > li > a > img {
+    height: 24px;
+    margin-right: 4px;
 }
 .navbar-right ul {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 16px;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 24px;
+}
+.navbar-right ul li a {
+    display: flex;
+    align-items: center;
 }
 
 .navbar-right ul li a.active {
@@ -78,23 +87,29 @@
 }
 
 @media (max-width: 900px) {
-
+    .navbar-right ul li a {
+        display: block;
+        align-items: center;
+    }
     .navbar-right {
         display: none;
         position: absolute;
         top: 127px;
         right: 0;
-        background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+        background: linear-gradient(
+            90deg,
+            #343333 38.05%,
+            #484848 69.22%,
+            #282828 98.98%
+        );
         width: 100%;
         text-align: right;
-        padding: 1rem 2rem;
+        padding: 16px 32px;
     }
-
 
     .burger-button {
         display: block;
     }
-
 
     .navbar-right.open {
         display: block;
@@ -109,11 +124,11 @@
     }
 
     .navbar-right ul li {
-        margin-bottom: 1rem;
+        margin-bottom: 16px;
     }
 
     .navbar-right ul li a {
-        font-size: 1.5rem;
+        font-size: 24px;
         color: white;
         text-decoration: none;
     }

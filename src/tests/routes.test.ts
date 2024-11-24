@@ -1,6 +1,4 @@
-//import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '@constants/routes'; я так и не смог нормально сработать с алиасами
-//первый
-import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from './routes';
+import { FAVORITES_PAGE_ROUTE, HOME_PAGE_ROUTE } from '../constants/routes';
 
 describe('Routes constants', () => {
     it('should define HOME_PAGE_ROUTE correctly', () => {
@@ -11,4 +9,3 @@ describe('Routes constants', () => {
         expect(FAVORITES_PAGE_ROUTE).toBe('/trainTask/favorites');
     });
 });
-

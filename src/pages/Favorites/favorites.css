@@ -4,48 +4,48 @@
     align-items: center;
     margin: 0;
 }
-.favorites  h4 {
+.favorites h4 {
     text-align: center;
 }
 
-.favorites > h2 {
-    font-size: 2rem;
+.favorites h2 {
+    font-size: 64px;
     margin: 0;
-    color: #F17900;
+    color: #f17900;
 }
-.favorites > .search-screen > h2 > img{
-   height: 1.5rem;
+.favorites > .search-screen > h2 > img {
+    height: 50px;
+    margin: 5px 20px 0 0;
 }
 
 .favorites > .search-screen > h1 {
-    font-size: 2.5rem;
-    margin: 0.5rem 0 0 0;
-
+    margin: 8px 0 0 0;
 }
 
 .favorites-intro {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
     color: #666;
 }
 
 .favorites-intro > h4 {
-    color: #F17900;
+    font-size: 16px;
+    color: #f17900;
     margin: 0;
 }
 
 .favorites-intro > p {
-    font-size: 2rem;
-    margin: 0.25rem 0;
+    font-size: 32px;
+    margin: 4px 0;
     color: #000;
 }
 
 .favorites-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 16px;
     width: 100%;
 }
-.favorites-container p{
+.favorites-container p {
     width: 100%;
     align-items: center;
 }

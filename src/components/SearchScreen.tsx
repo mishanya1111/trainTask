@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useArtworksContext } from '@utils/ArtworksContext';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
-interface SearchFormInputs {
+interface SEARCH_FORM_INPUTS {
     query: string;
 }
-
-interface SearchScreenProps {
-    onSearch: (query: string) => void;
-}
-
-const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
-    // Схема валидации
+const SearchScreen: React.FC = () => {
+    const { setSearchQuery } = useArtworksContext();
     const validationSchema = Yup.object({
         query: Yup.string()
             .min(3, 'Enter at least 3 characters')
@@ -28,27 +23,29 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
         watch,
         formState: { errors },
         trigger
-    } = useForm<SearchFormInputs>({
+    } = useForm<SEARCH_FORM_INPUTS>({
         resolver: yupResolver(validationSchema)
     });
 
     const query = watch('query', '');
-    //дебаунс
+
+    const handleDebounceSearch = useCallback(async () => {
+        const isValid = await trigger('query');
+        if (isValid) {
+            setSearchQuery(query);
+        }
+    }, [query, setSearchQuery, trigger]);
+
     useEffect(() => {
-        const delayDebounce = setTimeout(async () => {
-            const isValid = await trigger('query');
-            if (isValid) {
-                onSearch(query);
-            }
-        }, 1000);
+        const delayDebounce = setTimeout(handleDebounceSearch, 1000);
 
         return () => clearTimeout(delayDebounce);
-    }, [query, onSearch, trigger]);
+    }, [query, handleDebounceSearch]);
 
     return (
         <div className="search-screen">
             <h1 className="search-title">
-                Let's Find Some <span className="highlight">Art</span>
+                Let&apos;s Find Some <span className="highlight">Art</span>
             </h1>
             <h2>Here</h2>
             <form>
@@ -58,7 +55,6 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
                     placeholder="Search art author/title"
                     {...register('query')}
                 />
-                {/*Проверяется вводилась ли что-нибудь для отображеия ошибки*/}
                 {query.trim() !== '' && errors.query && (
                     <p className="error-message">{errors.query.message}</p>
                 )}
@@ -67,4 +63,4 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch }) => {
     );
 };
 
-export default SearchScreen;
+export default React.memo(SearchScreen);
