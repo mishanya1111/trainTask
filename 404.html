@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-
         const basePath = '/trainTask';
-
         const currentPath = window.location.pathname;
-
         if (!currentPath.startsWith(basePath)) {
-            const relativePath = currentPath.replace(/^\//, '');
+            const relativePath = currentPath.replace(/^\//, ''); // Удаляем начальный "/"
             const newUrl = `${basePath}/${relativePath}`;
-            console.log(`Redirecting to: ${newUrl}`);
             window.location.replace(newUrl);
-        } else {
-            console.log('Already in base path. No redirect needed.');
         }
     </script>
 </head>
