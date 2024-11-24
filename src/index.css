@@ -53,12 +53,16 @@ a {
 }
 
 .search-input {
-    width: 762px;
+    width: 60%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 16px;
     background-color: #3939390d;
+}
+
+.search-screen form {
+    width: 100%;
 }
 
 .other-works .filter-container h2 {
