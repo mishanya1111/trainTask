@@ -27,7 +27,7 @@ export function useFetch<T>(url: string): {
             }
             const json = await response.json();
             setData(json.data);
-            sessionStorage.setItem(url, JSON.stringify(json.data)); // Сохранение в кэш
+            sessionStorage.setItem(url, JSON.stringify(json.data));
         } catch (err) {
             if (err instanceof ArtworkError) {
                 setError(err.message);
