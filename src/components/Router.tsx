@@ -9,40 +9,46 @@ import { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const Router: React.FC = () => {
-    const router = createBrowserRouter([
+    const router = createBrowserRouter(
+        [
+            {
+                path: '',
+                errorElement: <ErrorPage />,
+                children: [
+                    {
+                        path: '',
+                        element: (
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <Root />
+                            </Suspense>
+                        ),
+                        children: [
+                            {
+                                index: true,
+                                element: (
+                                    <ArtworksProvider>
+                                        <Home />
+                                    </ArtworksProvider>
+                                )
+                            },
+                            {
+                                path: FAVORITES_PAGE_ROUTE,
+                                element: <Favorites />
+                            },
+                            {
+                                path: 'details/:id',
+                                element: <DetailInfo />
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
         {
-            path: HOME_PAGE_ROUTE,
-            errorElement: <ErrorPage />,
-            children: [
-                {
-                    path: '',
-                    element: (
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <Root />
-                        </Suspense>
-                    ),
-                    children: [
-                        {
-                            index: true,
-                            element: (
-                                <ArtworksProvider>
-                                    <Home />
-                                </ArtworksProvider>
-                            )
-                        },
-                        {
-                            path: FAVORITES_PAGE_ROUTE,
-                            element: <Favorites />
-                        },
-                        {
-                            path: 'details/:id',
-                            element: <DetailInfo />
-                        }
-                    ]
-                }
-            ]
+            basename: HOME_PAGE_ROUTE
         }
-    ]);
+    );
+
     return <RouterProvider router={router} />;
 };
 
