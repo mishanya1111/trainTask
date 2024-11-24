@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
     <script>
 
-        import { HOME_PAGE_ROUTE } from '../src/constants/routes';
+        const basePath = '/trainTask';
 
-        const basePath =  HOME_PAGE_ROUTE;
         const currentPath = window.location.pathname;
 
         if (!currentPath.startsWith(basePath)) {
-            const redirectTo = currentPath.split('/').slice(2).join('/');
-            const newUrl = `${basePath}/${redirectTo}`;
+            const relativePath = currentPath.replace(/^\//, '');
+            const newUrl = `${basePath}/${relativePath}`;
+            console.log(`Redirecting to: ${newUrl}`);
             window.location.replace(newUrl);
+        } else {
+            console.log('Already in base path. No redirect needed.');
         }
     </script>
 </head>
