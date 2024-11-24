@@ -1,4 +1,3 @@
-import { HOME_PAGE_ROUTE } from '@constants/routes';
 import { ERROR_BOUNDARY_STATE } from '@constants/types';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
@@ -32,7 +31,7 @@ class ErrorBoundary extends Component<
                         </h1>
                         <h1>
                             {' '}
-                            <Link to={HOME_PAGE_ROUTE}>Go to Home</Link>
+                            <Link to={''}>Go to Home</Link>
                         </h1>
                     </div>
                 </>
